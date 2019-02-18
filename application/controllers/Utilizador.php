@@ -23,27 +23,44 @@ class Utilizador extends CI_Controller {
  	$this->load->helper('security'); // -------> com isto iniciamos a biblioteca para pudermos validar nos form o XSS-clean <--------
     }
 
-	// public function view($page = 'home')
-	// {
-	// 		if ( ! file_exists(APPPATH.'views/Utilizador/'.$page.'.php'))
-	// 		{
-	// 				// Whoops, we don't have a page for that!
-	// 				show_404();
-	// 		}
+	public function view($page = 'home')
+	{
+			if ( ! file_exists(APPPATH.'views/Utilizador/'.$page.'.php'))
+			{
+					// Whoops, we don't have a page for that!
+					show_404();
+			}
 	
-	// 		$data['title'] = ucfirst($page); // Capitalize the first letter
+			$data['title'] = ucfirst($page); // Capitalize the first letter
 	
+<<<<<<< HEAD
 	// 		$this->load->view('templates/header', $data);
 	// 		$this->load->view('Utilizador/'.$page, $data);
 	// 		$this->load->view('templates/footer', $data);
 	// }
 >>>>>>> c55fc9624cd8502eba008d4e8c40cec8ecd65ce8
+=======
+			$this->load->view('templates/header', $data);
+			$this->load->view('Utilizador/'.$page, $data);
+			$this->load->view('templates/footer', $data);
+	}
+>>>>>>> developer
 
 	public function login()
 	{
+			
+	// 	$this->load->view('templates/header');
+	// 	// $this->load->view('templates/nav');
+	// 	$this->load->view('Utilizador/login');
+	// 	$this->load->view('templates/footer');
+
+	}
+
+	public function registo()
+	{
 		$this->load->view('templates/header');
 		// $this->load->view('templates/nav');
-		$this->load->view('Utilizador/login');
+		$this->load->view('Utilizador/registo');
 		$this->load->view('templates/footer');
 
 	}
