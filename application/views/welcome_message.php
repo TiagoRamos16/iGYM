@@ -1,19 +1,44 @@
-
-
-
-<div id="page-wrapper ">
-        <div class="container-fluid ">
-            <!-- Page Heading -->
-            <div class="row " id="main " >
-                <div class="col-sm-12 col-md-12 well " id="content ">
-                    <h1 class="text-center">Welcome Admin!</h1>
-                </div>
+<section>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="collapse navbar-collapse navbar-ex1-collapse ">
+                <ul class="nav navbar-nav side-nav ">
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="fas fa-users"></i> Gerir Funcionário</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="fas fa-users"></i> Gerir Clientes</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="fas fa-users"></i> Gerir Aulas</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="fas fa-door-open"></i> Gerir Salas</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="fas fa-dumbbell"></i> Gerir Equipamento</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="far fa-file-alt"></i> Gerir Planos Adesão</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="far fa-file-alt"></i> Gerir Planos Treino</a>
+                    </li>
+                    <li>
+                        <a href="gerirUtilizadores.php"><i class="far fa-file-alt"></i> Gerir Planos Nutrição</a>
+                    </li>
+                    <li>
+                        <a href="gerirBares.php"><i class="far fa-file-alt"></i> Gestao de Logs</a>
+                    </li>
+                </ul>
             </div>
-            <!-- /.row -->
         </div>
-        <!-- /.container-fluid -->
+        <div class="col-md-10 conteudo">
+            <h1 class="text-center">Admin!</h1>
+        </div>
     </div>
-    <!-- /#page-wrapper -->
-<!-- </div>/#wrapper -->
+
+</section>
+
 
 
