@@ -173,30 +173,31 @@
     background-color: #37526ea6;
     margin-top: 20% ;
     color: rgb(231, 231, 231);
+    padding: 30px;
+    border-radius: 20px;
     /* margin: 0px;
     padding: 0px;  */
 }
 
-.section-login .container-login .btn-login{
-    margin: 15px; 
-}
 
 
 /* pagina registo */
 
+.titulo-registo{
+    text-align: center;
+    padding: 10px;
+    font-size: 2.5em;
+}
+
     
-.container-registo{
+.div-registo{
+    /* background-color: #959799ee; */
     background-color: #37526ea6;
     color: rgb(231, 231, 231);
-    /* margin: 0px;
-    padding: 0px;  */
-}  
-
-
-/* admin page */
-
-.conteudo{
-    padding-left: 0px!important;
-    padding-right: 0px!important;
-    padding-top: 50px; 
+    padding: 30px;
+    margin-top: 2%;
+    border-radius: 20px;
+  
 }
+
+
