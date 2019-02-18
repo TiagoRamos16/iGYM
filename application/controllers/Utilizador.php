@@ -47,13 +47,11 @@ class Utilizador extends CI_Controller {
 >>>>>>> developer
 
 	public function login()
-	{
-			
-	// 	$this->load->view('templates/header');
-	// 	// $this->load->view('templates/nav');
-	// 	$this->load->view('Utilizador/login');
-	// 	$this->load->view('templates/footer');
-
+	{	
+		$this->load->view('templates/header');
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/login');
+		$this->load->view('templates/footer');
 	}
 
 	public function registo()
