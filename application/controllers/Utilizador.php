@@ -15,6 +15,7 @@ class Utilizador extends CI_Controller {
 
 	public function login()
 	{
+			
 		$this->load->view('templates/header');
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/login');
@@ -30,4 +31,5 @@ class Utilizador extends CI_Controller {
 		$this->load->view('templates/footer');
 
 	}
+
 }
