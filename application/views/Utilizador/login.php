@@ -1,5 +1,4 @@
 <section class="section-login">
-    <img class="img-login" src="https://i0.wp.com/www.africom.co.zw/wp-content/uploads/2017/03/login-page.jpg?ssl=1" alt="">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 container-login">
