@@ -28,7 +28,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Ver Perfil</a></li>
                     <li class="divider"></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
 
                 </ul>
             </li>

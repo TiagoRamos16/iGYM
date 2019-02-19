@@ -5,7 +5,9 @@ class Rececionista extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('templates/header');
+		$data['title'] = 'Home'; 
+
+		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_admin');
 		$this->load->view('Rececionista/index');

@@ -5,7 +5,8 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('templates/header');
+		$data['title'] = 'iGYM';
+		$this->load->view('templates/header',$data);
 		// $this->load->view('templates/nav');
 		$this->load->view('index');
 		$this->load->view('templates/footer');
