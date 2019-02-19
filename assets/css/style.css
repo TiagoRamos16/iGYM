@@ -1,5 +1,4 @@
 
-    
     #wrapper {
         padding-left: 0;    
     }
@@ -83,7 +82,8 @@
             overflow-x: hidden;
             padding-bottom: 40px;
         }
-    
+
+
         .side-nav>li>a {
             width: 225px;
             border-bottom: 1px rgba(0,0,0,.3) solid;
@@ -149,6 +149,15 @@
     margin-top: -12px;
 }
 
+.nav-pesquisa{
+    /* margin-top: 7px; */
+}
+
+.nav-title{
+margin-top: 15px;
+}
+
+
 /* .pesquisa-nav{
    width: 100%;
 } */
@@ -179,6 +188,16 @@
     padding: 0px;  */
 }
 
+.back-login{
+    text-decoration: none;
+    color: white;
+    font-size: 1.5em;
+}
+
+.back-login:hover, .back-login:focus, .back-login:active{
+    text-decoration: none;
+    color: rgb(216, 215, 215);
+}
 
 
 /* pagina registo */
@@ -198,6 +217,13 @@
     margin-top: 2%;
     border-radius: 20px;
   
+}
+
+/* *****************ADMIN************ */
+
+#main-admin{
+    padding-top: 60px; 
+
 }
 
 

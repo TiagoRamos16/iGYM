@@ -2,16 +2,17 @@
     <img class="img-login" src="https://i0.wp.com/www.africom.co.zw/wp-content/uploads/2017/03/login-page.jpg?ssl=1" alt="">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 container-login ">
+            <div class="col-md-6 col-md-offset-3 container-login">
+                <a class="back-login" href="<?=base_url('home');?>"><i class="fas fa-arrow-left "></i> Voltar</a>
                 <h2 class="text-center login-title text-white">Login</h2>
                 <form role="form form-login">
                     <div class="form-group">
-                        <label for="inputUsernameEmail">Username ou email</label>
-                        <input type="text" class="form-control" id="inputUsernameEmail">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" class="form-control" id="inputPassword">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
                     <div class="checkbox">
                         <label>
@@ -24,9 +25,9 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="form-control btn btn-info col-md-3 btn-login btn-block">
-                            Log In
-                        </button>
+                        <input type="submit" class="form-control btn btn-info col-md-3 btn-login btn-block" name="submitLogin" id="submitLogin" value="Efectuar Login">
+                        
+                       
 
                     </div>
                     
