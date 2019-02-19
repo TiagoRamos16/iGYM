@@ -20,7 +20,6 @@ class Utilizador extends CI_Controller {
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/login');
 		$this->load->view('templates/footer');
-
 	}
 
 	public function registo()

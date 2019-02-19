@@ -1,23 +1,50 @@
+
 <section class="section-login">
-    <img class="img-login" src="https://i0.wp.com/www.africom.co.zw/wp-content/uploads/2017/03/login-page.jpg?ssl=1"
-        alt="">
     <div class="container">
         <div class="align-self-center div-registo">
             <header class="align-self-center">
-                <h4 class="titulo-registo">Novo Registo</h4>
+                <!-- <h4 class="titulo-registo">Novo Registo</h4> -->
+                <div class="row">
+
+                    <!-- <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-info" style="width: 50%"></div>
+                    </div> -->
+
+                    <div class="col-md-offset-2 col-md-2 col-xs-3 text-center">
+                        <i class="far fa-check-circle fa-3x text-success"></i>
+                        <br>
+                        <label>Pacote</label>
+                    </div>
+                    <div class="col-md-2 col-xs-3 text-center">
+                        <i class="far fa-check-circle fa-3x text-warning"></i>
+                        <br>
+                        <label>Conta</label>
+                    </div>
+                    <div class="col-md-2 col-xs-3 text-center">
+                        <i class="far fa-dot-circle fa-3x"></i>
+                        <br>
+                        <label>Pagamento</label>
+                    </div>
+                    <div class="col-md-2 col-xs-3 text-center">
+                        <i class="far fa-dot-circle fa-3x"></i>
+                        <br>
+                        <label>Confirmação</label>
+                    </div>
+                </div>
             </header>
+
             <form>
                 <div class="form-group col-md-12">
-                    <label>Nome Completo </label>
+                    <label>Nome Completo<span class="required">*</span></label>
                     <input type="text" class="form-control" placeholder="">
                 </div> <!-- form-group end.// -->
 
                 <div class="form-group col-md-6">
-                    <label>Morada </label>
+                    <label>Morada<span class="required">*</span></label>
                     <input type="text" class="form-control" placeholder="">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-3">
-                    <label>Localidade</label>
+                    <label>Localidade<span class="required">*</span></label>
                     <select class="form-control" name="localidade">
                         <option selected="true" disabled="disabled">Localidade</option>
                         <?php 
@@ -29,12 +56,12 @@
                     </select>
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-3">
-                    <label>Código Postal</label>
+                    <label>Código Postal<span class="required">*</span></label>
                     <input type="text" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
 
                 <div class="form-group col-md-4">
-                    <label>Nacionalidade</label>
+                    <label>Nacionalidade<span class="required">*</span></label>
                     <select class="form-control" name="nacionalidade">
                         <option selected="true" disabled="disabled">Nacionalidade</option>
                         <?php 
@@ -46,16 +73,16 @@
                     </select>
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-4">
-                    <label>Cartão de Cidadão</label>
+                    <label>Cartão de Cidadão<span class="required">*</span></label>
                     <input type="number" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-4">
-                    <label>Número de Contribuinte</label>
+                    <label>Número de Contribuinte<span class="required">*</span></label>
                     <input type="number" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
 
                 <div class="form-group col-md-4">
-                    <label>Género</label>
+                    <label>Género<span class="required">*</span></label>
                     <br>
                     <select class="form-control" name="genero">
                         <option selected="true" disabled="disabled">Genero</option>
@@ -72,43 +99,40 @@
                     </label> -->
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-4">
-                    <label>Data de Nascimento</label>
+                    <label>Data de Nascimento<span class="required">*</span></label>
                     <input type="date" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-4">
-                    <label>Telefone</label>
+                    <label>Telefone<span class="required">*</span></label>
                     <input type="number" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
 
                 <div class="form-group col-md-6">
-                    <label>Username</label>
+                    <label>Username<span class="required">*</span></label>
                     <input type="text" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-6">
-                    <label>Email</label>
+                    <label>Email<span class="required">*</span></label>
                     <input type="email" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-6">
-                    <label>Password</label>
+                    <label>Password<span class="required">*</span></label>
                     <input type="password" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
                 <div class="form-group col-md-6">
-                    <label>Confirmação Password</label>
+                    <label>Confirmação Password<span class="required">*</span></label>
                     <input type="password" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
-                <div class="form-group col-md-12 ">
-                    <input type="checkbox" class="" id="reg_agree" name="reg_agree" value="1" required>
-                    <label for="reg_agree">Aceite os <a href="#">termos e condições</a></label>
-                </div>                            
 
-
-                <div class="form-group col-md-12  ">
-                    
-                    <div class="g-recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
-                    <!-- captcha google -->
+                <div align="center">
+                    <div class="form-group col-md-12 ">
+                        <input type="checkbox" class="" id="reg_agree" name="reg_agree" value="1" required>
+                        <label for="reg_agree">Aceite os <a href="#">termos e condições</a></label>
+                    </div>                            
+                    <div class="form-group col-md-12  ">
+                        <div class="g-recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
+                    </div><!-- captcha google -->
                 </div>
-             
-             
 
                 <div class="form-group col-md-12 ">
                     <button type="submit" class="btn btn-info btn-block"> Registo </button>
@@ -117,7 +141,6 @@
             <div class="border-top card-body text-center">Have an account? <a href="<?= base_url('utilizador/login')?>">Log In</a></div>
         </div> <!-- col.//-->
     </div> <!-- container.//-->
-
 
 </section>
 

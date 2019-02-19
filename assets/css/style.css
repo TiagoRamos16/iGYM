@@ -164,15 +164,15 @@ margin-top: 15px;
 
 /* pagina login */
 
+
+
+
  
 .section-login{
-
-}
-
-.section-login .img-login{
+    background-image: url('../img/login-page.jpg');
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     z-index: -1;
@@ -207,7 +207,6 @@ margin-top: 15px;
     padding: 10px;
     font-size: 2.5em;
 }
-
     
 .div-registo{
     /* background-color: #959799ee; */
@@ -219,6 +218,7 @@ margin-top: 15px;
   
 }
 
+<<<<<<< HEAD
 /* *****************ADMIN************ */
 
 #main-admin{
@@ -226,4 +226,14 @@ margin-top: 15px;
 
 }
 
+=======
+.required {
+    color: red;
+  }
+>>>>>>> 1ba451a52401cfdd16d63d9374824a1b2005e1b7
 
+  @media only screen and (max-width: 600px) {
+    .section-login {
+      background-color: lightblue;
+    }
+  }
