@@ -218,7 +218,6 @@ margin-top: 15px;
   
 }
 
-<<<<<<< HEAD
 /* *****************ADMIN************ */
 
 #main-admin{
@@ -226,11 +225,9 @@ margin-top: 15px;
 
 }
 
-=======
 .required {
     color: red;
   }
->>>>>>> 1ba451a52401cfdd16d63d9374824a1b2005e1b7
 
   @media only screen and (max-width: 600px) {
     .section-login {
