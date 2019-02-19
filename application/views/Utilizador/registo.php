@@ -1,6 +1,5 @@
+
 <section class="section-login">
-    <img class="img-login" src="https://i0.wp.com/www.africom.co.zw/wp-content/uploads/2017/03/login-page.jpg?ssl=1"
-        alt="">
     <div class="container">
         <div class="align-self-center div-registo">
             <header class="align-self-center">
@@ -11,22 +10,22 @@
                         <div class="progress-bar progress-bar-info" style="width: 50%"></div>
                     </div> -->
 
-                    <div class="col-md-offset-2 col-md-2 text-center">
+                    <div class="col-md-offset-2 col-md-2 col-xs-3 text-center">
                         <i class="far fa-check-circle fa-3x text-success"></i>
                         <br>
                         <label>Pacote</label>
                     </div>
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-2 col-xs-3 text-center">
                         <i class="far fa-check-circle fa-3x text-warning"></i>
                         <br>
                         <label>Conta</label>
                     </div>
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-2 col-xs-3 text-center">
                         <i class="far fa-dot-circle fa-3x"></i>
                         <br>
                         <label>Pagamento</label>
                     </div>
-                    <div class="col-md-2 text-center">
+                    <div class="col-md-2 col-xs-3 text-center">
                         <i class="far fa-dot-circle fa-3x"></i>
                         <br>
                         <label>Confirmação</label>
@@ -124,19 +123,16 @@
                     <label>Confirmação Password<span class="required">*</span></label>
                     <input type="password" class="form-control" placeholder=" ">
                 </div> <!-- form-group end.// -->
-                <div class="form-group col-md-12 ">
-                    <input type="checkbox" class="" id="reg_agree" name="reg_agree" value="1" required>
-                    <label for="reg_agree">Aceite os <a href="#">termos e condições</a></label>
-                </div>                            
 
-
-                <div class="form-group col-md-12  ">
-                    
-                    <div class="g-recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
-                    <!-- captcha google -->
+                <div align="center">
+                    <div class="form-group col-md-12 ">
+                        <input type="checkbox" class="" id="reg_agree" name="reg_agree" value="1" required>
+                        <label for="reg_agree">Aceite os <a href="#">termos e condições</a></label>
+                    </div>                            
+                    <div class="form-group col-md-12  ">
+                        <div class="g-recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
+                    </div><!-- captcha google -->
                 </div>
-             
-             
 
                 <div class="form-group col-md-12 ">
                     <button type="submit" class="btn btn-info btn-block"> Registo </button>
@@ -145,7 +141,6 @@
             <div class="border-top card-body text-center">Have an account? <a href="<?= base_url('utilizador/login')?>">Log In</a></div>
         </div> <!-- col.//-->
     </div> <!-- container.//-->
-
 
 </section>
 
