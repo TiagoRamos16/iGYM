@@ -5,8 +5,16 @@ class Utilizador_m extends CI_Model {
         parent::__construct();
     }
 
+        
+        public function queryPlanos()
+        {
+            $this->db->select('id, nome, tempo_fidelizacao, periodicidade, preco, cardiofit_musculacao, consulta_nutricao, avaliacao_fisica, aulas_grupo');
+            $query = $this->db->get('plano_adesao');
+            return $query->result_array();
+        }
 
 
+<<<<<<< HEAD
 
 
     //obtem utilizador com determinado email
@@ -47,4 +55,6 @@ class Utilizador_m extends CI_Model {
         $this->db->where('value', $tokenValue);
         return $this->db->delete('token');    
     }
+=======
+>>>>>>> 795a8bf1f39759996883dba552b8c2161061b605
 }

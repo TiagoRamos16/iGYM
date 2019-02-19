@@ -4,14 +4,15 @@
         <div class="align-self-center div-registo">
             <header class="align-self-center">
                 <!-- <h4 class="titulo-registo">Novo Registo</h4> -->
+
                 <div class="row">
 
                     <!-- <div class="progress progress-striped">
                         <div class="progress-bar progress-bar-info" style="width: 50%"></div>
-                    </div> -->
+                    </div>
 
                     <div class="col-md-offset-2 col-md-2 col-xs-3 text-center">
-                        <i class="far fa-check-circle fa-3x text-success"></i>
+                        <a class="back-login" href="<?=base_url('utilizador/registo_plano');?>"><i class="far fa-check-circle fa-2x text-success"></i></a>
                         <br>
                         <label>Pacote</label>
                     </div>
@@ -29,7 +30,34 @@
                         <i class="far fa-dot-circle fa-3x"></i>
                         <br>
                         <label>Confirmação</label>
+                    </div> -->
+
+
+                    <div class="progress progress-striped linha-progresso">
+                        <div class="progress-bar progress-bar-info" style="width: 30%"></div>
                     </div>
+
+
+                    <div class="stepwizard">
+                        <div class="row botao-progresso">
+                        
+                            <div class="col-xs-1 text-center progresso1">
+                                <a href="<?=base_url('utilizador/registo_plano');?>" type="button" class="btn btn-info btn-circle">1</a>
+                            </div>
+                            <div class="col-xs-1 col-xs-offset-2 text-center progresso2">
+                                <a href="#step-2" type="button" class="btn btn-info btn-circle">2</a>
+
+                            </div>
+                            <div class="col-xs-1 col-xs-offset-2 text-center progresso3">
+                                <a href="#step-3" type="button" class="btn btn-info btn-circle" disabled="disabled">3</a>
+                            </div>
+                            <div class="col-xs-1 col-xs-offset-2 text-center progresso4">
+                                <a href="#step-4" type="button" class="btn btn-info btn-circle" disabled="disabled">4</a>
+                            </div>
+
+                        </div> <!-- row botao-progresso -->
+                    </div> <!-- stepwizard -->
+
                 </div>
             </header>
 

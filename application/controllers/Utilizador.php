@@ -8,7 +8,13 @@ class Utilizador extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Utilizador_m');
+<<<<<<< HEAD
 
+=======
+		$this->load->library('session');
+		$this->load->library('form_validation');
+		// $this->load->library('security');
+>>>>>>> 795a8bf1f39759996883dba552b8c2161061b605
 	}
 
 
@@ -89,6 +95,7 @@ class Utilizador extends CI_Controller
 
 	}
 
+<<<<<<< HEAD
 	//logout
 	public function logout()
 	{
@@ -214,6 +221,38 @@ class Utilizador extends CI_Controller
 
 			//se tentar aceder a esta função sem ver apartir do email e da password faz qq coisa
 		}
+=======
+	public function registo_plano()
+	{
+
+		$data['plano'] = $this->Utilizador_m->queryPlanos();
+
+		$this->load->view('templates/header');
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/registo_plano', $data);
+		$this->load->view('templates/footer');
+
+	}
+
+	public function registo($id=null)
+	{
+
+		$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
+
+		$this->load->view('templates/header');
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/registo', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function registo_pagamento()
+	{
+
+		$this->load->view('templates/header');
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/registo_pagamento');
+		$this->load->view('templates/footer');
+>>>>>>> 795a8bf1f39759996883dba552b8c2161061b605
 
 	}
 
