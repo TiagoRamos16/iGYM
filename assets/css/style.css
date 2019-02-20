@@ -162,6 +162,11 @@ margin-top: 15px;
    width: 100%;
 } */
 
+
+
+
+
+
 /* pagina login */
 
 
@@ -206,6 +211,9 @@ margin-top: 15px;
 
     /* font-size: 1.1em;  */
 }
+
+
+
 
 /* pagina registo */
 
@@ -261,6 +269,20 @@ margin-top: 15px;
     margin-left: -25px;
 }
 
+/* registo pagamento */
+
+
+div#exTab1{
+    padding: 30px;
+}
+
+#nav-tab-card, .botao-pagamento, .paypal {
+    margin-top: 20px;
+}
+
+.inputCard{
+    color: black;
+}
 
 /* *****************ADMIN************ */
 

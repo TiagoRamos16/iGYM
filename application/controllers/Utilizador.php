@@ -62,8 +62,9 @@ class Utilizador extends CI_Controller
 	}
 
 	//registo
-	public function registo(){
+	public function registo($id=null){
 		$data['title'] = "Registo";
+		$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
 
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
