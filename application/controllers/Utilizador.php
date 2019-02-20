@@ -62,24 +62,81 @@ class Utilizador extends CI_Controller
 	}
 
 	//registo
+<<<<<<< HEAD
 	public function registo($id=null){
+=======
+	public function registo($idPlano=null){
+>>>>>>> 679ea03db83b34ef57b53b99af66e6ed518ae7a9
 		$data['title'] = "Registo";
 		$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
 
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+		// var_dump ($this->session->userdata('adminRegisto'));
+		// var_dump ($this->session->userdata('clienteRegisto'));
+		// echo $this->session->userdata('adminRegisto')['email'];
 
+		$this->form_validation->set_rules('nome', 'Nome', 'required');
+		$this->form_validation->set_rules('morada', 'Morada', 'required');
+		$this->form_validation->set_rules('localidade', 'Localidade', 'required');
+		$this->form_validation->set_rules('codigoPostal', 'Código Postal', 'required');
+		$this->form_validation->set_rules('nacionalidade', 'Nacionalidade', 'required');
+		$this->form_validation->set_rules('cc', 'cc', 'required');
+		$this->form_validation->set_rules('nif', 'nif', 'required');
+		$this->form_validation->set_rules('genero', 'Genero', 'required');
+		$this->form_validation->set_rules('dataNascimento', 'Data de Nascimento', 'required');
+		$this->form_validation->set_rules('telefone', 'Telefone', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('passwordRegisto', 'Password', 'required');
+		$this->form_validation->set_rules('confirmPasswordRegisto', 'Password', 'required');
+		$this->form_validation->set_rules('reg_agree', 'Check', 'required');
+		
 
 		if ($this->form_validation->run() == true) {
+			$nome = $this->security->xss_clean($this->input->post("nome"));
+			$morada = $this->security->xss_clean($this->input->post("morada"));
+			$localidade = $this->security->xss_clean($this->input->post("localidade"));
+			$codigoPostal = $this->security->xss_clean($this->input->post("codigoPostal"));
+			$nacionalidade = $this->security->xss_clean($this->input->post("nacionalidade"));
+			$cc = $this->security->xss_clean($this->input->post("cc"));
+			$nif = $this->security->xss_clean($this->input->post("nif"));
+			$genero = $this->security->xss_clean($this->input->post("genero"));
+			$dataNascimento = $this->security->xss_clean($this->input->post("dataNascimento"));
+			$telefone = $this->security->xss_clean($this->input->post("telefone"));
+			$username = $this->security->xss_clean($this->input->post("username"));
+			$email = $this->security->xss_clean($this->input->post("email"));
+			$password = $this->security->xss_clean($this->input->post("passwordRegisto"));
+			$email = $this->security->xss_clean($this->input->post("reg_agree"));
+			$dataRegisto = date('Y-m-d');
+			$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-			
-			
+
+			$arrayUtilizador = array(
+				"username" => $username,
+				"email" => $email,
+				"password" => $passwordHash,
+				"tipo" => 5,
+				"estado" => 2 
+			);
+			$arrayCliente = array(
+				"nome" => $nome,
+				"genero" => $genero,
+				"data_registo" => $dataRegisto,
+				"morada" => $morada,
+				"localidade" => $localidade,
+				"codigo_postal" => $codigoPostal,
+				"telefone" => $telefone,
+				"nacionalidade" => $nacionalidade,
+				"cc" => $cc,
+				"nif" => $nif,
+				"data_nascimento" => $dataNascimento,
+				"ultimo_pagamento" => 0,
+				"admin_id" => 3,  //mudar
+				"plano_adesao_id" => $idPlano
+			);
+
+			$this->session->set_userdata('adminRegisto',$arrayUtilizador);
+			$this->session->set_userdata('clienteRegisto',$arrayCliente);
+
 		}else{
 			$this->load->view('templates/header', $data);
 			// $this->load->view('templates/nav');
@@ -218,10 +275,10 @@ class Utilizador extends CI_Controller
 
 	public function registo_plano()
 	{
-
+		$data['title'] = "Escolher Plano"; 
 		$data['plano'] = $this->Utilizador_m->queryPlanos();
 
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/registo_plano', $data);
 		$this->load->view('templates/footer');

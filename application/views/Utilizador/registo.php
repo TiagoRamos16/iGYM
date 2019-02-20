@@ -66,7 +66,8 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label>Nome Completo<span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="" required>
+                        <input type="text" class="form-control" placeholder=""  name="nome" required
+                        value="<?php echo set_value('username'); ?>">
                     </div> <!-- form-group end.// -->
                 </div>
                 
@@ -74,12 +75,15 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Morada<span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder="" required>
+                        <input type="text" class="form-control" placeholder=""  name="morada" required
+                        value="<?php echo set_value('morada'); ?>">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-3">
                         <label>Localidade<span class="required">*</span></label>
-                        <select class="form-control" name="localidade" required>
+                        <select class="form-control" name="localidade"  name="localidade" required
+                        value="<?php echo set_value('morada'); ?>">
                             <option selected="true" disabled="disabled" value="">Localidade</option>
+                            <option  value="1">Ponta do sol</option>
                             <?php 
                                         // foreach($fabricante as $row)
                                         // { 
@@ -90,15 +94,18 @@
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-3">
                         <label>Código Postal<span class="required">*</span></label>
-                        <input type="text" class="form-control" placeholder=" " required>
+                        <input type="text" class="form-control" placeholder=" "  name="codigoPostal" required
+                        value="<?php echo set_value('codigoPostal'); ?>">
                     </div> <!-- form-group end.// -->
                 </div>
                 
                 <div class="row">                      
                     <div class="form-group col-md-4">
                         <label>Nacionalidade<span class="required">*</span></label>
-                        <select class="form-control" name="nacionalidade" required>
+                        <select class="form-control" name="nacionalidade"  name="nacionalidade"  required
+                        value="<?php echo set_value('nacionalidade'); ?>">
                             <option selected="true" disabled="disabled" value="">Nacionalidade</option>
+                            <option  value="1">Portuguesa</option>
                             <?php 
                                         // foreach($fabricante as $row)
                                         // { 
@@ -115,6 +122,7 @@
                     <div class="form-group col-md-4">
                         <label>Número de Contribuinte<span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder=" " required name="nif" id="nif">
+                        <p class="text-danger" id="erroNif"></p>
                     </div> <!-- form-group end.// -->
                 </div>  
                 <div class="row">                           
@@ -122,7 +130,7 @@
                         <label>Género<span class="required">*</span></label>
                         <br>
                         <select class="form-control" name="genero" required>
-                            <option selected="true" disabled="disabled" value="">Genero</option>
+                            <option selected="true" disabled="disabled" value="" name="genero">Genero</option>
                             <option value="m">Masculino</option>
                             <option value="f">Feminino</option>
                         </select>
@@ -137,11 +145,11 @@
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-4">
                         <label>Data de Nascimento<span class="required">*</span></label>
-                        <input type="date" class="form-control" placeholder=" " required>
+                        <input type="date" class="form-control" placeholder=" " required name="dataNascimento">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-4">
                         <label>Telefone<span class="required">*</span></label>
-                        <input type="number" class="form-control" placeholder=" " required>
+                        <input type="number" class="form-control" placeholder=" " required name="telefone">
                     </div> <!-- form-group end.// -->
                 </div> 
                 <div class="row">
@@ -179,11 +187,12 @@
                 </div>
             
                 <div class="form-group col-md-12 ">
-                    <input type="submit" class="btn btn-info btn-block" value="Formulário de registo" name="formRegisto" id="formRegisto"> 
+                    <input type="submit" class="btn btn-info btn-block" value="Avançar para Pagamento" name="formRegisto" id="formRegisto"> 
                 </div> <!-- form-group// -->
-
+                <p class="text-danger" id="erroSubmit"></p>                                    
             </form>
             <div class="border-top card-body text-center">Have an account? <a href="<?= base_url('utilizador/login')?>">Log In</a></div>
+            <div class="text-danger"><?php echo validation_errors(); ?></div>
         </div> <!-- col.//-->
     </div> <!-- container.//-->
 
