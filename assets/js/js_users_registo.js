@@ -1,5 +1,6 @@
 // flags de validação de submit
 var flagValida = 1;
+var flagVa = 0;
 
 
 
@@ -123,6 +124,8 @@ $('#confirmPasswordRegisto').blur(function(){
 $('#formRegisto').submit(function(event){
     if(flagValida!=1){
         event.preventDefault();
-    }   
+    }else if(flagVa == 0){
+        //erro
+    } 
     
 });

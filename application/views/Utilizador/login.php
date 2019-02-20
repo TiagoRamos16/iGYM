@@ -23,7 +23,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 container-login ">
-                <a class="back-login" href="<?=base_url('home');?>"><i class="fas fa-arrow-left "></i> Voltar</a>
                 <h2 class="text-center login-title text-white">Login</h2>
                 <?php echo form_open('utilizador/login','class="form form-login"'); ?>
                     <div class="form-group">
@@ -57,10 +56,18 @@
                         ?>
               
                 </form>
-                <label class="pull-right">Ainda nao tem conta? <a href="<?= base_url('utilizador/registo')?>">Efetuar Registo</a></label>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <a class="back-login" href="<?=base_url('home');?>"><i class="fas fa-arrow-left "></i> Voltar</a>
+                    </div> <!-- form-group// -->
+
+                    <div class="form-group col-md-8">
+                        <div class="border-top card-body text-center">Ainda nao tem conta? <a href="<?= base_url('utilizador/registo_plano')?>">Adira ao nosso ginásio</a></div>
+                    </div> <!-- form-group// -->
+                </div> <!-- row.// -->
 
             </div>
-
    
         </div>
     </div>

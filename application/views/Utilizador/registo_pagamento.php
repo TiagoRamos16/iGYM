@@ -58,7 +58,7 @@
                                     <label for="nome-cartao">Nome completo escrito na parte frontal do cartão<span class="required">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" name="nome-cartao" placeholder="Coloque o nome" required>
+                                        <input type="text" class="form-control" name="nome-cartao" placeholder="Coloque o nome" value="<?php echo set_value('nome-cartao'); ?>" required>
                                     </div> <!-- input-group.// -->
                                 </div> <!-- form-group.// -->
                     
@@ -69,13 +69,13 @@
                                         <!-- <span class="input-group-addon"><span class="fa fa-credit-card"></span></span> -->
                                         <!-- <input type="number" class="form-control" name="numero-cartao" placeholder="Insira o número"> -->
 
-                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao1" id="numero-cartao1" required/>
+                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao1" id="numero-cartao1" value="<?php echo set_value('numero-cartao1'); ?>" required/>
                                         -
-                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao2" id="numero-cartao2" required/>
+                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao2" id="numero-cartao2" value="<?php echo set_value('numero-cartao2'); ?>" required/>
                                         -
-                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao3" id="numero-cartao3" required/>
+                                        <input class="inputCard" type="number" min="1000" max="9999" name="numero-cartao3" id="numero-cartao3" value="<?php echo set_value('numero-cartao3'); ?>" required/>
                                         -
-                                        <input class="inputCard" type="number" min="1000" max="9999"  name="numero-cartao4" id="numero-cartao4" required/>
+                                        <input class="inputCard" type="number" min="1000" max="9999"  name="numero-cartao4" id="numero-cartao4" value="<?php echo set_value('numero-cartao4'); ?>" required/>
 
                                     </div> <!-- input-group.// -->
                                 </div> <!-- form-group.// -->
@@ -85,24 +85,35 @@
                     
                                 <div class="form-group col-md-4 col-md-offset-2">
                                     <label>Data de Expiração<span class="required">*</span></label>
-                                    <input type="month" class="form-control" id="validade-cartao" name="validade-cartao" required>
+                                    <input type="month" min="<?php echo date('Y-m-d'); ?>" value="<?php echo set_value('validade-cartao'); ?>" class="form-control" id="validade-cartao" name="validade-cartao" required>
                                 </div> <!-- form-group end.// -->
                     
                                 <div class="form-group col-md-4">
                                     <label>CVV<span class="required">*</span></label>
                                     <input type="number" class="form-control" placeholder="últimos 3 digitos na parte traseira do cartão"
-                                        name="codigo-cvv" id="codigo-cvv" min="1000" max="9999" required>
+                                        name="codigo-cvv" id="codigo-cvv" min="100" max="999" value="<?php echo set_value('codigo-cvv'); ?>" required>
                                 </div> <!-- form-group end.// -->
                     
                             </div> <!-- row.// -->
-                    
 
-                            <div class="form-group col-md-4 col-md-offset-4 botao-pagamento">
-                                <input type="submit" class="btn btn-info btn-block" value="Confirmar Pagamento" name="formRegisto" id="formRegisto"> 
+                            <div class="form-group col-md-8 col-md-offset-2 botao-pagamento">
+                                <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo_confirmacao/1')?>">Confirmar Pagamento</a>
+                                <!-- <input type="submit" class="btn btn-info btn-block" href="<?= base_url('utilizador/registo_confirmacao/1')?>" value="Confirmar Pagamento" name="formRegisto" id="formRegisto">  -->
                             </div> <!-- form-group// -->
 
-
                         </form>
+
+                        <div class="row">
+                            <div class="form-group col-md-2 col-md-offset-2">
+                                <a class="back-login" href="<?=base_url('utilizador/registo');?>"><i class="fas fa-arrow-left "></i> Voltar</a>
+                            </div> <!-- form-group// -->
+
+                            <div class="form-group col-md-4">
+                                <div class="border-top card-body text-center">Já possui conta? <a href="<?= base_url('utilizador/login')?>">Log In</a></div>
+                                <div class="text-danger"><?php echo validation_errors(); ?></div>
+                            </div> <!-- form-group// -->
+                        </div> <!-- row.// -->
+
                     </div> <!-- nav-tab-card.// -->
 
 
@@ -148,6 +159,6 @@
             </div> <!-- container.// -->
         </div> <!-- div-registo.// -->
     </div> <!-- container.// -->
-</section> <!-- container.// -->
+</section> <!-- .// -->
 
             

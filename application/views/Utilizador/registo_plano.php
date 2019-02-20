@@ -129,8 +129,20 @@
                 } // fecha foreach
             ?>
 
-            </div>
-        </div>
-    </div>
+            </div> <!-- row -->
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <a class="back-login" href="<?=base_url('home');?>"><i class="fas fa-arrow-left "></i> Voltar</a>
+                </div> <!-- form-group// -->
+
+                <div class="form-group col-md-4">
+                    <div class="border-top card-body text-center">Já possui conta? <a href="<?= base_url('utilizador/login')?>">Log In</a></div>
+                    <div class="text-danger"><?php echo validation_errors(); ?></div>
+                </div> <!-- form-group// -->
+            </div> <!-- row.// -->
+            
+        </div> <!-- div-registo -->
+    </div> <!-- container -->
 </section>
 
