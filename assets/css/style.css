@@ -53,7 +53,7 @@
         /*border: 1px solid rgba(0,0,0,.15);*/
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-        background-color: #fff;
+        /* background-color: #fff; */
         -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
     }
@@ -75,7 +75,7 @@
             border-radius: 0;
             border-top: 1px rgba(0,0,0,.5) solid;
             overflow-y: auto;
-            color: #fff;
+            /* color: #fff; */
             background-color: #1a1d21;
             /*background-color: #5A6B7D;*/
             bottom: 0;
@@ -225,7 +225,23 @@ margin-top: 15px;
   
 }
 
-li{
+
+
+#submitPlano{
+    font-size: 17px;
+}
+
+.lista-plano{
+    list-style-type:none;
+    padding: 0;
+}
+
+.titulo-plano{
+    background-color: red!important;
+    color: white!important;
+}
+
+.lista-plano li{
     background-color: white;
     color: #37526ea6;
     padding: 15px;
@@ -233,20 +249,7 @@ li{
     font-size: 20px;
 }
 
-#submitPlano{
-    font-size: 17px;
-}
 
-ul{
-    list-style-type:none;
-    padding: 0;
-}
-
-.titulo-plano{
-    background-color: red;
-    color: white;
-    
-}
 
 .required {
     color: red;

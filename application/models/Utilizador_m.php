@@ -14,7 +14,6 @@ class Utilizador_m extends CI_Model {
         }
 
 
-<<<<<<< HEAD
 
 
     //obtem utilizador com determinado email
@@ -55,6 +54,4 @@ class Utilizador_m extends CI_Model {
         $this->db->where('value', $tokenValue);
         return $this->db->delete('token');    
     }
-=======
->>>>>>> 795a8bf1f39759996883dba552b8c2161061b605
 }

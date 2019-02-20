@@ -66,7 +66,7 @@
 
                 <div class="col-md-4">
                     <div class="prices div-plano">
-                        <ul>
+                        <ul class="lista-plano">
                             <li class="titulo-plano"> <b><?php echo $row['nome'] ?></b> </li>
                             <li class="preco-plano"> <?php echo $row['preco'].".00€*" ?> </li>
                     <!-- verifica quantos dias por semana -->
