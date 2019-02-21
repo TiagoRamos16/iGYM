@@ -21,7 +21,21 @@
                 <li><a href="#conceito">Conceito</a></li>
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#contactos">Contactos</a></li>
-                <li><a href="<?= base_url('utilizador/login')?>">Login</a></li>
+                <?php 
+                if($this->session->userdata('sessao_utilizador')) : ?>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fas fa-user"></i> <?=$this->session->userdata('sessao_utilizador')['username']?><span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Ver Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
+                        </ul>
+                    </li>          
+                <?php else:?> 
+                    <li><a href="<?= base_url('utilizador/login')?>">Login</a></li>
+                <?php endif?>    
             </ul>
         </div>
     </div>

@@ -1,4 +1,9 @@
-<h1 class="title text-center"> July 2014 </h1>
+<div id="page-wrapper ">
+        <div class="container-fluid ">
+            <!-- Page Heading -->
+            <div class="row " id="main-admin">
+                
+<h1 class="title text-center"> Horário </h1>
 	<div class="calendar" data-toggle="calendar">
 		<div class="row">
 			<div class="col-xs-12 calendar-day calendar-no-current-month">
@@ -136,4 +141,12 @@
 	</div>
     
 
+
+   </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div><!-- /#wrapper -->
 
