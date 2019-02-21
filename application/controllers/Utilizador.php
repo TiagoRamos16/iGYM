@@ -36,14 +36,14 @@ class Utilizador extends CI_Controller
 				$this->session->set_flashdata('erroEmail', $email); //email do utilizador para ser colocado como value no formulario
 				redirect('utilizador/login');
 			} else {
-				$this->session->set_userdata($utilizador); //iniciar sessao
+				$this->session->set_userdata('sessao_utilizador',$utilizador); //iniciar sessao
 
 				if($utilizador['tipo']==1){ //redirecionar consoante o tipo de utilizador
 					redirect('administrador');
 				}else if($utilizador['tipo']==2){
 					redirect('rececionista');
 				}else if($utilizador['tipo']==3){
-					redirect('personalTrainer');
+					redirect('personalTrainer/horario');
 				}else if($utilizador['tipo']==4){
 					redirect('nutricionista');
 				}else if($utilizador['tipo']==5){
@@ -62,13 +62,9 @@ class Utilizador extends CI_Controller
 	}
 
 	//registo
-<<<<<<< HEAD
-	public function registo($id=null){
-=======
 	public function registo($idPlano=null){
->>>>>>> 679ea03db83b34ef57b53b99af66e6ed518ae7a9
 		$data['title'] = "Registo";
-		$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
+		$data['id_plano'] = $idPlano;	// id enviado por url com o id do plano escolhido
 
 		// var_dump ($this->session->userdata('adminRegisto'));
 		// var_dump ($this->session->userdata('clienteRegisto'));
@@ -91,7 +87,7 @@ class Utilizador extends CI_Controller
 		$this->form_validation->set_rules('reg_agree', 'Check', 'required');
 		
 
-		if ($this->form_validation->run() == true) {
+		if ($this->form_validation->run() == true ) {
 			$nome = $this->security->xss_clean($this->input->post("nome"));
 			$morada = $this->security->xss_clean($this->input->post("morada"));
 			$localidade = $this->security->xss_clean($this->input->post("localidade"));
@@ -305,6 +301,18 @@ class Utilizador extends CI_Controller
 		$this->load->view('templates/footer');
 
 	}
+
+	public function mensagens(){
+		$data['title'] = 'Mensagens';
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('utilizador/mensagens');
+		$this->load->view('templates/footer');
+	}
+
+
 
 	public function verificaEmailAjax(){
 		if($this->input->post('email')){
