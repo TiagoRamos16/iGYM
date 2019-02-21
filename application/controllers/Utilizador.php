@@ -67,34 +67,38 @@ class Utilizador extends CI_Controller
 		$data['title'] = "Escolher Plano"; 
 		$data['plano'] = $this->Utilizador_m->queryPlanos();
 
-		$this->load->view('templates/header',$data);
-		// $this->load->view('templates/nav');
-		$this->load->view('Utilizador/registo_plano', $data);
-		$this->load->view('templates/footer');
+		$idEscolhido = $this->input->post("formRegisto_plano");	// verifica que plano foi escolhido mas vem com formato "Plano X"
+		$planoEscolhido = substr($idEscolhido, 5);	// corta string "Plano X" para X de modo a obter o id escolhido
+
+		if($idEscolhido != null){
+
+			$this->session->set_userdata('planoEscolhido', $planoEscolhido); // id enviado por url com o id do plano ecolhido
+			redirect('utilizador/registo');
+
+		}else{
+			$this->load->view('templates/header',$data);
+			// $this->load->view('templates/nav');
+			$this->load->view('Utilizador/registo_plano', $data);
+			$this->load->view('templates/footer');
+		}
+
 
 	}
 
-	public function registo($idPlano=null){
+	public function registo(){
 		$data['title'] = "Registo";
 
-		if($idPlano == null){
+		if($this->session->userdata('planoEscolhido') == null){
 			redirect('utilizador/registo_plano');
 		}else{	
 			
-			
-			$this->session->set_userdata('planoEscolhido', $idPlano); // id enviado por url com o id do plano ecolhido
-			// $planoEscolhido = $this->session->userdata('planoEscolhido');
-		
-			$data['planoEscolhido'] = $idPlano;
+			// enviado pela variavel de sessao na funcao anterior com o id do plano ecolhido
+			$idPlano = $this->session->userdata('planoEscolhido');
 
 			// var_dump ($this->session->userdata('adminRegisto'));
 			// var_dump ($this->session->userdata('clienteRegisto'));
 			// echo $this->session->userdata('adminRegisto')['email'];
 
-
-
-			// var_dump ($this->session->userdata('clienteRegisto'));
-			// var_dump ($this->session->userdata('planoEscolhido'));
 
 			$this->form_validation->set_rules('nome', 'Nome', 'trim|required');
 			$this->form_validation->set_rules('morada', 'Morada', 'trim|required');
@@ -110,9 +114,7 @@ class Utilizador extends CI_Controller
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 			$this->form_validation->set_rules('passwordRegisto', 'Password', 'trim|required');
 			$this->form_validation->set_rules('confirmPasswordRegisto', 'Password', 'trim|required|matches[passwordRegisto]');
-			$this->form_validation->set_rules('reg_agree', 'Check', 'required');
 			
-
 			if ($this->form_validation->run() == true) {
 				$nome = $this->security->xss_clean($this->input->post("nome"));
 				$morada = $this->security->xss_clean($this->input->post("morada"));
@@ -127,11 +129,15 @@ class Utilizador extends CI_Controller
 				$username = $this->security->xss_clean($this->input->post("username"));
 				$email = $this->security->xss_clean($this->input->post("email"));
 				$password = $this->security->xss_clean($this->input->post("passwordRegisto"));
-				$email = $this->security->xss_clean($this->input->post("reg_agree"));
+				$reg_agree = $this->security->xss_clean($this->input->post("reg_agree"));
 				$dataRegisto = date('Y-m-d');
 				$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
+				if($this->input->post("reg_agree") == null){
 
+					$this->session->set_flashdata('errocheck', 'Tem de concordar com os termos e condições'); //mensagem de erro
+					redirect('utilizador/registo');
+				}
 
 				//---------------- codigo captcha------------------------------------------
 
@@ -161,11 +167,10 @@ class Utilizador extends CI_Controller
 						
 						// se o captcha nao retornar sucesso envia mensagem de erro
 						if(!($result->success)){
-							$data['erroCaptcha'] = "Tem de preencher o captcha";
-							$this->load->view('templates/header');
-							// $this->load->view('templates/nav');
-							$this->load->view('Utilizador/registo', $data);
-							$this->load->view('templates/footer');
+
+							$this->session->set_flashdata('erroCaptcha', 'Tem de preencher o captcha'); //mensagem de erro
+							redirect('utilizador/registo');
+
 						}
 					}
 				}
@@ -195,16 +200,13 @@ class Utilizador extends CI_Controller
 					"data_nascimento" => $dataNascimento,
 					"ultimo_pagamento" => 0,
 					"admin_id" => 3,  //mudar
-					"plano_adesao_id" => $planoEscolhido
+					"plano_adesao_id" => $idPlano
 				);
 
 				$this->session->set_userdata('adminRegisto',$arrayUtilizador);
 				$this->session->set_userdata('clienteRegisto',$arrayCliente);
 
-				$this->load->view('templates/header', $data);
-				// $this->load->view('templates/nav');
-				$this->load->view('Utilizador/registo_pagamento', $data);
-				$this->load->view('templates/footer');
+				redirect('utilizador/registo_pagamento');
 
 			}else{
 
@@ -216,26 +218,17 @@ class Utilizador extends CI_Controller
 		}
 	}
 
-	// public function registo($id=null)
-	// {
-
-	// 	$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
-
-	// 	$this->load->view('templates/header');
-	// 	// $this->load->view('templates/nav');
-	// 	$this->load->view('Utilizador/registo', $data);
-	// 	$this->load->view('templates/footer');
-	// }
-
 	public function registo_pagamento()
 	{
+		// var_dump($this->session->userdata('clienteRegisto'));
+		// var_dump($this->session->userdata('adminRegisto'));
 		$this->load->view('templates/header');
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/registo_pagamento');
 		$this->load->view('templates/footer');
 	}
 
-	public function registo_confirmacao()
+	public function registo_confirmacao($idPagamento = null)
 	{
 		$data['id_pagamento'] = $idPagamento;	// id enviado por url com o id do pagamento efectuado
 

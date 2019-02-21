@@ -116,10 +116,14 @@
                     ?>
                             <li><strong>*valor para contrato de <?php echo $row['tempo_fidelizacao'] ?> meses.</strong></li>
                             <li>Débito direto:<strong> <?php echo $row['preco']*0.9 ?>0€</strong></li>
-                        
-                            <div class="form-group ">
-                                <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo/').$row['id']?>">Escolher Plano</a>
-                            </div>
+                            
+                            <?php echo form_open("utilizador/registo_plano",'class="form form-registo_plano"'); ?>
+
+                                <div class="form-group ">
+                                    <!-- <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo/').$row['id']?>">Escolher Plano</a> -->
+                                    <input type="submit" class="btn btn-info btn-block" value="Plano <?= $row['id']?>" name="formRegisto_plano" id="formRegisto_plano"> 
+                                </div>
+                            </form>
                         </ul>
 
                     </div>
