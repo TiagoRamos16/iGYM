@@ -122,7 +122,9 @@
                             <div class="form-group col-md-4 col-md-offset-4 paypal">
                                 <p>Paypal is easiest way to pay online</p>
                                 <p>
-                                    <button type="button" class="btn btn-primary"><i class="fab fa-paypal"></i>Log in my Paypal </button>
+                                    <!-- <button type="button" class="btn btn-primary"><i class="fab fa-paypal"></i>Log in my Paypal </button> -->
+                                    <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo_confirmacao/2')?>">
+                                    <i class="fab fa-paypal"></i>Log in my Paypal</a>
                                 </p>
                                 <p><strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
                                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -151,6 +153,9 @@
                                     do
                                     eiusmod
                                     tempor incididunt ut labore et dolore magna aliqua. </p>
+                                <p>
+                                    <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo_confirmacao/3')?>">Avançar</a>
+                                </p>
                             </div> <!-- form-group// -->
                         </div> <!-- row.// -->
                     </div> <!-- nav-tab-bank.// -->
