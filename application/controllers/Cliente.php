@@ -7,7 +7,7 @@ class Cliente extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Cliente_m');
+		$this->load->model('Utilizador_m');
 
 	}
 
@@ -24,13 +24,13 @@ class Cliente extends CI_Controller {
 
 	public function trataAjaxCliente(){
 		if($this->input->post('cc')){
-            if($this->Cliente_m->verificaCc($this->input->post('cc'))!=null){
+            if($this->Utilizador_m->verificaCc($this->input->post('cc'))!=null){
                 echo "1";
             }else{
                 echo "0";
             }
         }else if($this->input->post('nif')){
-			if($this->Cliente_m->verificaNif($this->input->post('nif'))!=null){
+			if($this->Utilizador_m->verificaNif($this->input->post('nif'))!=null){
                 echo "1";
             }else{
                 echo "0";

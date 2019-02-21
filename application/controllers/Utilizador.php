@@ -197,7 +197,7 @@ class Utilizador extends CI_Controller
 					"nif" => $nif,
 					"data_nascimento" => $dataNascimento,
 					"ultimo_pagamento" => 0,
-					"admin_id" => 3,  //mudar
+					"admin_id" => null,
 					"plano_adesao_id" => $idPlano
 				);
 
@@ -218,9 +218,12 @@ class Utilizador extends CI_Controller
 
 	public function registo_pagamento()
 	{
+
+		$data['title'] = "Pagamento do Plano"; 
+
 		// var_dump($this->session->userdata('clienteRegisto'));
 		// var_dump($this->session->userdata('adminRegisto'));
-		$this->load->view('templates/header');
+		$this->load->view('templates/header',$data);
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/registo_pagamento');
 		$this->load->view('templates/footer');
@@ -228,6 +231,8 @@ class Utilizador extends CI_Controller
 
 	public function registo_confirmacao($idPagamento = null)
 	{
+		$data['title'] = "Confirmação da Inscrição"; 
+
 		$data['id_pagamento'] = $idPagamento;	// id enviado por url com o id do pagamento efectuado
 
 		if ($idPagamento == 3){ // se for pago por transferencia bancária
@@ -239,6 +244,26 @@ class Utilizador extends CI_Controller
 			$data['estado_pagamento'] = 1; // pagamento confirmado
 
 		}
+
+		// dados em comum na tabela admin para inserir na BD
+		$arrayUtilizador = $this->session->userdata('adminRegisto');
+		
+		// insere na tabela admin e retorna ID para inserir na tabela cliente
+		$idTabelaAdmin = $this->Utilizador_m->insereTabelaAdmin($arrayUtilizador);
+
+		// dados do cliente para inserir na BD
+		$arrayCliente = $this->session->userdata('clienteRegisto');
+
+		// faz update ao id do array com os dados do cliente, substituindo pelo valor retornado do id apos adicionar na tabela admin
+		$arrayCliente['admin_id'] = $idTabelaAdmin;
+
+		// adiciona cliente na base de dados
+		$this->Utilizador_m->insereTabelaCliente($arrayCliente);
+
+		// apos inserir na base de dados apaga variaveis de sessao
+		$this->session->unset_userdata('adminRegisto');
+		$this->session->unset_userdata('clienteRegisto');
+		
 
 		$this->load->view('templates/header');
 		// $this->load->view('templates/nav');
