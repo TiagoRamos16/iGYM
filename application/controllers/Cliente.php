@@ -22,7 +22,6 @@ class Cliente extends CI_Controller {
 	}
 
 
-
 	public function trataAjaxCliente(){
 		if($this->input->post('cc')){
             if($this->Cliente_m->verificaCc($this->input->post('cc'))!=null){

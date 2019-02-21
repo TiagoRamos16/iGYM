@@ -1,5 +1,23 @@
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<?php if($this->session->flashdata('erroPT')!=null):?>
+    <div class="alert alert-danger text-center msn-contacto" id="message">
+    <i class="fas fa-exclamation-circle"></i>
+        <strong>Erro!</strong> 
+        <?= $this->session->flashdata('erroPT')?>
+        <button type="button" class="close" aria-label="Close" id="close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <script>
+        document.getElementById("close").addEventListener("click", function(){
+            document.getElementById("message").style.display = "none";
+        });
+    </script>
+<?php endif?>
 <section id="sobre">
 
 

@@ -36,14 +36,14 @@ class Utilizador extends CI_Controller
 				$this->session->set_flashdata('erroEmail', $email); //email do utilizador para ser colocado como value no formulario
 				redirect('utilizador/login');
 			} else {
-				$this->session->set_userdata($utilizador); //iniciar sessao
+				$this->session->set_userdata('sessao_utilizador',$utilizador); //iniciar sessao
 
 				if($utilizador['tipo']==1){ //redirecionar consoante o tipo de utilizador
 					redirect('administrador');
 				}else if($utilizador['tipo']==2){
 					redirect('rececionista');
 				}else if($utilizador['tipo']==3){
-					redirect('personalTrainer');
+					redirect('personalTrainer/horario');
 				}else if($utilizador['tipo']==4){
 					redirect('nutricionista');
 				}else if($utilizador['tipo']==5){
@@ -61,6 +61,7 @@ class Utilizador extends CI_Controller
 
 	}
 
+<<<<<<< HEAD
 
 	public function registo_plano()
 	{
@@ -94,6 +95,34 @@ class Utilizador extends CI_Controller
 			
 			// enviado pela variavel de sessao na funcao anterior com o id do plano ecolhido
 			$idPlano = $this->session->userdata('planoEscolhido');
+=======
+	//registo
+	public function registo($idPlano=null){
+		$data['title'] = "Registo";
+		$data['id_plano'] = $idPlano;	// id enviado por url com o id do plano escolhido
+
+		// var_dump ($this->session->userdata('adminRegisto'));
+		// var_dump ($this->session->userdata('clienteRegisto'));
+		// echo $this->session->userdata('adminRegisto')['email'];
+
+		$this->form_validation->set_rules('nome', 'Nome', 'required');
+		$this->form_validation->set_rules('morada', 'Morada', 'required');
+		$this->form_validation->set_rules('localidade', 'Localidade', 'required');
+		$this->form_validation->set_rules('codigoPostal', 'Código Postal', 'required');
+		$this->form_validation->set_rules('nacionalidade', 'Nacionalidade', 'required');
+		$this->form_validation->set_rules('cc', 'cc', 'required');
+		$this->form_validation->set_rules('nif', 'nif', 'required');
+		$this->form_validation->set_rules('genero', 'Genero', 'required');
+		$this->form_validation->set_rules('dataNascimento', 'Data de Nascimento', 'required');
+		$this->form_validation->set_rules('telefone', 'Telefone', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('passwordRegisto', 'Password', 'required');
+		$this->form_validation->set_rules('confirmPasswordRegisto', 'Password', 'required');
+		$this->form_validation->set_rules('reg_agree', 'Check', 'required');
+		
+			$data['planoEscolhido'] = $idPlano;
+>>>>>>> d423c4870fb5b8c70915df49ef1f721a57938edf
 
 			// var_dump ($this->session->userdata('adminRegisto'));
 			// var_dump ($this->session->userdata('clienteRegisto'));
@@ -215,8 +244,9 @@ class Utilizador extends CI_Controller
 				$this->load->view('Utilizador/registo', $data);
 				$this->load->view('templates/footer');
 			}
-		}
 	}
+	
+	
 
 	public function registo_pagamento()
 	{
@@ -240,6 +270,57 @@ class Utilizador extends CI_Controller
 
 			$data['estado_pagamento'] = 1; // pagamento confirmado
 
+		if ($this->form_validation->run() == true ) {
+			$nome = $this->security->xss_clean($this->input->post("nome"));
+			$morada = $this->security->xss_clean($this->input->post("morada"));
+			$localidade = $this->security->xss_clean($this->input->post("localidade"));
+			$codigoPostal = $this->security->xss_clean($this->input->post("codigoPostal"));
+			$nacionalidade = $this->security->xss_clean($this->input->post("nacionalidade"));
+			$cc = $this->security->xss_clean($this->input->post("cc"));
+			$nif = $this->security->xss_clean($this->input->post("nif"));
+			$genero = $this->security->xss_clean($this->input->post("genero"));
+			$dataNascimento = $this->security->xss_clean($this->input->post("dataNascimento"));
+			$telefone = $this->security->xss_clean($this->input->post("telefone"));
+			$username = $this->security->xss_clean($this->input->post("username"));
+			$email = $this->security->xss_clean($this->input->post("email"));
+			$password = $this->security->xss_clean($this->input->post("passwordRegisto"));
+			$email = $this->security->xss_clean($this->input->post("reg_agree"));
+			$dataRegisto = date('Y-m-d');
+			$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+
+			$arrayUtilizador = array(
+				"username" => $username,
+				"email" => $email,
+				"password" => $passwordHash,
+				"tipo" => 5,
+				"estado" => 2 
+			);
+			$arrayCliente = array(
+				"nome" => $nome,
+				"genero" => $genero,
+				"data_registo" => $dataRegisto,
+				"morada" => $morada,
+				"localidade" => $localidade,
+				"codigo_postal" => $codigoPostal,
+				"telefone" => $telefone,
+				"nacionalidade" => $nacionalidade,
+				"cc" => $cc,
+				"nif" => $nif,
+				"data_nascimento" => $dataNascimento,
+				"ultimo_pagamento" => 0,
+				"admin_id" => 3,  //mudar
+				"plano_adesao_id" => $idPlano
+			);
+
+			$this->session->set_userdata('adminRegisto',$arrayUtilizador);
+			$this->session->set_userdata('clienteRegisto',$arrayCliente);
+
+		}else{
+			$this->load->view('templates/header', $data);
+			// $this->load->view('templates/nav');
+			$this->load->view('Utilizador/registo');
+			$this->load->view('templates/footer');
 		}
 
 		$this->load->view('templates/header');
@@ -247,6 +328,7 @@ class Utilizador extends CI_Controller
 		$this->load->view('Utilizador/registo_confirmacao', $data);
 		$this->load->view('templates/footer');
 	}
+}
 
 
 	//logout
@@ -375,6 +457,51 @@ class Utilizador extends CI_Controller
 			//se tentar aceder a esta função sem ver apartir do email e da password faz qq coisa
 		}
 	}
+
+	public function registo_plano()
+	{
+		$data['title'] = "Escolher Plano"; 
+		$data['plano'] = $this->Utilizador_m->queryPlanos();
+
+		$this->load->view('templates/header',$data);
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/registo_plano', $data);
+		$this->load->view('templates/footer');
+
+	}
+
+	// public function registo($id=null)
+	// {
+
+	// 	$data['id_plano'] = $id;	// id enviado por url com o id do plano ecolhido
+
+	// 	$this->load->view('templates/header');
+	// 	// $this->load->view('templates/nav');
+	// 	$this->load->view('Utilizador/registo', $data);
+	// 	$this->load->view('templates/footer');
+	// }
+
+	public function registo_pagamento()
+	{
+
+		$this->load->view('templates/header');
+		// $this->load->view('templates/nav');
+		$this->load->view('Utilizador/registo_pagamento');
+		$this->load->view('templates/footer');
+
+	}
+
+	public function mensagens(){
+		$data['title'] = 'Mensagens';
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('utilizador/mensagens');
+		$this->load->view('templates/footer');
+	}
+
+
 
 	public function verificaEmailAjax(){
 		if($this->input->post('email')){
