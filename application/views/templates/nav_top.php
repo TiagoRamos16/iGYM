@@ -22,14 +22,14 @@
              <!-- Top Menu Items -->
 
         <ul class="nav navbar-right top-nav ">
-            <li><a href="<?= base_url('utilizador/mensagens') ?>" class=""><i class="far fa-envelope"></i></i> Mensagens <span class="badge">42</span></a>
+            <li><a href="<?= base_url('utilizador/mensagens') ?>" class=""><i class="far fa-envelope"></i></i> Mensagens <span class="badge">142</span></a>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fas fa-user"></i> <?=$this->session->userdata('sessao_utilizador')['username']?> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?= base_url('utilizador/perfilUtilizador') ?>">Ver Perfil</a></li>
+                    <li><a href="<?= base_url('utilizador/paginaPerfil') ?>">Ver Perfil</a></li>
                     <li class="divider"></li>
                     <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
 

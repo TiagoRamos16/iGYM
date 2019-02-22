@@ -84,5 +84,40 @@ class Utilizador_m extends CI_Model {
 
 
 
+    //obter utilizador
 
+    public function obterUtilizador($id=false){
+        if($id===false){
+            return $this->db->get('admin')->result_array();
+        }else{
+            return $this->db->get_where('admin',array('id'=>$id))->row_array();
+        }
+    }
+
+    //obter funcionário
+
+    public function obterFuncionario($id=false){
+        if($id===false){
+            return $this->db->get('funcionario')->result_array();
+        }else{
+            return $this->db->get_where('funcionario',array('admin_id'=>$id))->row_array();
+        }
+    }
+
+    //update admin
+
+    public function editarUtilizador($data,$id){
+
+        $this->db->where('id', $id);
+        $this->db->update('admin', $data);
+    }
+
+    //update funcionario
+
+    public function editarFuncionario($data,$id){
+        $this->db->where('admin_id', $id);
+        $this->db->update('funcionario', $data);
+    }
+
+   
 }
