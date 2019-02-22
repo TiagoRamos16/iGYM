@@ -120,8 +120,9 @@
                             <?php echo form_open("utilizador/registo_plano",'class="form form-registo_plano"'); ?>
 
                                 <div class="form-group ">
-                                    <!-- <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo/').$row['id']?>">Escolher Plano</a> -->
-                                    <input type="submit" class="btn btn-info btn-block" value="Plano <?= $row['id']?>" name="formRegisto_plano" id="formRegisto_plano"> 
+                                    <!-- <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo/').$row['identificacao']?>">Escolher Plano</a> -->
+                                    <input type="hidden" class="form-control" value="<?= $row['identificacao']?>" name="plano_escolhido" id="plano_escolhido">
+                                    <input type="submit" class="btn btn-info btn-block" value="Escolher" name="formRegisto_plano" id="formRegisto_plano"> 
                                 </div>
                             </form>
                         </ul>

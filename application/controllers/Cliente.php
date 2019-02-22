@@ -8,6 +8,7 @@ class Cliente extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Utilizador_m');
+		$this->load->model('Cliente_m');
 
 	}
 
@@ -20,7 +21,6 @@ class Cliente extends CI_Controller {
 		$this->load->view('Cliente/index');
 		$this->load->view('templates/footer');
 	}
-
 
 	public function trataAjaxCliente(){
 		if($this->input->post('cc')){
@@ -37,4 +37,44 @@ class Cliente extends CI_Controller {
             }
 		}
 	}
+
+
+	public function exercicios()
+	{
+
+		$data['title'] = "Exercicios";
+
+		// envia dados dos exericios para menu cliente
+		$data['listaExercicios'] = $this->Cliente_m->queryExercicios();
+
+		// var_dump($data['listaExercicios']);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/exercicios', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function exercicioSelecionado($idExercicio)
+	{
+
+		$data['title'] = "Exercicios";
+	
+		// envia dados dos exericio selecionado
+		$data['exercicioSelecionado'] = $this->Cliente_m->dadosExercicio($idExercicio);
+
+		var_dump($data['exercicioSelecionado']);
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/exercicioSelecionado', $data);
+		$this->load->view('templates/footer');
+	}
+
+
+
+
+
+
+
 }

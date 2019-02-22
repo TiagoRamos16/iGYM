@@ -25,7 +25,7 @@
 <h1>Página Principal</h1>
 
 <a class="btn btn-success" href="<?= base_url('utilizador/login')?>">Login</a>
-<a class="btn btn-success" href="<?= base_url('utilizador/registo')?>">Registo</a>
+<a class="btn btn-success" href="<?= base_url('utilizador/registo_plano')?>">Registo</a>
 <a class="btn btn-success" href="<?= base_url('administrador')?>">Admin</a>
 <a class="btn btn-success" href="<?= base_url('cliente')?>">Cliente</a>
 <a class="btn btn-success" href="<?= base_url('nutricionista')?>">Nutricionista</a>

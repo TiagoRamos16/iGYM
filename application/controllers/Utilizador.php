@@ -60,18 +60,21 @@ class Utilizador extends CI_Controller
 	}
 
 
-
 	public function registo_plano()
 	{
 		$data['title'] = "Escolher Plano"; 
 		$data['plano'] = $this->Utilizador_m->queryPlanos();
 
-		$idEscolhido = $this->input->post("formRegisto_plano");	// verifica que plano foi escolhido mas vem com formato "Plano X"
-		$planoEscolhido = substr($idEscolhido, 5);	// corta string "Plano X" para X de modo a obter o id escolhido
+		$planoEscolhido = $this->input->post("plano_escolhido");	//  token do plano escolhido passado no input hidden
 
-		if($idEscolhido != null){
+		// verifica se o token escolhido corresponde a algum plano, para evitar que alterem por F12 o plano escolhido
+		$verificaToken = $this->Utilizador_m->confirmaPlano($planoEscolhido); 
 
-			$this->session->set_userdata('planoEscolhido', $planoEscolhido); // id enviado por url com o id do plano ecolhido
+		// var_dump($verificaToken);
+		
+		if($planoEscolhido != null && $verificaToken != null){
+
+			$this->session->set_userdata('planoEscolhido', $verificaToken['id']); // id do plano escolhido pelo token para guardar no utilizador
 			redirect('utilizador/registo');
 
 		}else{
