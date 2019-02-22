@@ -567,5 +567,64 @@ h1.title {
 /* cliente/exercicios */
 
 .img-exercicio{
-    width: 100%;
+    width: 100%;}
+
+
+/* pagina de perfil */
+
+
+.perfil-dados-pessoais{
+    padding: 25px;
+    border: 1px solid #c0c9cf!important; 
+    width: 60%;
+
+    border-radius: 15px;
+    margin: 50px auto; 
+}
+
+.perfil-dados-pessoais h3{
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.perfil-dados-pessoais .row{
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(142, 153, 156);  */
+}
+
+.img-perfil{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.edit-perfil{
+    top: -9px;
+    left: -19px;
+    position: relative;
+    font-size: 1.2em;
+}
+
+.edit-perfil:hover{
+    text-decoration: none;
+}
+
+/* modals editar perfil */
+#editarDadosPerfil, #editarDadosContacto, #editarDadosGym{
+    margin-top: 10%; 
+}
+
+#editarDadosPerfil .modal-header,#editarDadosContacto .modal-header,#editarDadosGym .modal-header{
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+}
+
+#editarDadosPerfil .modal-header .close,#editarDadosContacto .modal-header .close,#editarDadosGym .modal-header .close{   
+    color: #fff;
+}
+
+#editarDadosPerfil .modal-body .form-msn,#editarDadosContacto .modal-body .form-msn,#editarDadosGym .modal-body .form-msn{
+    margin-top: 30px;
 }

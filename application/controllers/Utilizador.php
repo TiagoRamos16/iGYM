@@ -298,7 +298,7 @@ class Utilizador extends CI_Controller
 				redirect('utilizador/resetPassword');
 			} else {
                 //gerar token
-				$tokenValue = bin2hex(random_bytes(32));;
+				$tokenValue = bin2hex(random_bytes(32));
 				$idUtilizador = $this->Utilizador_m->verificaEmail($email)['id'];
 
 				$token = array(
@@ -413,6 +413,22 @@ class Utilizador extends CI_Controller
 		$this->load->view('templates/footer');
 	}
 
+
+	public function paginaPerfil(){
+		$data['title'] = 'Perfil Pessoal';
+
+		$utilizador = $this->session->userdata('sessao_utilizador');
+
+		$data['utilizador'] = $this->Utilizador_m->obterUtilizador($utilizador['id']);
+		$data['funcionario'] = $this->Utilizador_m->obterFuncionario($utilizador['id']);
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('utilizador/paginaPerfil',$data);
+		$this->load->view('templates/footer');
+	}
+
 	public function verificaEmailAjax(){
 		if($this->input->post('email')){
             if($this->Utilizador_m->verificaEmail($this->input->post('email'))!=null){
@@ -428,6 +444,82 @@ class Utilizador extends CI_Controller
             }
 		}
 	}
+
+	public function editarUtilizador()
+	{
+		if ($this->input->post('editarPerfil')) {
+
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 100;
+			$config['max_width'] = 1024;
+			$config['max_height'] = 768;
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('userfile')) {
+				$nomeImagem = $this->upload->data()['file_name'];
+			}else{
+				$nomeImagem = "";
+			}
+
+			$id = $this->session->userdata('sessao_utilizador')['id'];
+			$username = $this->input->post("username");
+			$password = $this->input->post("password"); //********
+			
+			$editarFuncionario = array();
+			$editarUtilizador = array(
+				"username" => $username,
+				// "password" => $password
+			);
+
+			if($nomeImagem != ""){
+				$editarFuncionario['foto'] = $nomeImagem;
+				$this->Utilizador_m->editarFuncionario($editarFuncionario, $id);
+			}
+
+			if($password !="********"){
+				$passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+				$editarUtilizador['password'] = $passwordHashed;
+			}
+			
+
+			$this->Utilizador_m->editarUtilizador($editarUtilizador, $id);
+			
+			
+			$this->session->set_flashdata('sucessoEditar', 
+			'Dados de perfil editados com sucesso'); //mensagem de erro
+
+
+			redirect('utilizador/paginaPerfil', 'refresh');
+		
+		}else if($this->input->post('editarContactos')){
+		
+			$id = $this->session->userdata('sessao_utilizador')['id'];
+			$telefone = $this->input->post("telefone");
+			$morada = $this->input->post("morada");
+			$codigoPostal = $this->input->post("codigoPostal");
+
+			$editarFuncionario = array(
+				"telefone" => $telefone,
+				"morada" => $morada,
+				"codigo_postal" => $codigoPostal
+			);
+
+
+			$this->Utilizador_m->editarFuncionario($editarFuncionario, $id);
+
+			$this->session->set_flashdata('sucessoEditar', 
+			'Dados de perfil editados com sucesso'); //mensagem de erro
+
+
+			redirect('utilizador/paginaPerfil', 'refresh');
+		}
+
+
+	}
+	
+	
 
 
 }
