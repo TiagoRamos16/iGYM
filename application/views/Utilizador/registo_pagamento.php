@@ -97,8 +97,8 @@
                             </div> <!-- row.// -->
 
                             <div class="form-group col-md-8 col-md-offset-2 botao-pagamento">
-                                <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo_confirmacao/1')?>">Confirmar Pagamento</a>
-                                <!-- <input type="submit" class="btn btn-info btn-block" href="<?= base_url('utilizador/registo_confirmacao/1')?>" value="Confirmar Pagamento" name="formRegisto" id="formRegisto">  -->
+                                <!-- <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('utilizador/registo_confirmacao/1')?>">Confirmar Pagamento</a> -->
+                                <input type="submit" class="btn btn-info btn-block"" value="Confirmar Pagamento" name="formRegisto" id="formRegisto"> 
                             </div> <!-- form-group// -->
 
                         </form>
