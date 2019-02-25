@@ -44,7 +44,8 @@
                 </div>
             </a>
               
-            <div class="col-md-6 col-lg-4">
+            <a class="planoTreino-link" href="#">
+                <div class="col-md-6 col-lg-4">
                     <div class="planoTreino-item ">
                         <div class="planoTreino-item-header">
                             <i class="fas fa-file-signature fa-5x "></i>
@@ -61,8 +62,10 @@
                         </div>
                     </div>
                 </div>
-            
-            <div class="col-md-6 col-lg-4">
+            </a>
+
+            <a class="planoTreino-link" href="#">
+                <div class="col-md-6 col-lg-4">
                     <div class="planoTreino-item ">
                         <div class="planoTreino-item-header">
                             <i class="fas fa-file-signature fa-5x "></i>
@@ -79,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                
+            </a>  
         </div>
         <!-- /.row -->
     </div>

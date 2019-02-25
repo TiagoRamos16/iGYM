@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver</button>
+                            <a href="<?=base_url('personalTrainer/marcarAula')?>" class="btn btn-primary exercicios-btn">Ver</a>
                         </div>
                     </div>
                 </div>

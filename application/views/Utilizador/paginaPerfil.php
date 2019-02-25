@@ -208,15 +208,18 @@
       
             <div class="form-group">
                 <label for="telefone">Novo Telefone:</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="novo numero de telefone">
+                <input type="text" class="form-control" id="telefone" 
+                name="telefone" placeholder="novo numero de telefone">
             </div>
             <div class="form-group">
             <label for="telefone">Nova Morada:</label>
-                <input type="text" class="form-control" id="morada" name="morada" placeholder="nova morada">
+                <input type="text" class="form-control" id="morada" 
+                name="morada" placeholder="nova morada">
             </div>
             <div class="form-group">
                 <label for="telefone">Novo Codigo Postal:</label>
-                <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" placeholder="novo código postal">
+                <input type="text" class="form-control" id="codigoPostal" 
+                name="codigoPostal" placeholder="novo código postal">
             </div>
       </div>
       <div class="modal-footer">

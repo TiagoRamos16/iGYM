@@ -3,22 +3,57 @@
             <!-- Page Heading -->
             <div class="row " id="main-admin">
                 
-<h1 class="title text-center"> Horário </h1>
-	<div class="calendar" data-toggle="calendar">
+				<h1 class="title text-center"> Horário </h1>
+
+				<div class="row row-pesquisa-horario">
+					<form action="">
+						<div class="col-md-5">
+							<div class="form-group ">
+								<select class="form-control" name="" id="">
+									<option value="">Horario por:</option>
+									<option value="2">Por semana</option>
+									<option value="3">Por mes</option>
+								</select>
+							</div> 
+						</div>
+						<div class="col-md-5">
+							<div class="form-group ">
+								<input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="escolher data">
+							</div>		
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<input type="submit" value="Pesqusiar"	class="btn btn-default">
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<?= $this->calendar->generate();?>
+				<?= $this->calendar->generate($this->uri->segment(3), $this->uri->segment(4));;?> 
+			</div>
+
+	<!-- <div class="calendar" data-toggle="calendar">
+
 		<div class="row">
 			<div class="col-xs-12 calendar-day calendar-no-current-month">
+				<b>Segunda-feira</b>
 				<time datetime="2014-06-29">29</time>
 			</div>
 			<div class="col-xs-12 calendar-day calendar-no-current-month">
+			<b>Segunda-feira</b>
 				<time datetime="2014-06-30">30</time>
 			</div>
 			<div class="col-xs-12 calendar-day">
+			<b>Segunda-feira</b>
 				<time datetime="2014-07-01">01</time>
 			</div>
 			<div class="col-xs-12 calendar-day">
+			<b>Segunda-feira</b>
 				<time datetime="2014-07-02">02</time>
 			</div>
 			<div class="col-xs-12 calendar-day">
+			<b>Segunda-feira</b>
 				<time datetime="2014-07-03">03</time>
 				<div class="events">
 					<div class="event">
@@ -27,9 +62,11 @@
 				</div>
 			</div>
 			<div class="col-xs-12 calendar-day">
+			<b>Segunda-feira</b>
 				<time datetime="2014-07-04">04</time>
 			</div>
 			<div class="col-xs-12 calendar-day">
+			<b>Segunda-feira</b>
 				<time datetime="2014-07-05">05</time>
 			</div>
 		</div>
@@ -138,7 +175,7 @@
 				<time datetime="2014-08-02">02</time>
 			</div>
 		</div>
-	</div>
+	</div> -->
     
 
 
