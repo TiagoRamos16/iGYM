@@ -581,6 +581,28 @@ h1.title {
 }
 
 
+/* cliente/treinos */
+
+.fa-times-circle:before {
+    position: absolute;
+    right: 80px;
+    top: 56px;
+    border-radius: 50%;
+    text-align: center;
+    color: #ca1818;
+    font-size: 20px;
+    width: 100px;
+    height: 50px;
+    padding: 15px 0 0 0;
+}
+
+.alert-success {
+    width: 400px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* pagina de perfil */
 
 

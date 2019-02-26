@@ -2,17 +2,18 @@
     <div class="container-fluid ">
         <!-- Page Heading -->
         <div class="row " id="main-admin">
-            <h1 class="title-exercicios text-center">Exercícios</h1>
+            <h1 class="title-exercicios text-center">Plano de Exercícios</h1>
 
 
             <?php 
-            foreach($listaExercicios as $row)
-            { ?>
+                foreach($exericiosExistentesPlano as $row){ 
+                // var_dump($exericiosExistentesPlano);
+            ?>
             
-            <a class="exercicios-link" href="#edit<?php echo $row['id'];?>" data-title="Edit" data-toggle="modal">
                 <div class="col-md-3">
                     <div class="exercicios-item text-center">
                         <div class="info">
+                            <a class="fas fa-times-circle" href="#delete<?php echo $row['id'];?>" data-title="Delete" data-toggle="modal"></a>
                             <img class="img-exercicio" src="<?php echo base_url("assets/img/exercicios/".$row['foto']) ?>" alt="">
                             <div class="exercicios-title">
                                 <?php echo $row['nome'] ?>
@@ -20,25 +21,48 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver +</button>
+                            <a class="exercicios-link" href="#edit<?php echo $row['id'];?>" data-title="Edit" data-toggle="modal">
+                                <button class="btn btn-primary exercicios-btn">Ver +</button></a>
                         </div>
                     </div>
                 </div>
-            </a>
+            
 
-            <!-- https://www.spotebi.com/fitness-tips/best-back-exercises-posture-tone-strength/ -->
-
-            <div class="modal fade myModal" id="edit<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <!------------------------------- Modal para apgar exercício do plano -------------------------------->
+            <div class="modal fade myModal" id="delete<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <?php echo form_open('cliente/exercicios','class="form form-msn"'); ?>
+                        <?php echo form_open('cliente/apagar_exercicio_plano_treino/'.$row['id']); ?>
                         <div class="modal-header" id="titulo-exercicios">
                             <button type="button" id="fechar-modal" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 class="modal-title"> <?php echo $row['nome'] ?> </h4>
                         </div>
                         <div class="modal-body">
                         
+                        <p>Está prestes a apagar o <?php echo $row['nome'] ?> do seu plano de treino.</p>
+                        <p>Tem a certeza que quer apagar?</p>
 
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="Apagar" name="apagar_plano">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!------------------------------- Modal com informação do exercício -------------------------------->
+            <div class="modal fade myModal" id="edit<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header" id="titulo-exercicios">
+                            <button type="button" id="fechar-modal" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title"> <?php echo $row['nome'] ?> </h4>
+                        </div>
+                        <div class="modal-body">
                             <div class="form-group">
                                 <img class="img-exercicio" src="<?php echo base_url("assets/img/exercicios/".$row['foto']) ?>" alt="">
                             </div>
@@ -63,34 +87,10 @@
                                 <input type="hidden" class="form-control" name="exercicio_selecionado" value="<?php echo $row['id'];?>" />
                             </div>
 
-
-                            <div class="form-group">
-                                <label id="modeloLabel">Adicionar a um plano de treino:</label><BR>
-                                <div class = "row">
-                                    <div class="form-group col-md-6">
-                                        <select class="form-control" id="plano_treino" name="plano_treino">
-                                            <option selected="true" disabled="disabled">Seleccione um plano de treino</option>
-                                            <?php 
-                                                foreach($listaPlanoTreino as $plano)
-                                                { 
-                                                echo '<option value="'.$plano['id'].'">'.$plano['nome'].'</option>';
-                                                }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('cliente/novo_plano/').$row['id']?>">Criar Novo Plano</a>
-                                    </div>
-                                </div>
-                            </div>
-
-
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary" value="Adicionar ao plano escolhido" name="adicionar_ao_plano">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>

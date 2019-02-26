@@ -15,7 +15,7 @@
                         </div>
 
                         <div class="form-group col-md-3">
-                            <a class="form-control btn btn-info btn-login btn-block" href="<?= base_url('cliente/exercicios') ?>">Voltar atrás</a>
+                            <a class="form-control btn btn-info btn-login btn-block" href="javascript:history.back()">Voltar atrás</a>
                         </div>
 
                         <div class="form-group col-md-3 col-md-offset-6">
@@ -25,6 +25,18 @@
                     </form>
                 </div>
             </div>
+
+
+            <?php 
+
+                if($this->session->flashdata('sucessoTreino')!=null){
+                    echo '<div class="alert alert-dismissible alert-success sucessoTreino">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('sucessoTreino').'</div>';
+                }               
+
+            ?>
+
+
             
         </div>
         <!-- /.row -->

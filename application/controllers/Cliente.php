@@ -83,11 +83,8 @@ class Cliente extends CI_Controller {
 
 		$data['title'] = "Novo Plano Exercícios";
 
-		if ($idExercicio == false){
-			redirect('cliente/exercicios');
-		}else{
-			$data['exercicio'] = $idExercicio;
-		}
+		$data['exercicio'] = $idExercicio;
+
 
 		if($this->input->post('criar_plano')){
 
@@ -105,13 +102,17 @@ class Cliente extends CI_Controller {
 			// insere novo plano na BD e seleciona id
 			$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
 
-			// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
-			$planoTreino_has_exercicio = array(
-				"plano_treino_id" => $idPlanoTreino,
-				"exercicio_id" => $idExercicio
-			);
-			$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
+			if ($idExercicio != false){
+				// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
+				$planoTreino_has_exercicio = array(
+					"plano_treino_id" => $idPlanoTreino,
+					"exercicio_id" => $idExercicio
+				);
+				$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
+			}
 
+			$this->session->set_flashdata('sucessoTreino', 'Plano de Treino criado com sucesso'); //mensagem de sucesso
+			redirect('cliente/novo_plano');
 		}
 
 
@@ -120,6 +121,63 @@ class Cliente extends CI_Controller {
 		$this->load->view('templates/nav_cliente');
 		$this->load->view('Cliente/novo_plano', $data);
 		$this->load->view('templates/footer');
+	}
+
+
+	public function treinos($idTreinoApagar = false)
+	{
+		$data['title'] = "Planos de Treinos";
+
+		$data['listaPlanos'] = $this->Exercicio_m->dadosPlanoTreinoCompleto();
+		$data['listaNomesPlanos'] = $this->Exercicio_m->dadosNomePlanoTreino();
+
+
+
+		/*
+		FALTA PROTEGER COM ID DE QUEM CRIOU PORQUE SO ELE PODE APAGAR
+		*/
+
+
+
+
+		if ($idTreinoApagar == true){
+			$this->Exercicio_m->apagarPlanoTreino($idTreinoApagar);
+			// redirect('cliente/treinos');
+		}
+
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/treinos',$data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function plano_treino($idPlanoTreino = false)
+	{
+		$data['title'] = "Planos de Treino";
+
+		if($idPlanoTreino == true){
+
+			$data['exericiosExistentesPlano'] = $this->Exercicio_m->infoPlanoTreino($idPlanoTreino);
+
+		}else{
+			redirect('cliente/treinos');
+		}
+
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/plano_treino',$data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function apagar_exercicio_plano_treino($id_exercicio_plano_treino = false)
+	{
+		$this->Exercicio_m->query_apagar_exercicio_plano_treino($id_exercicio_plano_treino);
+		redirect('cliente/treinos');
+
 	}
 
 
