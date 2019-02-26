@@ -518,8 +518,21 @@ class Utilizador extends CI_Controller
 
 
 	}
+
+
 	
-	
+	public function outroPerfil($idUtilizador=null){
+		$data['title'] = 'Perfil de Utilizador';
+
+		$data['utilizador'] = $this->Utilizador_m->obterUtilizador($idUtilizador);
+		$data['cliente'] = $this->Utilizador_m->obterCliente($idUtilizador);
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('utilizador/outroPerfil',$data);
+		$this->load->view('templates/footer');
+	}
 
 
 }

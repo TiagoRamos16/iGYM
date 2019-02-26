@@ -109,6 +109,18 @@ class Utilizador_m extends CI_Model {
         }
     }
 
+     //obter cliente
+
+     public function obterCliente($id=false){
+        if($id===false){
+            return $this->db->get('cliente')->result_array();
+        }else{
+            return $this->db->get_where('cliente',array('admin_id'=>$id))->row_array();
+        }
+    }
+
+
+
     //update admin
 
     public function editarUtilizador($data,$id){

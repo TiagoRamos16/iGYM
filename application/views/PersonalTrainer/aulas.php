@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver</button>
+                            <a class="btn btn-primary exercicios-btn" href="<?=base_url('personalTrainer/visualizarAulas')?>">Ver</a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver</button>
+                            <a class="btn btn-primary exercicios-btn" href="<?=base_url('personalTrainer/historicoAulas')?>">Ver</a>
                         </div>
                     </div>
                 </div>

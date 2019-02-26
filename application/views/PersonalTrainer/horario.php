@@ -29,8 +29,7 @@
 					</form>
 				</div>
 
-				<?= $this->calendar->generate();?>
-				<?= $this->calendar->generate($this->uri->segment(3), $this->uri->segment(4));;?> 
+				 <?= $this->calendar->generate($this->uri->segment(3), $this->uri->segment(4),$data2);?>
 			</div>
 
 	<!-- <div class="calendar" data-toggle="calendar">
