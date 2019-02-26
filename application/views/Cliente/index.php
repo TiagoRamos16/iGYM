@@ -2,7 +2,6 @@
     <div class="container-fluid ">
         <!-- Page Heading -->
         <div class="row " id="main-admin">
-            <!-- <h1 class="title-exercicios text-center">Aulas</h1> -->
 
             <a class="exercicios-link" href="<?= base_url('cliente/exercicios')?>">
                 <div class="col-md-6 col-lg-4">
@@ -24,7 +23,7 @@
                 </div>
             </a>
 
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?= base_url('cliente/treinos')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">

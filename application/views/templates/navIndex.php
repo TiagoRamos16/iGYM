@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= base_url('home')?>">
                 <img class="nav-img" src="<?=base_url('assets/img/logo2.png')?>" alt="LOGO">
             </a>
         </div>
@@ -29,6 +29,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Ver Perfil</a></li>
+                            <li><a href="<?= base_url('cliente') ?>">Area de cliente</a></li>
                             <li class="divider"></li>
                             <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
                         </ul>

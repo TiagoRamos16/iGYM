@@ -459,7 +459,10 @@ class Utilizador extends CI_Controller
 
 			if ($this->upload->do_upload('userfile')) {
 				$nomeImagem = $this->upload->data()['file_name'];
+		
 			}else{
+				$this->session->set_flashdata('erroImagem', 
+			'Erro a carregar imagem'); //mensagem de erro
 				$nomeImagem = "";
 			}
 

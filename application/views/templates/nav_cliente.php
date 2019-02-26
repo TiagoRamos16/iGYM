@@ -8,13 +8,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="<?= base_url('home')?>">
             <img class="nav-img" src="<?=base_url('assets/img/logo2.png')?>" alt="LOGO">
         </a>
     </div>
 
     <!--  These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse ">
+
+        <ul class="nav navbar-nav custom-navbar-nav">
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente')?>">Home</a></li>
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/exercicios')?>">Exercícios</a></li>
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/treinos')?>">Treinos</a></li>
+            <li class=""><a id="navbartitulos" href="#">Calendário</a></li>
+            <li class=""><a id="navbartitulos" href="#">Aulas</a></li>
+        </ul>
 
         <!-- Top Menu Items -->
 
@@ -23,7 +31,7 @@
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fas fa-user"></i> Perfil <span class="caret"></span>
+                    <i class="fas fa-user"></i> <?=$this->session->userdata('sessao_utilizador')['username']?> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="#">Ver Perfil</a></li>
