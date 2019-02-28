@@ -4,7 +4,7 @@
         <div class="row " id="main-admin">
             <h1 class="title-planosTreino text-center">Planos de treino</h1>
             
-            <a class="planoTreino-link" href="#">
+            <a class="planoTreino-link" href="<?= base_url('personalTrainer/meusPlanos')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="planoTreino-item text-center">
                         <div class="planoTreino-item-header">
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary planoTreino-btn">Ver</button>
+                            <a class="btn btn-primary planoTreino-btn" href="<?= base_url('personalTrainer/meusPlanos')?>">Ver</a>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
         <div class="row " id="main-admin">
             <h1 class="title-exercicios text-center">Gestão de Clientes</h1>
             
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?= base_url('personalTrainer/verClientes')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item text-center">
                         <div class="exercicios-item-header">
@@ -18,13 +18,13 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver</button>
+                            <a class="btn btn-primary exercicios-btn" href="<?= base_url('personalTrainer/verClientes')?>">Ver</a>
                         </div>
                     </div>
                 </div>
             </a>
 
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?= base_url('personalTrainer/verPedidos')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">
@@ -38,12 +38,12 @@
                         </div>
 
                         <div class="bottom">
-                            <button class="btn btn-primary exercicios-btn">Ver</button>
+                            <button class="btn btn-primary exercicios-btn" href="<?= base_url('personalTrainer/verPedidos')?>">Ver</button>
                         </div>
                     </div>
                 </div>
             </a>
-            <a class="exercicios-link" href="#">
+            <!-- <a class="exercicios-link" href="#">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-            </a>
+            </a> -->
               
             
                 

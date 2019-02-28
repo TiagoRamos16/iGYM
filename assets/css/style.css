@@ -724,6 +724,12 @@ div.today {
 /* calendario */
 
 
+/* Fechar modal */
+
+.closeModal{
+    color: #fff!important;
+}
+
 
 /* back */
 
@@ -733,4 +739,29 @@ div.today {
 
 .btnremoveCliente{
     cursor: pointer;
+}
+
+/* ver personalTrainer/clientes */
+
+.verClientes-menu{
+    margin-top: 40px;
+     
+}
+
+.row{
+    /* margin-right: 0px!important; 
+    margin-left: 0px!important; */
+}
+
+.verClientes-menu .btn-criar-mensagem{
+    margin-top: -9px;
+}
+
+.listaClientes{
+    margin-top: 100px;
+}
+
+.btn-verPedidos{
+    width: 100%;
+ 
 }

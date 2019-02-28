@@ -69,7 +69,7 @@
                     <div class="col-md-8 col-md-offset-2">
                         <table class="table table-striped table-hover ">
                             <thead>
-                                <tr>
+                                <tr class="bg-primary">
                                     <th>Data</th>
                                     <th>Hora inicio</th>
                                     <th>Hora fim</th>    

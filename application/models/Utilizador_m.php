@@ -99,6 +99,30 @@ class Utilizador_m extends CI_Model {
         }
     }
 
+    //obter utilizador associado a um funcionário
+    
+    public function obterUtilizadorPorFuncinario($idFuncionario,$pesquisa=false,$estado){
+        
+        $this->db->select('*');
+        $this->db->from('funcionario_has_cliente fc');
+        $this->db->join('funcionario f', 'fc.funcionario_admin_id = f.admin_id');
+        $this->db->join('cliente c', 'fc.cliente_admin_id = c.admin_id');
+        $this->db->join('admin a', 'c.admin_id = a.id');
+        $this->db->where(array('f.admin_id'=>$idFuncionario));
+
+        if($pesquisa!=false){
+            $this->db->like(array('c.nome'=>$pesquisa)); 
+        }
+        if($estado!=false){
+            $this->db->where(array('a.estado'=>$estado)); 
+        }
+           
+        return $this->db->get()->result_array();
+       
+       
+    }
+
+
     //obter funcionário
 
     public function obterFuncionario($id=false){
@@ -135,6 +159,36 @@ class Utilizador_m extends CI_Model {
         $this->db->where('admin_id', $id);
         $this->db->update('funcionario', $data);
     }
+
+    //adicionar dados  a tabela funcionario_has_cliente
+
+    public function associarFuncionarioCliente($dados){
+        return $this->db->insert("funcionario_has_cliente",$dados);
+    }
+
+    //verifica se funcionario ja esta associado a utilizador
+    
+    public function verificaFuncionarioCliente($idCliente,$idFuncionario){
+        return $this->db->get_where('funcionario_has_cliente',array('cliente_admin_id'=>$idCliente,'funcionario_admin_id'=>$idFuncionario))->row_array();
+    }
+
+
+    //listar pedidos por aceitar de cada utilizador
+
+    public function listaPedidoPendentesPorUtilizador($idFuncionario,$estado){
+        $this->db->join('cliente c', 'fc.cliente_admin_id = c.admin_id');
+        return $this->db->get_where('funcionario_has_cliente fc',array('funcionario_admin_id'=>$idFuncionario,"fc_estado"=>$estado))->result_array();
+    }
+
+    //update funcionario_has_cliente
+
+    public function editarFuncionarioHasCliente($data,$id){
+
+        $this->db->where('id', $id);
+        $this->db->update('funcionario_has_cliente', $data);
+    }
+
+
 
    
 }
