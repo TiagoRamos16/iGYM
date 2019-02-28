@@ -6,6 +6,57 @@
 
 
             <?php 
+            // var_dump($listaDificuldade);
+            ?>
+
+            <div class="filter-search">
+                <div class="container">
+                    <?php echo form_open('cliente/exercicios') ;?>
+
+                        <div class="col-md-5">
+                            <input type="text" class="search-query form-control" name="search" placeholder="indique o nome do plano pretendida">
+                        </div>
+
+                        <div class="col-md-3">
+                            <select class="form-control" id="pesquisaTipoExercicio" name="pesquisaTipoExercicio" >
+                                <option selected="true" disabled="disabled">Tipo de Exercício</option>
+                                <?php 
+                                    foreach($listaTipo_exercicio as $row)
+                                    { 
+                                    echo '<option value="'.$row['tipo_exercicio'].'">'.$row['tipo_exercicio'].'</option>';
+                                    }
+                                ?>  
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <select class="form-control" id="pesquisaDificuldade" name="pesquisaDificuldade" >
+                                <option selected="true" disabled="disabled">Dificuldade</option>
+                                <?php
+                                    foreach($listaDificuldade as $row)
+                                    { 
+                                    echo '<option value="'.$row['dificuldade'].'">'.$row['dificuldade'].'</option>';
+                                    }
+                                ?>  
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-primary" value="Pesquisar" name="pesquisaExercicios">
+                            <!-- <input type="submit" class="btn btn-primary wrn-btn">Pesquisar</button> -->
+                        </div>
+
+                    <?php echo form_close(); ?>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <?php 
             foreach($listaExercicios as $row)
             { ?>
             
@@ -16,6 +67,11 @@
                             <img class="img-exercicio" src="<?php echo base_url("assets/img/exercicios/".$row['foto']) ?>" alt="">
                             <div class="exercicios-title">
                                 <?php echo $row['nome'] ?>
+                            </div>
+                            <div class="exercicios-descricao">
+                                <?php
+                                    echo $row['tipo_exercicio'].'<br>'.$row['dificuldade']
+                                ?>
                             </div>
                         </div>
 

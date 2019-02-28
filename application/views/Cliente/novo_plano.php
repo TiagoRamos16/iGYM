@@ -2,7 +2,7 @@
     <div class="container-fluid ">
         <!-- Page Heading -->
         <div class="row " id="main-admin">
-            <h1 class="title-exercicios text-center">Exercícios</h1>
+            <h1 class="title-exercicios text-center">Novo Plano de Exercícios</h1>
 
 
             <div class="container">

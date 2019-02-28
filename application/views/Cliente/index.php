@@ -31,7 +31,7 @@
                         </div>
                         <div class="info">
                             <div class="exercicios-title">
-                                Treinos
+                                Planos
                             </div>
                             <p class="exercicios-descricao"> Construa o plano de treino ideal para si </p>
                         </div>

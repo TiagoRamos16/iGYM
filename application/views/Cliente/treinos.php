@@ -6,11 +6,67 @@
 
 
             <?php
+
+                if($this->session->flashdata('erroApagarTreino')!=null){
+                    echo '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('erroApagarTreino').'</div>';
+                }
+                if($this->session->flashdata('erroPedidoPlano')!=null){
+                    echo '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('erroPedidoPlano').'</div>';
+                }
+                if($this->session->flashdata('sucessoPedidoPlano')!=null){
+                    echo '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('sucessoPedidoPlano').'</div>';
+                }
+
+                
+
+            ?>
+
+
+            <a class="exercicios-link" href="#">
+                <div class="col-md-6 col-lg-4">
+                    <div class="exercicios-item ">
+                        <div class="exercicios-item-header">
+                            <i class="fas fa-plus-circle fa-5x "></i>
+                        </div>
+                        <?php echo form_open('cliente/treinos'); ?>
+                        <div class="info">
+                            <div class="exercicios-title">
+                                Pedir Plano de Treino
+                            </div>
+
+                            <div class="exercicios-descricao">
+                                <select class="form-control" id="selecionaFuncionario" name="selecionaFuncionario" >
+                                    <option selected="true" disabled="disabled">Escolher Funcionário</option>
+                                    <?php 
+                                        foreach($listaFuncionario as $row)
+                                        { 
+                                        echo '<option value="'.$row['admin_id'].'">'.$row['nome'].'</option>';
+                                        }
+                                    ?>  
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bottom">
+                            <input type="submit" class="btn btn-primary exercicios-btn" value="Pedir" />
+                        </div>
+                        <?php echo form_close(); ?>
+                    </div>
+                </div>
+            </a>
+
+
+            <?php
+
             // var_dump($listaPlanos);
             // var_dump($listaNomesPlanos);
+            
 
             // contador para criar nova row após ter 3 elementos
-            $count = 1;
+            $count = 2;
 
             // verifica os nomes dos planos de treino
             foreach($listaNomesPlanos as $row1){ 
@@ -23,7 +79,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="exercicios-item">
                             <div class="exercicios-item-header">
-                                <a class="fas fa-times-circle" href="#edit<?php echo $row1['id'];?>" data-title="Edit" data-toggle="modal"></a>
+                                <a class="fas fa-times-circle apagarTreino" href="#edit<?php echo $row1['id'];?>" data-title="Edit" data-toggle="modal"></a>
                                 <i class="fas fa-file-signature fa-5x "></i>
                             </div>
                             <div class="info">
@@ -87,32 +143,34 @@
                     echo "</div>";
                 }
                 $count++;
+
+            //  <!-- foreach -->
             } 
-             //  <!-- foreach -->
+
             ?>
 
             <div class="row">
-            <a class="exercicios-link" href="#">
-                <div class="col-md-6 col-lg-4">
-                    <div class="exercicios-item ">
-                        <div class="exercicios-item-header">
-                            <i class="fas fa-plus-circle fa-5x "></i>
-                        </div>
-                        <div class="info">
-                            <div class="exercicios-title">
-                                Novo Plano de Treino
+                <a class="exercicios-link" href="#">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="exercicios-item ">
+                            <div class="exercicios-item-header">
+                                <i class="fas fa-plus-circle fa-5x "></i>
                             </div>
-                            <p class="exercicios-descricao">Crie um novo plano de treinos para associar os exercícios pretendidos</p>
-                        </div>
+                            <div class="info">
+                                <div class="exercicios-title">
+                                    Novo Plano de Treino
+                                </div>
+                                <p class="exercicios-descricao">Crie um novo plano de treinos para associar os exercícios pretendidos</p>
+                            </div>
 
-                        <div class="bottom">
-                            <form action="<?= base_url('cliente/novo_plano')?>">
-                                <input type="submit" class="btn btn-primary exercicios-btn" value="Criar" />
-                            </form>
+                            <div class="bottom">
+                                <form action="<?= base_url('cliente/novo_plano')?>">
+                                    <input type="submit" class="btn btn-primary exercicios-btn" value="Criar" />
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
             </div>
 
                 

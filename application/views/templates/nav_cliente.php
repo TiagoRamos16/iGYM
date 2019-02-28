@@ -19,7 +19,7 @@
         <ul class="nav navbar-nav custom-navbar-nav">
             <li class=""><a id="navbartitulos" href="<?= base_url('cliente')?>">Home</a></li>
             <li class=""><a id="navbartitulos" href="<?= base_url('cliente/exercicios')?>">Exercícios</a></li>
-            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/treinos')?>">Treinos</a></li>
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/treinos')?>">Planos</a></li>
             <li class=""><a id="navbartitulos" href="#">Calendário</a></li>
             <li class=""><a id="navbartitulos" href="#">Aulas</a></li>
         </ul>
