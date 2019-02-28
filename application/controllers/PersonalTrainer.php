@@ -7,6 +7,7 @@ class PersonalTrainer extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Sala_m');
 		$this->load->model('Aula_m');
+		$this->load->model('Utilizador_m');
 
 		if($this->session->userdata('sessao_utilizador')==null){
 			$this->session->set_flashdata('erroPT', 'Não tem permissao de aceder a esta página '); //mensagem de erro
@@ -313,6 +314,146 @@ class PersonalTrainer extends CI_Controller {
 		$this->load->view('PersonalTrainer/historicoAulas',$data);
 		$this->load->view('templates/footer');
 
+	}
+
+	public function verClientes($arg1=false){
+
+		$data['title'] = 'Listagem de clientes';
+		
+		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
+		
+
+		$this->form_validation->set_rules('pesquisa', 'Pesquisa', 'required');
+
+		if ($this->form_validation->run() == true) {
+			$pesquisa = $this->input->post('pesquisa');
+			$utilizadores = $this->Utilizador_m->obterUtilizadorPorFuncinario($idFuncionario,$pesquisa,$arg1);
+
+			$data['utilizadores'] = $utilizadores ;
+		
+		}else{
+			$utilizadores = $this->Utilizador_m->obterUtilizadorPorFuncinario($idFuncionario,false,$arg1);
+
+			$data['utilizadores'] = $utilizadores ;
+		}
+
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/verClientes',$data);
+		$this->load->view('templates/footer');
+	}
+
+	public function AdicionarCliente(){
+
+		$this->form_validation->set_rules('email', 'Email', 'required');
+
+		if ($this->form_validation->run() == true) {
+
+			$email = $this->input->post('email');
+			$utilizador = $this->Utilizador_m->verificaEmail($email);
+			$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
+			$data = date('Y-m-d');
+
+			$dados = array(
+				"cliente_admin_id" => $utilizador['id'],
+				"funcionario_admin_id" => $idFuncionario,
+				"fc_estado" => "pendente",
+				"fc_data" => $data
+			);
+
+
+			if($utilizador['id'] == $idFuncionario || $utilizador['tipo'] != 5){
+				$this->session->set_flashdata('erroAssocia', 'ERRO'); //mensagem de erro || $utilizador['tipo'] != 5
+				redirect('personalTrainer/verClientes','refresh');
+			}
+
+
+
+			//verifica se utilizador ja esta associado
+			if($this->Utilizador_m->verificaFuncionarioCliente($utilizador['id'],$idFuncionario)==null){
+				$this->Utilizador_m->associarFuncionarioCliente($dados);
+				$this->session->set_flashdata('sucessoAssocia', 'Foi enviado um pedido ao utilizador'); //mensagem de sucesso
+				redirect('personalTrainer/verClientes','refresh');
+			}else{
+				$this->session->set_flashdata('erroAssocia', 'Ja está associado a esse utilizador'); //mensagem de erro
+				redirect('personalTrainer/verClientes','refresh');
+			}
+
+			
+		}
+	}
+
+	public function verPedidos($estado=false){
+		$data['title'] = 'Listagem de pedidos';
+
+
+		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
+
+		if($estado==1){
+			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"activo");
+		}else if($estado==2){
+			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"rejeitado");
+		}else{
+			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"pendente");
+		}
+		
+
+		// var_dump($this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"pendente"));
+
+		if($this->input->post('submitAceitaCliente')){
+			$idPedido = $this->input->post('idPedido');
+
+			$data = array(
+				"fc_estado" => "activo",
+			);
+
+			$this->Utilizador_m->editarFuncionarioHasCliente($data,$idPedido);
+
+			
+			$this->session->set_flashdata('sucessoAceitar', 'Sucesso a aceitar Cliente');
+			
+			redirect('personalTrainer/verPedidos',"refresh");
+
+		}else if($this->input->post('submitRejeitarCliente')){
+			
+			$idPedido = $this->input->post('idPedido');
+
+			$data = array(
+				"fc_estado" => "rejeitado",
+			);
+
+			$this->Utilizador_m->editarFuncionarioHasCliente($data,$idPedido);
+
+			
+			$this->session->set_flashdata('sucessoRejeitar', 'Sucesso a rejeitar Cliente');
+			
+			redirect('personalTrainer/verPedidos',"refresh");
+
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav_top');
+			$this->load->view('templates/nav_lateral_funcionario');
+			$this->load->view('PersonalTrainer/verPedidos',$data);
+			$this->load->view('templates/footer');
+		}
+		
+		
+	}
+
+
+	public function meusPlanos(){
+		$data['title'] = 'Meus planos de treino';
+
+
+		
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/meusPlanos',$data);
+		$this->load->view('templates/footer');
 	}
 
 

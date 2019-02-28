@@ -5,7 +5,7 @@
 
 
                 <div class="row">
-                    <h1 class="title text-center"> Visualizar Historico de Aulas </h1>
+                    <h1 class="title text-center"> Os meus planos de treino </h1>
                 </div>    
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4" >
@@ -21,19 +21,17 @@
                         <table class="table table-striped table-hover ">
                             <thead>
                                 <tr class="bg-primary">
-                                    <th>Data</th>
-                                    <th>Hora inicio</th>
-                                    <th>Hora fim</th>    
-                                    <th>Nome</th>
-                                    <th>Duração</th>
-                                    <th>Lotação</th>
-                                    <th>Sala</th>
-                                    <th>Tipo</th>
-                                    <th></th>
+                                    <th class="col-md-1">#</th>
+                                    <th class="col-md-4">Nome</th>
+                                    <th class="col-md-2">Data Criação</th>    
+                                    <th class="col-md-2">Estado</th>
+                                    <th class="col-md-1">Ver</th>
+                                    <th class="col-md-1">Editar</th>
+                                    <th class="col-md-1">Remover</th>
                                 </tr>
                             </thead>
                             <tbody id='lista'>
-                            <?php foreach($aulas as $aula): ?>
+                            <!-- <?php foreach($aulas as $aula): ?>
                                 <tr>
                                     <td><?= $aula['data']?></td>
                                     <td><?= $aula['hora_inicio']?></td>
@@ -48,7 +46,7 @@
                                       
                                     </td>
                                 </tr>
-                            <?php endforeach;?> 
+                            <?php endforeach;?>  -->
                             </tbody>
                         </table>     
                     </div>

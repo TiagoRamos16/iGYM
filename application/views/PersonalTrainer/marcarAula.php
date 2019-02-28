@@ -88,7 +88,7 @@
                     <h3 id=titleAulas class="text-center">Lista de aulas </h3>
                     <table class="table table-striped table-hover ">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary">
                                 <th>Hora inicio</th>
                                 <th>Hora fim</th>
                                 <th>Nome</th>
