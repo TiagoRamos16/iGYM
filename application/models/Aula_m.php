@@ -1,22 +1,72 @@
 <?php
-class Aula_m extends CI_Model {
+class Aula_m extends CI_Model 
+{
          
     public function __construct()  {
         parent::__construct();
 
     }
 
-    public function obterAulas($id=false, $idFunc=false){
-        if($id!=false){
-            return $this->db->get_where('aula',array('id'=>$id))->row_array();
+    public function obterAulas( $id=false, $idFunc=false ){
+        if( $id != false ){
+            return $this->db->get_where('aula',array('id' => $id ) )->row_array();
         }else if($idFunc!=false){
             
-            return $this->db->get_where('aula',array('funcionario_admin_id'=>$idFunc))->result_array();
+            return $this->db->get_where('aula',array('funcionario_admin_id' => $idFunc))->result_array();
 
 
         }else{
             return $this->db->get('aula')->result_array();
         }
+    }
+
+
+    public function obterAulasCalendario(){
+
+        $this->db->select('nome "title", data_inicio "start", data_fim "end", id');
+        return $this->db->get('aula')->result_array();
+        
+    }
+
+    public function obterAulasCliente($idCliente){
+
+        $this->db->select('aula.nome "title", aula.data_inicio "start", aula.data_fim "end", aula.id');
+        $this->db->from('aula');
+        $this->db->join('aula_has_cliente ','aula_has_cliente.id_aula = aula.id');
+        $this->db->where('id_cliente', $idCliente);
+
+        return $this->db->get()->result_array();
+        
+    }
+
+    public function verificaVagasAula($idAula){
+
+        $this->db->select('*');
+        $this->db->from('aula_has_cliente');
+        $this->db->where('id_aula', $idAula);
+        return $this->db->get()->result_array();
+        
+    }
+
+
+    public function verificaInscricaoAula($idAula, $idCliente){
+
+        $this->db->select('*');
+        $this->db->from('aula_has_cliente');
+        $this->db->where('id_aula', $idAula);
+        $this->db->where('id_cliente', $idCliente);
+        return $this->db->get()->result_array();
+        
+    }
+
+    public function novaInscricaoAula($novaInscricao){
+        return $this->db->insert('aula_has_cliente', $novaInscricao);
+    }
+
+    public function eliminarInscricaoAula($idAula, $idCliente){
+        $this->db->where('id_cliente', $idCliente);
+        $this->db->where('id_aula', $idAula);
+        return $this->db->delete('`aula_has_cliente`');
     }
 
     
