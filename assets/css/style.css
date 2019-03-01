@@ -1,6 +1,11 @@
 textarea {
     resize: none;
   }
+
+.btn-back-geral{
+    margin-left: 100px;
+    font-size: 1.3em; 
+}  
   
     #wrapper {
         padding-left: 0;    
@@ -616,6 +621,7 @@ h1.title {
 
     border-radius: 15px;
     margin: 50px auto; 
+    overflow: auto;
 }
 
 .perfil-dados-pessoais h3{
@@ -764,4 +770,68 @@ div.today {
 .btn-verPedidos{
     width: 100%;
  
+}
+
+
+/* personalTrainer / ver plano treino */
+
+.verPT-nomeCliente{
+    font-size: 1.8em;
+    position: relative;
+    top: 5px;
+    left: 30px;
+}
+
+.listaClientes-li-verPlano:hover{
+    background-color: #f1eeee;
+}
+
+.exercioPlanoTreino{
+    /* margin: 8px!important; */
+    margin: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(178, 178, 202); 
+}
+
+.plano-treino-divs{
+    padding: 20px;
+    border: 1px solid #c0c9cf!important; 
+    border-radius: 15px;
+    margin: 50px auto; 
+    overflow: auto;
+    width: 80%
+}
+
+
+
+
+.plano-treino-divs h3{
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.plano-treino-divs .row{
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(142, 153, 156);  */
+}
+
+.label-nivel{
+    position: absolute;
+    padding: 8px;
+    top: 20px;
+    left:35px;
+    /* font-size: 1em; */
+}
+
+.icon-del{
+    position: absolute;
+    padding: 8px;
+    top: 15px;
+    right:30px;
+}
+
+.btns-lista-exercicios{
+    margin-top: 30px ;
+    margin-bottom: 30px ;
 }

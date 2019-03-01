@@ -75,6 +75,71 @@ class Exercicio_m extends CI_Model {
     }
 
 
+    //obter plano de treino por Funcionario
+    public function getPlanoTreinoPorFuncionario($idFuncionario=false){
+        return $this->db->get_where('plano_treino',array('funcionario_admin_id'=>$idFuncionario))->result_array(); 
+    }
+
+    public function obterPlanoTreino($id=false){
+        if($id==false){
+            $this->db->select('pt.id,pt.nome "pt_nome",pt.funcionario_admin_id,pt.cliente_admin_id, pt.pt_estado,pt.pt_data, f.nome "f_nome" ');
+            $this->db->join('funcionario f','pt.funcionario_admin_id = f.admin_id');    
+            return $this->db->get('plano_treino pt')->result_array();
+        }else{
+            $this->db->select('pt.id,pt.nome "pt_nome",pt.funcionario_admin_id,pt.cliente_admin_id, pt.pt_estado,pt.pt_data, f.nome "f_nome" ');
+            $this->db->join('funcionario f','pt.funcionario_admin_id = f.admin_id');   
+            return $this->db->get_where('plano_treino pt',array('id'=>$id,))->row_array();
+        }
+    }
+
+    //obter plano de treino publico e  activos
+
+    public function getPlanoTreinoPorTipo($tipo,$estado){
+        return $this->db->get_where('plano_treino',array('pt_tipo'=>$tipo,'pt_estado'=>$estado))->result_array(); 
+    }
+
+    //pedidos de plano de treino por utilizador
+
+    public function getPedidosDePlanosTreino($estado=false,$idUtilizador=false,$ordenar=false){
+
+        $this->db->select('cp.cpt_data, c.nome "nome_cliente", cp.cpt_estado, c.admin_id');
+        $this->db->join('cliente c',"cp.id_cliente = c.admin_id");
+        $this->db->join('plano_treino pt',"cp.id_planoTreino = pt.id");
+
+        if($estado!=false){
+            $this->db->where("cp.cpt_estado",$estado);
+        } 
+        if($idUtilizador!=false){
+            $this->db->where("pt.funcionario_admin_id",$idUtilizador);
+        }
+        
+        if($ordenar!=false){
+            if($ordenar=="nome"){
+                $this->db->order_by('c.nome', 'ASC');
+            }else if($ordenar=="data"){
+                $this->db->order_by('cp.cpt_data', 'DESC');
+            }
+            
+        }
+
+        return $this->db->get('cliente_has_planotreino cp')->result_array();
+
+
+    }
+
+
+    //obter clientes associados a plano de treino
+    public function oberClientesAssociadoPlanoTreino($idPlano){
+        $this->db->join("cliente c","cp.id_cliente = c.admin_id");
+        return $this->db->get_where('cliente_has_planotreino cp',array("id_planoTreino"=>$idPlano))->result_array();      
+    }
+
+    //obter exercicios associados a plano de treino
+    public function oberExerciciosAssociadoPlanoTreino($idPlano){
+        $this->db->join("exercicio e","pe.exercicio_id = e.id");
+        return $this->db->get_where('plano_treino_has_exercicio pe',array("pe.plano_treino_id"=>$idPlano))->result_array();      
+    }
+
     public function verificaPlanoTreino($idFuncionario, $idUtilizador){
 
         $this->db->select('pt_estado');
@@ -103,9 +168,24 @@ class Exercicio_m extends CI_Model {
     }
 
 
-    public function dadosExercicio($idExercicio)
+    public function dadosExercicio($idExercicio=false)
     {
-        return $this->db->get_where('exercicio', array('id' => $idExercicio))->row_array();
+        if($idExercicio==false){
+            return $this->db->get('exercicio')->result_array();
+        }else{
+            return $this->db->get_where('exercicio', array('id' => $idExercicio))->row_array();
+        }
+        
+    }
+
+    
+    public function dadosExercicioPorUtilizador($idUtilizador)
+    {
+       return $this->db->get_where('exercicio', array('funcionario_admin_id' => $idUtilizador))->result_array();
+    }        
+
+    public function obterExerciciosAssociadosPlano($idPlano){
+        return $this->db->get_where('plano_treino_has_exercicio', array('plano_treino_id' => $idPlano))->result_array();
     }
 
 
@@ -124,6 +204,15 @@ class Exercicio_m extends CI_Model {
     {
         $this->db->where('id', $idTreinoApagar);
         return $this->db->delete('plano_treino'); 
+    }
+
+ 
+    //eitar plano de treino
+
+    public function editarPlanoTreino($data,$id){
+
+        $this->db->where('id', $id);
+        $this->db->update('plano_treino', $data);
     }
 
     

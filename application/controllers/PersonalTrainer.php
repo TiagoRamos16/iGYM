@@ -8,6 +8,7 @@ class PersonalTrainer extends CI_Controller {
 		$this->load->model('Sala_m');
 		$this->load->model('Aula_m');
 		$this->load->model('Utilizador_m');
+		$this->load->model('Exercicio_m');
 
 		if($this->session->userdata('sessao_utilizador')==null){
 			$this->session->set_flashdata('erroPT', 'Não tem permissao de aceder a esta página '); //mensagem de erro
@@ -446,8 +447,46 @@ class PersonalTrainer extends CI_Controller {
 	public function meusPlanos(){
 		$data['title'] = 'Meus planos de treino';
 
+		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
+		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorFuncionario($idFuncionario);
 		
+
+		if($this->input->post('submitRemovePlano')){
+			
+			$idPlano = $this->input->post('idPlano');
+
+			$this->Exercicio_m->apagarPlanoTreino($idPlano);
+
+			$this->session->set_flashdata('sucessoApagarPlano', 'Sucesso a apagar plano de treino');
+			
+			redirect('personalTrainer/meusPlanos',"refresh");
+		}
+
+		if($this->input->post('submitEditarPlano')){
+			
+			$idPlano = $this->input->post('idPlano');
+
+			$plano = $this->Exercicio_m->obterPlanoTreino($idPlano);
+
+			$nome = $this->input->post('nome');
+			$estado = $this->input->post('estado');
+
+			if($nome == "") $nome = $plano['nome'];
+
+			$data = array(
+				"nome" => $nome,
+				"pt_estado" => $estado
+			);
+
+
+			$this->Exercicio_m->editarPlanoTreino($data,$idPlano);
+				
+			$this->session->set_flashdata('sucessoEditarPlano', 'Sucesso a editar plano de treino');
+			
+			redirect('personalTrainer/meusPlanos',"refresh");
+		
+		}
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav_top');
@@ -456,6 +495,166 @@ class PersonalTrainer extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+
+	public function verPlanoTreino($idPlano = false){
+		
+		$data['title'] = 'Visualizar plano de treino';
+
+		$data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
+		$data['clientes'] = $this->Exercicio_m->oberClientesAssociadoPlanoTreino($idPlano);
+		$data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		$data['id'] = $idPlano;
+
+		// var_dump($this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano));
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/verPlanoTreino',$data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function verPlanoTreinoOutro($idPlano = false){
+		
+		$data['title'] = 'Visualizar plano de treino';
+
+		$data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
+		$data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		$data['id'] = $idPlano;
+
+		// var_dump($data);
+
+		// var_dump($this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano));
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/verPlanoTreinoOutro',$data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function eliminarExercicoPlanoTreino($idPlano = false, $idExercico=false){
+	
+		$this->Exercicio_m->query_apagar_exercicio_plano_treino($idPlano, $idExercico);
+
+		$this->session->set_flashdata('sucessoEliminarExercicio', 'Sucesso a eliminar exercicio do plano de treino');
+			
+		redirect('personalTrainer/verPlanoTreino/'.$idPlano,"refresh");
+	}
+
+
+	public function listaExercicios($idPlano=false,$flag=false){
+
+		$data['title'] = 'Lista de exercicios';
+
+		$data['id'] = $idPlano;
+
+		if($flag==false){
+			$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+		}else{
+			$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+		}
+
+		if($this->input->post('idPlano')){
+			$idPlano = $this->input->post('idPlano');
+			echo json_encode($this->Exercicio_m->obterExerciciosAssociadosPlano($idPlano));
+		}else if ($this->input->post('btnAdicionar')){
+
+			$planoTreino_has_exercicio = array(
+				"plano_treino_id" => $this->input->post('idPlanoAdicionar'),
+				"exercicio_id" => $this->input->post('idExercicioAdicionar')
+			);
+			
+			$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
+
+			$this->session->set_flashdata('sucessoAdicionarExercicio', 'Sucesso a adicionar exercicio ao plano de treino');
+
+			if($flag==false){
+				redirect('personalTrainer/listaExercicios/'.$idPlano, "refresh");
+			}else{
+				redirect('personalTrainer/listaExercicios/'.$idPlano."/1", "refresh");
+			}
+			
+		}
+		else{ 
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav_top');
+			$this->load->view('templates/nav_lateral_funcionario');
+			$this->load->view('PersonalTrainer/listaExercicios',$data);
+			$this->load->view('templates/footer');
+		}
+
+
+		
+
+		// var_dump($this->Exercicio_m->obterExerciciosAssociadosPlano($idPlano));
+
+		// var_dump($this->Exercicio_m->dadosExercicio());
+
+		// var_dump($data['exercicios']);
+		
+
+	}
+
+	public function adicionarExercicio(){
+		
+		$data['title'] = 'Adicionar exercicio';
+
+
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/adicionarExercicio',$data);
+		$this->load->view('templates/footer');
+	}
+
+	public function verTodosPlanos(){
+		
+		$data['title'] = 'Ver todos os planos';
+
+		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorTipo("publico","1");
+
+		// var_dump($data['planosTreino']);
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_top');
+		$this->load->view('templates/nav_lateral_funcionario');
+		$this->load->view('PersonalTrainer/verTodosPlanosTreino',$data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function verPedidoPlanos(){
+		$data['title'] = 'Pedidos de Planos';
+
+		// var_dump($this->Exercicio_m->getPedidosDePlanosTreino(0));
+		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
+
+
+		$data['planosTreino'] = $this->Exercicio_m->getPedidosDePlanosTreino(false,$idFuncionario,"data");
+		
+		// var_dump($data['planosTreino']);
+
+		if($this->input->post('ordenamento')){
+			$ordenamento = $this->input->post('ordenamento');
+			echo json_encode($this->Exercicio_m->getPedidosDePlanosTreino(false,$idFuncionario,$ordenamento));
+		}else if($this->input->post('ordenamento2')){
+			$ordenamento2 = $this->input->post('ordenamento2');
+			echo json_encode($this->Exercicio_m->getPedidosDePlanosTreino($ordenamento2,$idFuncionario,false));
+		}
+		
+		else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav_top');
+			$this->load->view('templates/nav_lateral_funcionario');
+			$this->load->view('PersonalTrainer/verPedidosPlanosTreino',$data);
+			$this->load->view('templates/footer');
+		}
+
+
+	
+	}
 
 	public function ajax(){
 		if($this->input->post('sala')){
@@ -466,6 +665,8 @@ class PersonalTrainer extends CI_Controller {
 			echo "0";
 		}
 	}
+
+
 
 
 	
