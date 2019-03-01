@@ -22,7 +22,7 @@
                 <div class="col-md-3">
                     <div class="exercicios-item text-center">
                         <div class="info">
-                            <a class="fas fa-times-circle" href="#delete<?php echo $row['id'];?>" data-title="Delete" data-toggle="modal"></a>
+                            <a class="fas fa-times-circle apagarTreino" href="#delete<?php echo $row['id'];?>" data-title="Delete" data-toggle="modal"></a>
                             <img class="img-exercicio" src="<?php echo base_url("assets/img/exercicios/".$row['foto']) ?>" alt="">
                             <div class="exercicios-title">
                                 <?php echo $row['nome'] ?>
