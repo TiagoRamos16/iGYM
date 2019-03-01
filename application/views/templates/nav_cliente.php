@@ -20,8 +20,8 @@
             <li class=""><a id="navbartitulos" href="<?= base_url('cliente')?>">Home</a></li>
             <li class=""><a id="navbartitulos" href="<?= base_url('cliente/exercicios')?>">Exercícios</a></li>
             <li class=""><a id="navbartitulos" href="<?= base_url('cliente/treinos')?>">Planos</a></li>
-            <li class=""><a id="navbartitulos" href="#">Calendário</a></li>
-            <li class=""><a id="navbartitulos" href="#">Aulas</a></li>
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/calendario')?>">Calendário</a></li>
+            <li class=""><a id="navbartitulos" href="<?= base_url('cliente/aulas')?>">Aulas</a></li>
         </ul>
 
         <!-- Top Menu Items -->

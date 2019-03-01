@@ -1,21 +1,20 @@
 <?php
-class Utilizador_m extends CI_Model {
+class Utilizador_m extends CI_Model 
+{
          
     public function __construct()  {
         parent::__construct();
     }
 
     // envia dados dos planos para criar tabela
-    public function queryPlanos()
-    {
+    public function queryPlanos(){
         // $this->db->select('id, nome, tempo_fidelizacao, periodicidade, preco, cardiofit_musculacao, consulta_nutricao, avaliacao_fisica, aulas_grupo, identificacao');
         $query = $this->db->get('plano_adesao');
         return $query->result_array();
     }
 
     // verifica se o token do plano escolhido existe na base de dados para prevenir alteracao por F12
-    public function confirmaPlano($planoEscolhido)
-    {
+    public function confirmaPlano($planoEscolhido){
         return $this->db->get_where('plano_adesao', array('identificacao' => $planoEscolhido))->row_array();
     }
 

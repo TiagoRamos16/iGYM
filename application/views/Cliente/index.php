@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </a>
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?= base_url('cliente/calendario')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">

@@ -1,14 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cliente extends CI_Controller {
+class Cliente extends CI_Controller 
+{
 
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->model('Utilizador_m');
 		$this->load->model('Exercicio_m');
+		$this->load->model('Aula_m');
+		
 
 		if($this->session->userdata('sessao_utilizador')==null){
 			$this->session->set_flashdata('erroPT', 'Não tem permissao de aceder a esta página '); //mensagem de erro
@@ -25,8 +27,7 @@ class Cliente extends CI_Controller {
 
 	}
 
-	public function index()
-	{
+	public function index(){
 		$data['title'] = 'Home'; 
 
 		$this->load->view('templates/header',$data);
@@ -36,14 +37,14 @@ class Cliente extends CI_Controller {
 	}
 
 	public function trataAjaxCliente(){
-		if($this->input->post('cc')){
-            if($this->Utilizador_m->verificaCc($this->input->post('cc'))!=null){
+		if( $this->input->post('cc') ) {
+            if( $this->Utilizador_m->verificaCc($this->input->post('cc') ) != null ){
                 echo "1";
             }else{
                 echo "0";
             }
-        }else if($this->input->post('nif')){
-			if($this->Utilizador_m->verificaNif($this->input->post('nif'))!=null){
+        }elseif( $this->input->post('nif') ){
+			if( $this->Utilizador_m->verificaNif($this->input->post('nif') )!= null ){
                 echo "1";
             }else{
                 echo "0";
@@ -52,8 +53,7 @@ class Cliente extends CI_Controller {
 	}
 
 
-	public function exercicios()
-	{
+	public function exercicios(){
 
 		$data['title'] = "Exercicios";
 
@@ -77,7 +77,7 @@ class Cliente extends CI_Controller {
 		$utilizador = $this->session->userdata('sessao_utilizador');
 
 
-		if($this->input->post('adicionar_ao_plano')){
+		if( $this->input->post('adicionar_ao_plano') ){
 
 			// id do plano de treino escolhido
 			$idPlanoTreino = $this->input->post('plano_treino');
@@ -101,15 +101,14 @@ class Cliente extends CI_Controller {
 	}
 
 
-	public function novo_plano($idExercicio = false)
-	{
+	public function novo_plano($idExercicio = false){
 
 		$data['title'] = "Novo Plano Exercícios";
 
 		$data['exercicio'] = $idExercicio;
 
 
-		if($this->input->post('criar_plano')){
+		if( $this->input->post('criar_plano') ){
 
 			//verifica cliente que pretende criar um novo plano de treino
 			$utilizador = $this->session->userdata('sessao_utilizador');
@@ -127,7 +126,7 @@ class Cliente extends CI_Controller {
 			// insere novo plano na BD e seleciona id
 			$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
 
-			if ($idExercicio != false){
+			if ( $idExercicio != false ){
 				// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
 				$planoTreino_has_exercicio = array(
 					"plano_treino_id" => $idPlanoTreino,
@@ -137,7 +136,8 @@ class Cliente extends CI_Controller {
 			}
 
 			$this->session->set_flashdata('sucessoTreino', 'Plano de Treino criado com sucesso'); //mensagem de sucesso
-			redirect('cliente/novo_plano');
+			// redirect('cliente/novo_plano');
+			redirect($_SERVER['HTTP_REFERER']);
 		}
 
 
@@ -149,8 +149,7 @@ class Cliente extends CI_Controller {
 	}
 
 
-	public function treinos($idTreinoApagar = false)
-	{
+	public function treinos($idTreinoApagar = false){
 		$data['title'] = "Planos de Treinos";
 
 		// passa para a view o nome dos planos
@@ -173,13 +172,13 @@ class Cliente extends CI_Controller {
 		$verificaEstado = $this->Exercicio_m->verificaPlanoTreino($idFuncionario, $utilizador['id']);
 
 		// verifica se existe já existe algum pedido
-		if(count($verificaEstado) > 0){
+		if( count($verificaEstado) > 0 ){
 
 			// verifica se existe mais que um resultado
-			foreach ($verificaEstado as $row){
+			foreach ( $verificaEstado as $row ){
 				
 				// se ja existir algum pendente da erro
-				if ($row['pt_estado'] == 'pendente'){
+				if ( $row['pt_estado'] == 'pendente' ){
 
 					$this->session->set_flashdata('erroPedidoPlano', 'Já efectuou um pedido a este funcionário. Por favor aguarde que o funcionário responda.'); //mensagem de sucesso
 					redirect('cliente/treinos');
@@ -208,12 +207,12 @@ class Cliente extends CI_Controller {
 
 
 		// verifica se foi passado o id de um plano a apagar e se pode ser apagado por este utilizador
-		if ($idTreinoApagar == true){
+		if ( $idTreinoApagar == true ){
 
 			// verifica os planos criados pelo utilizador e que podem ser apagados pelo mesmo
 			$resultado = $this->Exercicio_m->getPlanoTreino($idTreinoApagar, $utilizador['id']);
 
-			if ($resultado != null){
+			if ( $resultado != null ){
 
 				$this->Exercicio_m->apagarPlanoTreino($idTreinoApagar);
 
@@ -235,11 +234,10 @@ class Cliente extends CI_Controller {
 	}
 
 
-	public function plano_treino($idPlanoTreino = false, $id_exercicio_plano_treino = false)
-	{
+	public function plano_treino($idPlanoTreino = false, $id_exercicio_plano_treino = false){
 		$data['title'] = "Planos de Treino";
 
-		if($idPlanoTreino == true){
+		if( $idPlanoTreino == true ){
 
 			// passa id do plano de treino recebido pelo url para ser enviado com o id do exercicio que queremos apagar
 			$data['idPlanoTreino'] = $idPlanoTreino;
@@ -251,7 +249,7 @@ class Cliente extends CI_Controller {
 			redirect('cliente/treinos');
 		}
 
-		if($id_exercicio_plano_treino == true){
+		if( $id_exercicio_plano_treino == true ){
 			
 			$this->Exercicio_m->query_apagar_exercicio_plano_treino($idPlanoTreino, $id_exercicio_plano_treino);
 			redirect('cliente/plano_treino/'.$idPlanoTreino);
@@ -265,7 +263,106 @@ class Cliente extends CI_Controller {
 	}
 
 
+	public function calendario(){
+		$data['title'] = "Calendário";
 
+		$idCliente = $this->session->userdata('sessao_utilizador')['id'];
+
+
+		// variavel que é declarada na DATA do ajax faz sempre post na primeira vez que a pagina é declarada
+		if( $this->input->post('start') ){
+
+			echo json_encode( $this->Aula_m->obterAulasCliente($idCliente) );
+
+		}else{
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/nav_cliente');
+			$this->load->view('Cliente/calendario',$data);
+			$this->load->view('templates/footer');
+		}
+		
+
+	}
+
+
+	public function aulas(){
+		$data['title'] = "Aulas";
+
+		if( $this->input->post('start') ){
+
+			echo json_encode($this->Aula_m->obterAulasCalendario());
+
+		}else{
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/aulas',$data);
+		$this->load->view('templates/footer');
+
+		}
+	}
+
+
+	public function visualizarAula($idAula=null){
+
+		if( $idAula == null){
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+
+		$data['title'] = 'Ver aula';
+		$data['aula'] = $this->Aula_m->obterAulas($idAula, false);
+		$data['idAula'] = $idAula;
+
+		$idCliente = $this->session->userdata('sessao_utilizador')['id'];
+		$verificaInscricao = $this->Aula_m->verificaInscricaoAula($idAula, $idCliente);
+
+		// verifica quantas pessoas ja estao inscritas
+		$data['numeroInscricoes'] = $this->Aula_m->verificaVagasAula($idAula);
+
+		// se nao retorna nada, ou seja se nao esta inscrito
+		if( count($verificaInscricao) == 0 ){
+
+			$inscricao = 0;
+		
+		}else{
+
+			$inscricao = 1;
+		}
+
+		// passa variavel para a view para indicar se o utilizar adiciona ou remove a inscricao na aula
+		$data['inscricao'] = $inscricao;
+
+		// se for feita inscricao
+		if( $this->input->post('marcarAula') ){
+
+			// array para inserir novo plano				
+			$novaInscricao = array(
+				"id_cliente" => $idCliente,
+				"id_aula" => $idAula
+			);
+
+			$this->Aula_m->novaInscricaoAula($novaInscricao);
+			//enviar mensagem a participantes
+			$this->session->set_flashdata('sucessoNovaInscricao', 'Inscrito com sucesso na aula');
+			redirect('cliente/visualizarAula/'.$idAula);
+		}
+
+		// se for desmarcar aula
+		if( $this->input->post('desmarcarAula') ){
+			
+			$this->Aula_m->eliminarInscricaoAula($idAula, $idCliente);
+			//enviar mensagem a participantes
+			$this->session->set_flashdata('sucessoDesmarcarAula', 'A sua inscrição foi removida da aula');
+			redirect('cliente/visualizarAula/'.$idAula);
+		}
+		
+	
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('Cliente/visualizarAula',$data);
+		$this->load->view('templates/footer');
+	}
 
 
 
