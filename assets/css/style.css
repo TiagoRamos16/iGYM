@@ -835,3 +835,23 @@ div.today {
     margin-top: 30px ;
     margin-bottom: 30px ;
 }
+
+
+
+/*
+*************************************
+
+CSS PARA FIXAR IMAGEM NO FUNDO
+
+*************************************
+*/
+#fullpage {
+    background:url('../img/fundoindex.png') top right no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+    color: white;
+}
+
+
+
+/* body	{ background:url(your-image.jpg) top right no-repeat; background-attachment:fixed; } */
