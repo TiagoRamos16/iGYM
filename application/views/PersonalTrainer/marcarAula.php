@@ -22,9 +22,9 @@
 
 
 				<h1 class="title text-center"> Marcar Aula </h1>
-
+                <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/aulas')?>"> <i class="fas fa-arrow-left"></i> Back</a>   </p>
 				<div class="col-md-4">
-                    <?php echo form_open('personalTrainer/marcarAula'); ?>
+                    <?php echo form_open('personalTrainer/marcarAula','class="form-marcarAula"'); ?>
                         <input type="hidden" id="url" value="<?=base_url()?>">
 
                             <div class="form-group">
@@ -58,11 +58,12 @@
                                 <input type="time" class="form-control" id="fim" name="fim" required>
                             </div>
 
-                            <h4 class="text-danger text-center" id="erroTime"></h4>
+                            <p class="text-danger text-center" id="erroTime"></p>
                             <div class="form-group formShow" hidden >
-                                <label for="lotacao" class= "control-label">Lotação</label>
-                                <input type="number" class="form-control" id="lotacao" name="lotacao" placeholder="Lotação da aula" required>
+                                <label for="lotacao" class= "control-label">Número máximo de participantes</label>
+                                <input type="number" class="form-control" id="lotacao" name="lotacao" placeholder="Número máximo de participantes" required>
                                 <p class="text-center text-danger" id="infoLotacao"></p>
+                                <small class="text-muted" id="lotacaoSala"></small>
                             </div>
 
                             <h4 class="text-danger text-center">
@@ -76,7 +77,7 @@
                             <div class="form-group formShow" >
                           
                                 <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary" name="marcarAula">Marcar Aula</button>
+                                <button type="submit" class="btn btn-primary" name="marcarAula" id="submitMarcarAula">Marcar Aula</button>
                   
                             </div>
 
@@ -84,7 +85,7 @@
                     <h4 class="text-center text-danger"><?php echo validation_errors(); ?></h4> 
 				</div>
 
-			    <div class="col-md-8">
+			    <div class="col-md-6 col-md-offset-1">
                     <h3 id=titleAulas class="text-center">Lista de aulas </h3>
                     <table class="table table-striped table-hover ">
                         <thead>
@@ -118,6 +119,9 @@
 
 <script>
 
+    var lotacaoSala = 0;                
+
+
     $('#data').change(function(){
         $('#divSala').show();
         mostrarAulasAjax();
@@ -127,6 +131,7 @@
     $("#sala").change(function(){
         $('.formShow').show();
         mostrarAulasAjax();
+        lotacaSalaAjax();
     });
 
 
@@ -138,10 +143,15 @@
     // });
 
       $("#fim").blur(function(){
-        if($("#inicio").val()>=$("#fim").val()){
-            $("#erroTime").html('erro em hora');
+        var fim = $("#fim").val();
+        var inicio = $("#inicio").val();
+
+        if(inicio >= fim){
+            $("#erroTime").html('Hora de fim deve ser maior que hora de inicio');
+            $('#submitMarcarAula').attr("disabled", true);
         }else{
             $("#erroTime").html(''); 
+            $('#submitMarcarAula').attr("disabled", false);
         }
     });
 
@@ -176,8 +186,10 @@
                     if(data!="0"){
                         for(var i=0 ;i<data.length;i++){
                             html+= '<tr>';
-                                html+= "<td>"+  data[i]['hora_inicio']+"</td>";
-                                html+= "<td>"+  data[i]['hora_fim']+"</td>";  
+                                var horaInicio = data[i]['hora_inicio'].split(" ");
+                                var horaFim = data[i]['hora_fim'].split(" ");
+                                html+= "<td>"+  horaInicio[1]+ "</td>";
+                                html+= "<td>"+  horaFim[1]+ "</td>";  
                                 html+= "<td>"+  data[i]['nomeAula']+"</td>";  
                                 html+= "<td>"+  data[i]['duracao']+"</td>";   
                                 html+= "<td>"+  data[i]['lotacao']+"</td>";    
@@ -187,7 +199,7 @@
 
                         if(html==""){
                             lista.html(html); 
-                            $('#semResultados').html('Sem resultados');
+                            $('#semResultados').html('<i class="fas fa-exclamation-circle"></i> Sem resultados');
                         } else{
                             $('#semResultados').html('');
                             lista.html(html); 
@@ -199,6 +211,42 @@
     }
 
 
+// lotacaoSala
 
+function lotacaSalaAjax(){
+    var sala =  $("#sala").val(); 
+    var url = $("#url").val(); 
+   
+        $.ajax(
+            {
+                url: url+'personalTrainer/ajax2',
+                type:"post",
+                dataType: "json",
+                data:{
+                    "salaLotacao" : sala,
+                    },
+                success: function(data,status){
+                    // console.log(data);
+                    // console.log(data.id);
+                    // console.log(data['id']);
+                    $('#lotacaoSala').html('Número maximo de participantes nesta sala: <b>'+data.capacidade_maxima+'</b>');
+                    lotacaoSala = data.capacidade_maxima;
+                   
+            }
+        });
+}
+
+
+// lotacao
+    $("#lotacao").blur(function(){
+        if($("#lotacao").val()>lotacaoSala){
+            $("#infoLotacao").html('Lotação escolhida ultrapassa a lotação máxima da sala'); 
+            $('#submitMarcarAula').attr("disabled", true);
+        }else{
+            $("#infoLotacao").html(''); 
+            $('#submitMarcarAula').attr("disabled", false);
+        }
+    });
+   
 </script>      
 

@@ -100,11 +100,11 @@ class Aula_m extends CI_Model
          
     }
 
-    public function obterParticipantesAula($idAula){
+    public function obterParticipantesAula($idAula,$estado){
         $this->db->select('c.admin_id "clienteId", c.nome "clienteNome",c.telefone');
         $this->db->from('aula_has_cliente ac');
         $this->db->join('cliente c', 'c.admin_id = ac.id_cliente');
-        $this->db->where(array('id_aula'=>$idAula));
+        $this->db->where(array('ac.id_aula'=>$idAula,'ac.ac_estado'=>$estado));
         
         return $this->db->get()->result_array();
     }
@@ -131,6 +131,30 @@ class Aula_m extends CI_Model
            
            return $this->db->get()->result_array();
     }
+
+
+    public function obterSala($idSala=false){
+        if($idSala==false){
+            return $this->db->get('sala')->result_array();
+        }else{
+            return $this->db->get_where('sala',array('id'=>$idSala))->row_array();
+        }
+       
+    }
+
+    //verifica se uma aula pertence a um determina funcionario
+    public function verificaAulaFuncionario($idFuncionario, $idAula){
+        return $this->db->get_where('aula',array("id"=>$idAula,"funcionario_admin_id"=>$idFuncionario))->row_array();
+    }
+
+
+    //editar aula_has_cliente
+    public function editarExercicio($data,$idAula,$idCliente){
+
+        $this->db->update('aula_has_cliente', $data, array("id_aula" => $idAula,"id_cliente" => $idCliente) );
+    }
+
+
 
 
 

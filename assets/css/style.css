@@ -2,6 +2,15 @@ textarea {
     resize: none;
   }
 
+ .btn-transparent{
+     background-color: transparent;
+     border: 0px;
+ } 
+
+ .text-white{
+    color: white!important;
+ }
+
 .btn-back-geral{
     margin-left: 100px;
     font-size: 1.3em; 
@@ -835,3 +844,41 @@ div.today {
     margin-top: 30px ;
     margin-bottom: 30px ;
 }
+
+
+
+/* personal trainer adicionar plano treino */
+
+
+.form-add-pt{
+   margin-top: 30px;
+}
+
+.btn-cancel-add-pt{
+    margin-right: 10px;
+}
+
+
+/* personal trainer/adicionar exercicio */
+
+.div-form-addExercicio{
+    margin-top: 45px;
+}
+
+.div-form-addExercicio label{
+    margin: 10px 0px;
+}
+
+
+/* personalTrainer/MarcarAula */
+
+
+.form-marcarAula{
+    margin-top: 35px;
+}
+
+
+
+
+
+

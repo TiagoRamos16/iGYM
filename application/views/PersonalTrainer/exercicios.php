@@ -4,7 +4,7 @@
         <div class="row " id="main-admin">
             <h1 class="title-exercicios text-center">Exercicios</h1>
             
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?=base_url('personalTrainer/meusExercicios')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item text-center">
                         <div class="exercicios-item-header">
@@ -24,7 +24,7 @@
                 </div>
             </a>
 
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?=base_url('personalTrainer/adicionarExercicio')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">

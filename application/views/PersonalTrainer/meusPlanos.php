@@ -38,19 +38,29 @@
                         });
                     </script>
                 <?php endif?>
+                <?php if($this->session->flashdata('sucessoInserirPlano')!=null):?>
+                    <div class="alert alert-success text-center msn-contacto" id="message">
+                        <i class="fas fa-check-circle  text-success"></i>
+                        <strong>Sucesso!</strong> 
+                        <?= $this->session->flashdata('sucessoInserirPlano')?>
+                        <button type="button" class="close" aria-label="Close" id="close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                    <script>
+                        document.getElementById("close").addEventListener("click", function(){
+                            document.getElementById("message").style.display = "none";
+                        });
+                    </script>
+                <?php endif?>
 
 
                 <div class="row">
                     <h1 class="title text-center"> Os meus planos de treino </h1>
                     <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/planosTreino')?>"> <i class="fas fa-arrow-left"></i> Back</a>   </p>
                 </div>    
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4" >
-                        <label for="pesqData">Pesquisar por data:</label>
-                        <input type="date" class="form-control" name="pesqData" id="pesqData">
-                    </div>
-                    
-                </div>    
+                 
 
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
