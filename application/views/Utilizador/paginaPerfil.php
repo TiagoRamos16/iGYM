@@ -31,6 +31,38 @@
         });
     </script>
 <?php endif?>
+<?php if($this->session->flashdata('erroPass')!=null):?>
+    <div class="alert alert-danger text-center msn-contacto" id="message">
+        <i class="fas fa-check-circle  text-danger"></i>
+        <strong>Erro!</strong> 
+        <?= $this->session->flashdata('erroPass')?>
+        <button type="button" class="close" aria-label="Close" id="close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <script>
+        document.getElementById("close").addEventListener("click", function(){
+            document.getElementById("message").style.display = "none";
+        });
+    </script>
+<?php endif?>
+<?php if($this->session->flashdata('erroPassConf')!=null):?>
+    <div class="alert alert-danger text-center msn-contacto" id="message">
+        <i class="fas fa-check-circle  text-danger"></i>
+        <strong>Erro!</strong> 
+        <?= $this->session->flashdata('erroPassConf')?>
+        <button type="button" class="close" aria-label="Close" id="close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <script>
+        document.getElementById("close").addEventListener("click", function(){
+            document.getElementById("message").style.display = "none";
+        });
+    </script>
+<?php endif?>
 
 <div id="page-wrapper ">
     <div class="container-fluid">
@@ -189,14 +221,19 @@
                 placeholder="novo username" value="<?= $utilizador['username']?>">
             </div>
             <div class="form-group">
+                <label for="password">Password Antiga:</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" 
+                placeholder="password antiga">
+            </div>
+            <div class="form-group">
                 <label for="password">Nova Password:</label>
                 <input type="password" class="form-control" id="password" name="password" 
-                placeholder="nova password" value="********">
+                placeholder="nova password">
             </div>
             <div class="form-group">
                 <label for="confPassword">Confirmar Nova Password:</label>
                 <input type="password" class="form-control" id="confPassword" name="confPassword" 
-                placeholder="confirmar password" value="********">
+                placeholder="confirmar password">
             </div>
             <div class="form-group">
                 <input type="file" class="form-control" id="userfile" 
@@ -225,17 +262,17 @@
             <div class="form-group">
                 <label for="telefone">Novo Telefone:</label>
                 <input type="text" class="form-control" id="telefone" 
-                name="telefone" placeholder="novo numero de telefone">
+                name="telefone" placeholder="novo numero de telefone" value="<?= $funcionario['telefone']?>">
             </div>
             <div class="form-group">
             <label for="telefone">Nova Morada:</label>
                 <input type="text" class="form-control" id="morada" 
-                name="morada" placeholder="nova morada">
+                name="morada" placeholder="nova morada" value="<?= $funcionario['morada']?>">
             </div>
             <div class="form-group">
                 <label for="telefone">Novo Codigo Postal:</label>
                 <input type="text" class="form-control" id="codigoPostal" 
-                name="codigoPostal" placeholder="novo código postal">
+                name="codigoPostal" placeholder="novo código postal" value="<?= $funcionario['codigo_postal']?>">
             </div>
       </div>
       <div class="modal-footer">

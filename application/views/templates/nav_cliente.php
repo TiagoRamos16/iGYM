@@ -27,14 +27,14 @@
         <!-- Top Menu Items -->
 
         <ul class="nav navbar-right top-nav ">
-            <li><a href="../index.php" class=""><i class="far fa-envelope"></i></i> Mensagens</a>
+            <li><a href="<?= base_url('cliente/mensagens')?>" class=""><i class="far fa-envelope"></i></i> Mensagens</a>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fas fa-user"></i> <?=$this->session->userdata('sessao_utilizador')['username']?> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Ver Perfil</a></li>
+                    <li><a href="<?= base_url('cliente/paginaPerfil')?>">Ver Perfil</a></li>
                     <li class="divider"></li>
                     <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
 

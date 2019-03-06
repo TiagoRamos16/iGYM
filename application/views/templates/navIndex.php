@@ -16,10 +16,10 @@
 
         <div id="navbar" class="navbar-collapse collapse in" aria-expanded="true" style="">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#conceito">Conceito</a></li>
-                <li><a href="#contactos">Contactos</a></li>
+                <li><a href="<?= base_url('home')?>">Home</a></li>
+                <li><a href="<?= base_url('home')?>#servicos">Serviços</a></li>
+                <li><a href="<?= base_url('home')?>#conceito">Conceito</a></li>
+                <li><a href="<?= base_url('home')?>#contactos">Contactos</a></li>
                 <?php 
                 if($this->session->userdata('sessao_utilizador')) : ?>
                     <li class="dropdown">
@@ -28,7 +28,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Ver Perfil</a></li>
-                            <li><a href="<?= base_url('cliente') ?>">Area de cliente</a></li>
+                            <?php
+                                if ($this->session->userdata('sessao_utilizador')['tipo']==5){ ?>
+                                    <li><a href="<?= base_url('cliente') ?>">Area de cliente</a></li>
+                            <?php
+                                }elseif ($this->session->userdata('sessao_utilizador')['tipo']==3){ ?>
+                                    <li><a href="<?= base_url('PersonalTrainer') ?>">Area de cliente</a></li>
+                            <?php
+                                }
+                            ?>
+                            
                             <li class="divider"></li>
                             <li><a href="<?= base_url('utilizador/logout')?>">Logout</a></li>
                         </ul>

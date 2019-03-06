@@ -52,6 +52,30 @@ class Cliente extends CI_Controller
 		}
 	}
 
+	public function mensagens(){
+		$data['title'] = 'Mensagens';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('utilizador/mensagens', $data);
+		$this->load->view('templates/footer');
+	}
+
+
+	public function paginaPerfil(){
+		$data['title'] = 'Perfil Pessoal';
+
+		$utilizador = $this->session->userdata('sessao_utilizador');
+
+		$data['utilizador'] = $this->Utilizador_m->obterUtilizador($utilizador['id']);
+		$data['funcionario'] = $this->Utilizador_m->obterCliente($utilizador['id']);
+
+		$this->load->view('templates/header',$data);
+		$this->load->view('templates/nav_cliente');
+		$this->load->view('utilizador/paginaPerfil',$data);
+		$this->load->view('templates/footer');
+	}
+
 
 	public function exercicios(){
 

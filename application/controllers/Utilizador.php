@@ -343,7 +343,7 @@ class Utilizador extends CI_Controller
 			$email = $this->security->xss_clean($this->input->post('email'));
 
 			if ($this->Utilizador_m->verificaEmail($email) == null) {
-				$this->session->set_flashdata('erroResetPassword', 'Email inexistente'); //mensagem de sucesso    
+				$this->session->set_flashdata('erroResetPassword', 'Email inexistente'); //mensagem de erro
 				$this->session->set_flashdata('email', $email); //email do utilizador para ser colocado como value no formulario
 				redirect('utilizador/resetPassword');
 			} else {
@@ -399,7 +399,7 @@ class Utilizador extends CI_Controller
 
 		} else {
 			$this->load->view('templates/header', $data);
-			// $this->load->view('templates/nav');
+			$this->load->view('templates/navIndex');
 			$this->load->view('Utilizador/resetPassword');
 			$this->load->view('templates/footer');
 
@@ -507,33 +507,65 @@ class Utilizador extends CI_Controller
 
 			$this->load->library('upload', $config);
 
-			if ($this->upload->do_upload('userfile')) {
-				$nomeImagem = $this->upload->data()['file_name'];
-		
+			if ($_FILES['userfile']['name']!=null){
+
+				if ($this->upload->do_upload('userfile')) {
+					$nomeImagem = $this->upload->data()['file_name'];
+			
+				}else{
+					$this->session->set_flashdata('erroImagem', 
+				'Erro a carregar imagem'); //mensagem de erro
+					$nomeImagem = "";
+				}
 			}else{
-				$this->session->set_flashdata('erroImagem', 
-			'Erro a carregar imagem'); //mensagem de erro
 				$nomeImagem = "";
 			}
 
 			$id = $this->session->userdata('sessao_utilizador')['id'];
 			$username = $this->input->post("username");
+			$oldPassword = $this->input->post("oldPassword");
 			$password = $this->input->post("password"); //********
 			
 			$editarFuncionario = array();
 			$editarUtilizador = array(
 				"username" => $username,
-				// "password" => $password
+				"password" => $password
 			);
 
+			$dadosAdmin = $this->Utilizador_m->obterUtilizador($id);
+
 			if($nomeImagem != ""){
+
 				$editarFuncionario['foto'] = $nomeImagem;
+				if ($this->session->userdata('sessao_utilizador')['tipo'] == 3){
 				$this->Utilizador_m->editarFuncionario($editarFuncionario, $id);
+
+				}elseif($this->session->userdata('sessao_utilizador')['tipo'] == 5){
+				$this->Utilizador_m->editarCliente($editarFuncionario, $id);
+				}
 			}
 
-			if($password !="********"){
-				$passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-				$editarUtilizador['password'] = $passwordHashed;
+			if($this->input->post("password")){
+
+
+				if (password_verify($oldPassword, $dadosAdmin['password']) == true){
+
+					if($this->input->post("password") == $this->input->post("confPassword")){
+						$passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+						$editarUtilizador['password'] = $passwordHashed;
+
+					}else{
+						
+						$this->session->set_flashdata('erroPassConf', 
+						'A nova password não coincide com a confirmação da mesma'); //mensagem de erro
+						redirect('cliente/paginaPerfil');
+					}
+
+				}else{
+					$this->session->set_flashdata('erroPass', 
+					'A password antiga que colocou não corresponde à existente na base de dados'); //mensagem de erro
+					redirect('cliente/paginaPerfil');
+				}
 			}
 			
 
@@ -543,10 +575,15 @@ class Utilizador extends CI_Controller
 			$this->session->set_flashdata('sucessoEditar', 
 			'Dados de perfil editados com sucesso'); //mensagem de erro
 
-
-			redirect('utilizador/paginaPerfil', 'refresh');
+			if ($this->session->userdata('sessao_utilizador')['tipo'] == 3){
+				redirect('utilizador/paginaPerfil');
+			}elseif($this->session->userdata('sessao_utilizador')['tipo'] == 5){
+				redirect('cliente/paginaPerfil');
+			}
+			
 		
-		}else if($this->input->post('editarContactos')){
+		}
+		else if($this->input->post('editarContactos')){
 		
 			$id = $this->session->userdata('sessao_utilizador')['id'];
 			$telefone = $this->input->post("telefone");
@@ -559,14 +596,21 @@ class Utilizador extends CI_Controller
 				"codigo_postal" => $codigoPostal
 			);
 
+			if ($this->session->userdata('sessao_utilizador')['tipo'] == 3){
+				
+				$this->Utilizador_m->editarFuncionario($editarFuncionario, $id);
+				$this->session->set_flashdata('sucessoEditar', 
+				'Dados de perfil editados com sucesso'); //mensagem de erro
+				redirect('utilizador/paginaPerfil');
 
-			$this->Utilizador_m->editarFuncionario($editarFuncionario, $id);
+			}elseif($this->session->userdata('sessao_utilizador')['tipo'] == 5){
+				$this->Utilizador_m->editarCliente($editarFuncionario, $id);
+				$this->session->set_flashdata('sucessoEditar', 
+				'Dados de perfil editados com sucesso'); //mensagem de erro
+				redirect('cliente/paginaPerfil');
+			}
 
-			$this->session->set_flashdata('sucessoEditar', 
-			'Dados de perfil editados com sucesso'); //mensagem de erro
 
-
-			redirect('utilizador/paginaPerfil', 'refresh');
 		}
 
 

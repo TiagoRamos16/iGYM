@@ -37,7 +37,7 @@ class PersonalTrainer extends CI_Controller {
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/index');
+		$this->load->view('PersonalTrainer/horario');
 		$this->load->view('templates/footer');
 	}
 
@@ -45,42 +45,6 @@ class PersonalTrainer extends CI_Controller {
 	public function horario()
 	{
 		$data['title'] = 'Horario'; 
-
-		$config['day_type'] = 'long'; 
-		$config = array(
-			'show_next_prev'  => TRUE,
-			'next_prev_url'   => base_url('personalTrainer/horario')
-		);
-		$config['template'] = '
-			{cal_cell_content}<span class="day_listing">{day}</span>&nbsp;&bull; {content}&nbsp;{/cal_cell_content}
-			{cal_cell_content_today}<div class="today"><span class="day_listing">{day}</span>&bull; {content}</div>{/cal_cell_content_today}
-			{cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
-			{cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
-		'; 
-		
-		$config['template'] = '
-			{table_open}<table class="calendar">{/table_open}
-			{week_day_cell}<th class="day_header">{week_day}</th>{/week_day_cell}
-			{cal_cell_content}<span class="day_listing">{day}</span>&nbsp;&bull; {content}&nbsp;{/cal_cell_content}
-			{cal_cell_content_today}<div class="today"><span class="day_listing">{day}</span>&bull; {content}</div>{/cal_cell_content_today}
-			{cal_cell_no_content}<span class="day_listing">{day}</span>&nbsp;{/cal_cell_no_content}
-			{cal_cell_no_content_today}<div class="today"><span class="day_listing">{day}</span></div>{/cal_cell_no_content_today}
-		'; 
-
-
-		$this->load->library('calendar',$config);
-
-
-		$data2 = array(
-			3 => 'http://example.com/news/article/2006/06/03/',
-			7 => 'http://example.com/news/article/2006/06/07/',
-			13 => 'http://example.com/news/article/2006/06/13/',
-			
-		);
-
-		$data['data2'] = $data2;		
-
-		// print_r($this->session->userdata('sessao_utilizador'));
 
 		$this->load->view('templates/header',$data);
 		$this->load->view('templates/nav_top');

@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= base_url('home')?>">
                 <img class="nav-img" src="<?=base_url('assets/img/logo2.png')?>" alt="LOGO">
             </a>
         </div>

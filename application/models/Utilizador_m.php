@@ -159,6 +159,12 @@ class Utilizador_m extends CI_Model
         $this->db->update('funcionario', $data);
     }
 
+    //update cliente
+    public function editarCliente($data,$id){
+        $this->db->where('admin_id', $id);
+        $this->db->update('cliente', $data);
+    }
+
     //adicionar dados  a tabela funcionario_has_cliente
 
     public function associarFuncionarioCliente($dados){

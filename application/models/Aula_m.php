@@ -23,14 +23,14 @@ class Aula_m extends CI_Model
 
     public function obterAulasCalendario(){
 
-        $this->db->select('nome "title", data_inicio "start", data_fim "end", id');
+        $this->db->select('nome "title", hora_inicio "start", hora_fim "end", id');
         return $this->db->get('aula')->result_array();
         
     }
 
     public function obterAulasCliente($idCliente){
 
-        $this->db->select('aula.nome "title", aula.data_inicio "start", aula.data_fim "end", aula.id');
+        $this->db->select('aula.nome "title", aula.hora_inicio "start", aula.hora_fim "end", aula.id');
         $this->db->from('aula');
         $this->db->join('aula_has_cliente ','aula_has_cliente.id_aula = aula.id');
         $this->db->where('id_cliente', $idCliente);
