@@ -1,4 +1,8 @@
+<<<<<<< HEAD
   textarea {
+=======
+textarea {
+>>>>>>> 303659d323f53e4635d86378ae2135aa2aaba380
     resize: none;
   }
 
@@ -860,17 +864,6 @@ CSS PARA FIXAR IMAGEM NO FUNDO
     color: white;
 }
 
-
-.section-contactos{
-    background-color: #37526ea6;
-    margin-top: 20% ;
-    color: rgb(231, 231, 231);
-    padding: 30px;
-    border-radius: 20px;
-    /* margin: 0px;
-    padding: 0px;  */
-}
-
 #mapaContacto{
     margin-top: 40px;
 
@@ -908,10 +901,15 @@ CSS PARA FIXAR IMAGEM NO FUNDO
 }
 
 
-
-
 .section-contactos {
-    margin-top: 25px;
+
+    background-color: #37526ea6;
+    margin-top: 11% ;
+    color: rgb(231, 231, 231);
+    padding: 30px;
+    border-radius: 20px;
+    /* margin: 0px;
+    padding: 0px;  */
     text-align: center;
     animation: fadein 5s;
     -moz-animation: fadein 5s; /* Firefox */
@@ -1169,9 +1167,9 @@ section#servicos{
 
 }
 
-.servicosContainer{
-    margin-top: 5%;
-    margin-bottom: 25%;
+
+.servicosRow{
+    margin-top: 100px;
 }
 
 
@@ -1319,6 +1317,7 @@ section .section-title {
     color: #808080;
     text-align: center;	
 }
+
   
   /*-=-=-=-=-=-=-=-=-=-=-=- */
   /* Column Grids */

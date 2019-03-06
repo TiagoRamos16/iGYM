@@ -76,8 +76,16 @@ class Cliente extends CI_Controller
 		//verifica cliente que pretende criar um novo plano de treino
 		$utilizador = $this->session->userdata('sessao_utilizador');
 
+		if ( ($this->input->post('adicionar_ao_plano')) && ($this->input->post('plano_treino')==null) ){
 
-		if( $this->input->post('adicionar_ao_plano') ){
+			$this->session->set_flashdata('erroPlanoTreino', 'Tem de selecionar um plano de treino ou criar um novo.'); //mensagem de erro
+			// redirect('cliente/novo_plano');
+			// redirect($_SERVER['HTTP_REFERER']);
+
+		}
+
+
+		if( ($this->input->post('adicionar_ao_plano')) && ($this->input->post('plano_treino')!=null) ){
 
 			// id do plano de treino escolhido
 			$idPlanoTreino = $this->input->post('plano_treino');
@@ -101,52 +109,108 @@ class Cliente extends CI_Controller
 	}
 
 
+
 	public function novo_plano($idExercicio = false){
 
 		$data['title'] = "Novo Plano Exercícios";
 
 		$data['exercicio'] = $idExercicio;
 
+		$this->form_validation->set_rules('nome_plano', 'Nome', 'trim|required|is_unique[plano_treino.nome]|max_length[40]', 
+		array('required' => 'Tem de preencher o %s.', 'max_length' => 'O comprimento máximo é de 40 caracteres' , 'is_unique' => 'Já existe um plano de treino com este %s'));
 
-		if( $this->input->post('criar_plano') ){
 
-			//verifica cliente que pretende criar um novo plano de treino
-			$utilizador = $this->session->userdata('sessao_utilizador');
+		if (($this->form_validation->run() == true) && ($this->input->post('criar_plano')) ) {
 
-			$nomePlanoTreino = $this->input->post('nome_plano');
 
-			// array para inserir novo plano				
-			$novoPlanoTreino = array(
-				"nome" => $nomePlanoTreino,
-				"cliente_admin_id" => $utilizador['id'],
-				"pt_estado" => "ativo",
-				"pt_data" => date("Y-m-d")
-			);
-
-			// insere novo plano na BD e seleciona id
-			$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
-
-			if ( $idExercicio != false ){
-				// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
-				$planoTreino_has_exercicio = array(
-					"plano_treino_id" => $idPlanoTreino,
-					"exercicio_id" => $idExercicio
+				//verifica cliente que pretende criar um novo plano de treino
+				$utilizador = $this->session->userdata('sessao_utilizador');
+	
+				$nomePlanoTreino = $this->security->xss_clean($this->input->post("nome_plano"));
+	
+				// array para inserir novo plano				
+				$novoPlanoTreino = array(
+					"nome" => $nomePlanoTreino,
+					"cliente_admin_id" => $utilizador['id'],
+					"pt_estado" => "ativo",
+					"pt_data" => date("Y-m-d")
 				);
-				$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
-			}
+	
+				// insere novo plano na BD e seleciona id
+				$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
+	
+				if ( $idExercicio != false ){
+					// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
+					$planoTreino_has_exercicio = array(
+						"plano_treino_id" => $idPlanoTreino,
+						"exercicio_id" => $idExercicio
+					);
+					$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
+				}
+	
+				$this->session->set_flashdata('sucessoTreino', 'Plano de Treino criado com sucesso'); //mensagem de sucesso
+				// redirect('cliente/novo_plano');
+				redirect($_SERVER['HTTP_REFERER']);
 
-			$this->session->set_flashdata('sucessoTreino', 'Plano de Treino criado com sucesso'); //mensagem de sucesso
-			// redirect('cliente/novo_plano');
-			redirect($_SERVER['HTTP_REFERER']);
+
+		}else{
+
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/nav_cliente');
+			$this->load->view('Cliente/novo_plano', $data);
+			$this->load->view('templates/footer');
 		}
 
 
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/nav_cliente');
-		$this->load->view('Cliente/novo_plano', $data);
-		$this->load->view('templates/footer');
 	}
+
+
+	// public function novo_plano($idExercicio = false){
+
+	// 	$data['title'] = "Novo Plano Exercícios";
+
+	// 	$data['exercicio'] = $idExercicio;
+
+
+	// 	if( $this->input->post('criar_plano') ){
+
+	// 		//verifica cliente que pretende criar um novo plano de treino
+	// 		$utilizador = $this->session->userdata('sessao_utilizador');
+
+	// 		$nomePlanoTreino = $this->input->post('nome_plano');
+
+	// 		// array para inserir novo plano				
+	// 		$novoPlanoTreino = array(
+	// 			"nome" => $nomePlanoTreino,
+	// 			"cliente_admin_id" => $utilizador['id'],
+	// 			"pt_estado" => "ativo",
+	// 			"pt_data" => date("Y-m-d")
+	// 		);
+
+	// 		// insere novo plano na BD e seleciona id
+	// 		$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
+
+	// 		if ( $idExercicio != false ){
+	// 			// apos ter id do plano de treino selecionado, vai inserir id do exercicios com o id do plano na BD
+	// 			$planoTreino_has_exercicio = array(
+	// 				"plano_treino_id" => $idPlanoTreino,
+	// 				"exercicio_id" => $idExercicio
+	// 			);
+	// 			$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
+	// 		}
+
+	// 		$this->session->set_flashdata('sucessoTreino', 'Plano de Treino criado com sucesso'); //mensagem de sucesso
+	// 		// redirect('cliente/novo_plano');
+	// 		redirect($_SERVER['HTTP_REFERER']);
+	// 	}
+
+
+
+	// 	$this->load->view('templates/header', $data);
+	// 	$this->load->view('templates/nav_cliente');
+	// 	$this->load->view('Cliente/novo_plano', $data);
+	// 	$this->load->view('templates/footer');
+	// }
 
 
 	public function treinos($idTreinoApagar = false){

@@ -2,7 +2,7 @@
     <div class="container-fluid ">
         <!-- Page Heading -->
         <div class="row " id="main-admin">
-            <h1 class="title-exercicios text-center">Aulas</h1>
+            <h1 class="title-exercicios text-center">Aulas Gerais do Ginásio</h1>
 
             <div class="container">
                 <div id="calendar"></div>
