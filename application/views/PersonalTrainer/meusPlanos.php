@@ -163,7 +163,7 @@
             <input type="hidden" class="form-control idPlano" id="idPlano" name="idPlano" value="">
             <div class="form-group">
                 <label for="">Novo nome:</label>                
-                <input type="text" class="form-control" name="nome" id="nome" placeholder="Novo Nome">
+                <input type="text" class="form-control" name="nome" id="nome" placeholder="Novo Nome" value="">
                 <p class="text-muted"><small>Se deixar o campo em branco este nao sofre alterações</small></p>                
             </div> 
             <div class="form-group">

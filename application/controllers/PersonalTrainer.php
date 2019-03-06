@@ -529,16 +529,20 @@ class PersonalTrainer extends CI_Controller {
 			redirect('personalTrainer/meusPlanos',"refresh");
 		}
 
+		// editar plano de treino
+
 		if($this->input->post('submitEditarPlano')){
 			
 			$idPlano = $this->input->post('idPlano');
 
 			$plano = $this->Exercicio_m->obterPlanoTreino($idPlano);
 
-			$nome = $this->input->post('nome');
+			$nome = trim($this->input->post('nome'));
+
 			$estado = $this->input->post('estado');
 
-			if($nome == "") $nome = $plano['nome'];
+			if($nome == "") $nome = $plano['pt_nome'];
+			if($estado == "") $estado = $plano['pt_estado'];
 
 			$data = array(
 				"nome" => $nome,
@@ -731,7 +735,7 @@ class PersonalTrainer extends CI_Controller {
 
 
 			// $ultimoId = $this->Exercicio_m->inserePlanoTreino($data);
-			$ultimoId = 10;
+			// $ultimoId = 10;
 
 	
 			redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$ultimoId,'refresh');
