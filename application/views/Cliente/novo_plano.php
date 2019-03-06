@@ -11,7 +11,12 @@
 
                         <div class="form-group">
                             <label for="descricao-exercicio">Nome do Plano:</label>
-                            <input type="text" class="form-control" name="nome_plano"/>
+                            <input type="text" class="form-control" maxlength="40" name="nome_plano"/>
+                            <?php
+                                // echo validation_errors();
+                                echo form_error('nome_plano', '<div class="error">', '</div>');
+
+                            ?>
                         </div>
 
                         <div class="form-group col-md-3">

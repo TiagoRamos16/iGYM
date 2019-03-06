@@ -86,7 +86,7 @@
 
     <section id="servicos" class="pb-5">
         <div class="container servicosContainer">
-            <h5 class="section-title h1 text-center">Serviços</h5>
+            <h1 class="section-title text-center">Serviços</h1>
             <div class="row servicosRow">
                 <!-- Team member -->
                 <div class="col-xs-12 col-sm-3">
@@ -203,7 +203,7 @@
 <section id="conceito">
 
     <div class="container servicosContainer">
-        <h5 class="section-title h1 text-center">Conceitos</h5>
+        <h1 class="section-title text-center">Conceitos</h1>
         <div class="row servicosRow">
 
             <div class="jumbotron">
@@ -215,25 +215,25 @@
 
             <div class="wrapper">
                 <div class="counter col_fourth">
-                <i class="fa fa-code fa-2x"></i>
+                <i class="fas fa-building fa-2x iconeIndex"></i>
                 <h2 class="timer count-title count-number" data-to="12" data-speed="1500"></h2>
                 <p class="count-text ">Estúdios de Fitness</p>
                 </div>
 
                 <div class="counter col_fourth">
-                <i class="fa fa-coffee fa-2x"></i>
+                <i class="far fa-clipboard fa-2x iconeIndex"></i>
                 <h2 class="timer count-title count-number" data-to="19" data-speed="1500"></h2>
                 <p class="count-text ">Personal Trainers</p>
                 </div>
 
                 <div class="counter col_fourth">
-                <i class="fa fa-lightbulb-o fa-2x"></i>
+                <i class="fas fa-users fa-2x iconeIndex"></i>
                 <h2 class="timer count-title count-number" data-to="120" data-speed="1500"></h2>
                 <p class="count-text ">Aulas de Grupo</p>
                 </div>
 
                 <div class="counter col_fourth end">
-                <i class="fa fa-bug fa-2x"></i>
+                <i class="fas fa-dumbbell fa-2x iconeIndex"></i>
                 <h2 class="timer count-title count-number" data-to="51980" data-speed="1500"></h2>
                 <p class="count-text ">Equipamentos</p>
                 </div>
@@ -249,7 +249,7 @@
 
     <section id="contactos" class="section-contactos">
         <div class="container">
-            <h5 class="text-center text-uppercase">Contactos</h5>
+            <h1 class="section-title text-center">Contactos</h1>
             <hr>
             <div class="row">
                 <div class="col-md-12 text-center" id="mapaContacto">

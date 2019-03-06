@@ -29,7 +29,7 @@
                 <?php endif?>
                
                <div class="col-md-12">
-               <a class="back-arrow" href="<?= base_url('cliente/aulas')?>"><i class="fas fa-arrow-left"></i>Back</a>
+               <a class="back-arrow" href="javascript:history.back()"><i class="fas fa-arrow-left"></i>Back</a>
                     <div class="perfil-dados-pessoais">
                         <div class="row">
                             <div class="col-md-12">
@@ -66,11 +66,6 @@
                         <div class="row">
                             <div class="col-md-4"><b>Hora de fim:</b></div>
                             <div class="col-md-8"><?= $aula['hora_fim']?></div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4"><b>tipo:</b></div>
-                            <div class="col-md-8"><?= $aula['tipo']?></div>
                         </div>
                         <hr>
                         <div class="row">

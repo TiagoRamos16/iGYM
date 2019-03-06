@@ -67,7 +67,14 @@
                     <div class="form-group col-md-12">
                         <label>Nome Completo<span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder=""  name="nome" required
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['nome']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['nome'];
+                            }else{
+                                echo set_value('nome');
+                            } ?>">
+
+
                     </div> <!-- form-group end.// -->
                 </div>
                 
@@ -76,12 +83,25 @@
                     <div class="form-group col-md-6">
                         <label>Morada<span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder=""  name="morada" required
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['morada']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['morada'];
+                            }else{
+                                echo set_value('morada');
+                            } ?>">
+
+
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-3">
                         <label>Localidade<span class="required">*</span></label>
                         <select class="form-control" name="localidade"  name="localidade" required
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['localidade']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['localidade'];
+                            }else{
+                                echo set_value('localidade');
+                            } ?>">
+
                             <option selected="true" disabled="disabled" value="">Localidade</option>
                             <option value="1" 
                             <?php 
@@ -106,7 +126,13 @@
                     <div class="form-group col-md-3">
                         <label>Código Postal<span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder="0000-000" pattern="[0-9]{4}-[0-9]{3}" name="codigoPostal" required
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['codigo_postal']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['codigo_postal'];
+                            }else{
+                                echo set_value('codigo_postal');
+                            } ?>">
+                        
                     </div> <!-- form-group end.// -->
                 </div>
                 
@@ -114,7 +140,13 @@
                     <div class="form-group col-md-4">
                         <label>Nacionalidade<span class="required">*</span></label>
                         <select class="form-control" name="nacionalidade"  name="nacionalidade"  required
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['nacionalidade']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['nacionalidade'];
+                            }else{
+                                echo set_value('nacionalidade');
+                            } ?>">
+
                             <option selected="true" disabled="disabled" value="">Nacionalidade</option>
                             <option value="1"
                             <?php 
@@ -136,13 +168,25 @@
                     <div class="form-group col-md-4">
                         <label>Cartão de Cidadão<span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder=" " required name="cc" id="cc"
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['cc']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['cc'];
+                            }else{
+                                echo set_value('cc');
+                            } ?>">
+
                         <p class="text-danger" id="erroCC"></p>
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-4">
                         <label>Número de Contribuinte<span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder=" " required name="nif" id="nif"
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['nif']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['nif'];
+                            }else{
+                                echo set_value('nif');
+                            } ?>">
+
                         <p class="text-danger" id="erroNif"></p>
                     </div> <!-- form-group end.// -->
                 </div>  
@@ -158,7 +202,7 @@
                                     if($this->session->userdata('clienteRegisto')['genero']=='m'){
                                         echo 'selected="selected"'; 
                                     }
-                                } 
+                                }
                             ?> 
                             >Masculino</option>
                             <option value="f"
@@ -175,25 +219,45 @@
                     <div class="form-group col-md-4">
                         <label>Data de Nascimento<span class="required">*</span></label>
                         <input type="date" class="form-control" placeholder=" " required name="dataNascimento" 
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['data_nascimento']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['data_nascimento'];
+                            }else{
+                                echo set_value('data_nascimento');
+                            } ?>">
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-4">
                         <label>Telefone<span class="required">*</span></label>
                         <input type="number" class="form-control" placeholder=" " required name="telefone" 
-                        value="<?php if($this->session->userdata('clienteRegisto')!= null) echo $this->session->userdata('clienteRegisto')['telefone']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('clienteRegisto')!= null){
+                            echo $this->session->userdata('clienteRegisto')['telefone'];
+                            }else{
+                                echo set_value('telefone');
+                            } ?>">
                     </div> <!-- form-group end.// -->
                 </div> 
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label>Username<span class="required">*</span></label>
                         <input type="text" class="form-control" placeholder=" " required name="username" id="username"
-                        value="<?php if($this->session->userdata('adminRegisto')!= null) echo $this->session->userdata('adminRegisto')['username']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('adminRegisto')!= null){
+                            echo $this->session->userdata('adminRegisto')['username'];
+                            }else{
+                                echo set_value('username');
+                            } ?>">
                         <p class="text-danger" id="erroUsername"></p>
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-6">
                         <label>Email<span class="required">*</span></label>
                         <input type="email" class="form-control" placeholder=" " required name="email" id="email"
-                        value="<?php if($this->session->userdata('adminRegisto')!= null) echo $this->session->userdata('adminRegisto')['email']; ?>">
+                        value="<?php 
+                        if($this->session->userdata('adminRegisto')!= null){
+                            echo $this->session->userdata('adminRegisto')['email'];
+                            }else{
+                                echo set_value('email');
+                            } ?>">
                         <p class="text-danger" id="erroEmail"></p>
                     </div> <!-- form-group end.// -->
                 </div>                        
@@ -213,7 +277,7 @@
                 <div>                        
                 <div align="center" class="row">
                     <div class="form-group col-md-12 ">
-                        <input type="checkbox" class="" id="reg_agree" name="reg_agree">
+                        <input type="checkbox" class="" id="reg_agree" name="reg_agree" required>
                         <label for="reg_agree">Aceite os <a href="#">termos e condições</a></label>
                     </div>
 
@@ -224,7 +288,8 @@
                     ?>
 
                     <div class="form-group col-md-12 ">
-                        <div class="g-recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
+                        <div class="g-recaptcha" id="recaptcha" data-sitekey="6LdOt5AUAAAAAK20_UC56v2G2kHoWU8QU3zvSHx9"></div>
+                        <span class="msg-error error" style="margin-left:100px;color:red"></span>
 
                         <?php       /*   se o captcha nao for preenchido mostra erro  */
                             if($this->session->flashdata('erroCaptcha')!=null){
@@ -258,3 +323,18 @@
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="<?=base_url("assets/js/js_users_registo.js")?>"></script>
+
+<script>
+$( '#formRegisto' ).click(function(e){
+  var $captcha = $( '#recaptcha' ),
+      response = grecaptcha.getResponse();
+  
+  if (response.length === 0) {
+    $( '.msg-error').text( "Tem de preencher o reCAPTCHA!" );
+    if( !$captcha.hasClass( "error" ) ){
+      $captcha.addClass( "error" );
+      e.preventDefault(); // cancela o evento do submit
+    }
+  }
+})
+</script>

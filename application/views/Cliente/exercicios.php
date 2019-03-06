@@ -7,6 +7,14 @@
 
             <?php 
             // var_dump($listaDificuldade);
+
+
+            if($this->session->flashdata('erroPlanoTreino')!=null){
+                echo '<div id="erroPlanoTreino" class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>'.$this->session->flashdata('erroPlanoTreino').'</div>';
+            }               
+
+
             ?>
 
             <div class="filter-search">
@@ -162,3 +170,13 @@
 </div>
 <!-- /#page-wrapper -->
 </div><!-- /#wrapper -->
+
+
+<script>
+    //funcao para ocultar mensagem de submissao do form apos 3 segundos
+    $( document ).ready(function(){
+        $('#erroPlanoTreino').fadeIn('slow', function(){
+            $('#erroPlanoTreino').delay(3000).fadeOut(); 
+        });
+    });
+</script>
