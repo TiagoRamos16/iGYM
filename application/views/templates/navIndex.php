@@ -17,9 +17,8 @@
         <div id="navbar" class="navbar-collapse collapse in" aria-expanded="true" style="">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Home</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#conceito">Conceito</a></li>
                 <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#conceito">Conceito</a></li>
                 <li><a href="#contactos">Contactos</a></li>
                 <?php 
                 if($this->session->userdata('sessao_utilizador')) : ?>
