@@ -2,13 +2,17 @@
     <div class="container-fluid ">
         <!-- Page Heading -->
         <div class="row " id="main-admin">
-            <h1 class="title-exercicios text-center">Calendário</h1>
+            <h1 class="title-exercicios text-center">Calendário Pessoal</h1>
+
+            <div class="form-group col-md-4 col-md-offset-8">
+                <a class="btn btn-primary" href="<?=base_url('cliente/aulas');?>"> Inscrição numa nova aula </a>
+            </div>
 
             <div class="container">
                 <div id="calendar"></div>
             </div>
             
-            <div id="calendarModal" class="modal fade">
+            <!-- <div id="calendarModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -21,7 +25,14 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+
+            <div class="form-group col-md-9 col-md-offset-3">
+                <span class="text-muted">Caso o calendário esteja vazio é porque não se inscreveu em nenhuma aula.</span>
+                <span class="text-muted">Utilize o botão "Inscrição numa nova aula" para adicionar.</span>
             </div>
+
+            
 
         </div>
         <!-- /.row -->
