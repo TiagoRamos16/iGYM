@@ -39,6 +39,13 @@ class Aula_m extends CI_Model
         
     }
 
+
+    public function obterAulasFuncionario($idFuncionario){
+        $this->db->select('a.*, s.nome "nome_sala"');
+        $this->db->join("sala s","s.id = a.sala_id");
+        return $this->db->get_where('aula a',array('a.funcionario_admin_id'=>$idFuncionario))->result_array();
+    }
+
     public function verificaVagasAula($idAula){
 
         $this->db->select('*');

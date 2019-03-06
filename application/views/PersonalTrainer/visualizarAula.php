@@ -7,7 +7,8 @@
 
 
             <div class="col-md-6">
-                <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/visualizarAulas')?>">
+                <!-- <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/visualizarAulas')?>"> -->
+                <p><a class="btn-back-geral btn btn-primary" href="<?php if(isset($_SERVER['HTTP_REFERER'])) echo $_SERVER['HTTP_REFERER']?>"> 
                     <i class="fas fa-arrow-left"></i> Back</a> </p>
                 <div class="perfil-dados-pessoais">
                     <div class="row">

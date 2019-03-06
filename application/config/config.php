@@ -454,7 +454,7 @@ $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = false;
 $config['csrf_exclude_uris'] = array('Utilizador/verificaEmailAjax','Cliente/trataAjaxCliente','PersonalTrainer/ajax','PersonalTrainer/ajax2',
-'cliente/calendario','cliente/aulas','PersonalTrainer/listaExercicios','PersonalTrainer/verPedidoPlanos');
+'cliente/calendario','cliente/aulas','PersonalTrainer/listaExercicios','PersonalTrainer/verPedidoPlanos','personalTrainer/calendario');
 
 /*
 |--------------------------------------------------------------------------
