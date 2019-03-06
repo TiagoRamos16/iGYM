@@ -4,15 +4,65 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Utilizador extends CI_Controller
 {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 		$this->load->model('Utilizador_m');
 	}
 
 
-	public function login()
-	{
+	public function index(){
+
+		$this->form_validation->set_rules('nomeContacto', 'Nome', 'trim|required');
+		$this->form_validation->set_rules('emailContacto', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('assuntoContacto', 'Nome', 'trim|required');
+		$this->form_validation->set_rules('mensagemContacto', 'Nome', 'trim|required');
+
+		if ($this->form_validation->run() == true) {
+			
+			$nome = $this->security->xss_clean($this->input->post('nomeContacto'));
+			$email = $this->security->xss_clean($this->input->post('emailContacto'));
+			$assunto = $this->security->xss_clean($this->input->post('assuntoContacto'));
+			$mensagem = $this->security->xss_clean($this->input->post('mensagemContacto'));
+
+			//configurar email
+			$this->load->library('email');
+
+			//SMTP & mail configuration
+			$config = array(
+				'protocol' => 'smtp',
+				'smtp_host' => 'ssl://smtp.googlemail.com',
+				'smtp_port' => 465,
+				'smtp_user' => 'rentacar.bravavalley@gmail.com',
+				'smtp_pass' => '1a2s3d4f5g',
+				'mailtype' => 'html',
+				'charset' => 'utf-8'
+			);
+
+			$this->email->initialize($config);
+			$this->email->set_mailtype("html");
+			$this->email->set_newline("\r\n");
+
+			$this->email->to('mauriciogouveia1990@gmail.com');
+			$this->email->from($email, $nome);
+			$this->email->subject($assunto);
+
+			$this->email->message($mensagem);
+
+			//Send email
+			$this->email->send();
+
+			$this->session->set_flashdata('sucessoFormContacto', 'O seu formulário foi submetido, iremos responder o mais rápido possível.'); //mensagem de sucesso
+
+		} else {
+			$this->session->set_flashdata('erroFormContacto', 'Formulário não submetido, por favor tente novamente'); //mensagem de erro
+		}
+
+		redirect('home#contactos');
+
+	}
+
+
+	public function login(){
 		$data['title'] = 'Login';
 
 		$this->form_validation->set_rules('email', 'Email', 'required');
