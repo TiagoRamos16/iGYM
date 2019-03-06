@@ -216,9 +216,16 @@
             <div class="wrapper">
                 <div class="counter col_fourth">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <i class="fa fa-code fa-2x iconeIndex"></i>
 =======
                 <i class="fas fa-building fa-2x iconeIndex"></i>
+>>>>>>> developer
+=======
+                <i class="fas fa-building fa-2x iconeIndex"></i>
+=======
+                <i class="fa fa-code fa-2x iconeIndex"></i>
+>>>>>>> a2d4734f9525bb40bd273c5c254eef67cf6bce60
 >>>>>>> developer
                 <h2 class="timer count-title count-number" data-to="12" data-speed="1500"></h2>
                 <p class="count-text ">Estúdios de Fitness</p>
@@ -226,9 +233,16 @@
 
                 <div class="counter col_fourth">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <i class="fa fa-coffee fa-2x iconeIndex"></i>
 =======
                 <i class="far fa-clipboard fa-2x iconeIndex"></i>
+>>>>>>> developer
+=======
+                <i class="far fa-clipboard fa-2x iconeIndex"></i>
+=======
+                <i class="fa fa-coffee fa-2x iconeIndex"></i>
+>>>>>>> a2d4734f9525bb40bd273c5c254eef67cf6bce60
 >>>>>>> developer
                 <h2 class="timer count-title count-number" data-to="19" data-speed="1500"></h2>
                 <p class="count-text ">Personal Trainers</p>
@@ -236,9 +250,16 @@
 
                 <div class="counter col_fourth">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <i class="fa fa-lightbulb-o fa-2x iconeIndex"></i>
 =======
                 <i class="fas fa-users fa-2x iconeIndex"></i>
+>>>>>>> developer
+=======
+                <i class="fas fa-users fa-2x iconeIndex"></i>
+=======
+                <i class="fa fa-lightbulb-o fa-2x iconeIndex"></i>
+>>>>>>> a2d4734f9525bb40bd273c5c254eef67cf6bce60
 >>>>>>> developer
                 <h2 class="timer count-title count-number" data-to="120" data-speed="1500"></h2>
                 <p class="count-text ">Aulas de Grupo</p>
@@ -246,9 +267,16 @@
 
                 <div class="counter col_fourth end">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <i class="fa fa-bug fa-2x iconeIndex"></i>
 =======
                 <i class="fas fa-dumbbell fa-2x iconeIndex"></i>
+>>>>>>> developer
+=======
+                <i class="fas fa-dumbbell fa-2x iconeIndex"></i>
+=======
+                <i class="fa fa-bug fa-2x iconeIndex"></i>
+>>>>>>> a2d4734f9525bb40bd273c5c254eef67cf6bce60
 >>>>>>> developer
                 <h2 class="timer count-title count-number" data-to="51980" data-speed="1500"></h2>
                 <p class="count-text ">Equipamentos</p>
