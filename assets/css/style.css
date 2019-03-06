@@ -1,3 +1,20 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ @TiagoRamos16 Sign out
+0
+0 0 TiagoRamos16/iGYM
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Insights  Settings
+iGYM/assets/css/style.css
+ Mauricio a
+7f25c65  6 minutes ago
+1368 lines (1052 sloc)  23.4 KB
+    
 textarea {
     resize: none;
   }
@@ -850,9 +867,7 @@ div.today {
 
 /*
 *************************************
-
 CSS PARA FIXAR IMAGEM NO FUNDO
-
 *************************************
 */
 #fullpage {
@@ -962,10 +977,8 @@ CSS PARA FIXAR IMAGEM NO FUNDO
 
 /*
 *************************************
-
 **************Carousel***************
 *https://bootsnipp.com/snippets/7B4x*
-
 *************************************
 */
 
@@ -1148,7 +1161,6 @@ CSS PARA FIXAR IMAGEM NO FUNDO
     box-shadow: none;
     outline: none;
 }
-
 .btn-primary {
     color: #fff;
     background-color: #007b5e;
@@ -1161,9 +1173,7 @@ CSS PARA FIXAR IMAGEM NO FUNDO
 
 /*
 *************************************
-
 **************Serviços***************
-
 *************************************
 */
 
@@ -1310,9 +1320,7 @@ section .section-title {
 
 /*
 *************************************
-
 **************CONCEITOS***************
-
 *************************************
 */
 
@@ -1322,15 +1330,12 @@ section .section-title {
 }
 
 
-
-
-
-body {
+.wrapper {
     font-family: Arial;
     background-color: #f5f5f5;
     color: #808080;
-        text-align: center;	
-  }
+    text-align: center;	
+}
   
   /*-=-=-=-=-=-=-=-=-=-=-=- */
   /* Column Grids */
@@ -1363,5 +1368,5 @@ body {
   .counter { background-color: #ffffff; padding: 20px 0; border-radius: 5px;}
   .count-title { font-size: 40px; font-weight: normal;  margin-top: 10px; margin-bottom: 0; text-align: center; color:black; }
   .count-text { font-size: 13px; font-weight: normal;  margin-top: 10px; margin-bottom: 0; text-align: center; color:black; }
-  .fa-2x { margin: 0 auto; float: none; display: table; color: #4ad1e5; }
+  .iconeIndex { margin: 0 auto; float: none; display: table; color: #4ad1e5; }
   

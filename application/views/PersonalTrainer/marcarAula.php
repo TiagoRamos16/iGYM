@@ -61,7 +61,8 @@
                             <p class="text-danger text-center" id="erroTime"></p>
                             <div class="form-group formShow" hidden >
                                 <label for="lotacao" class= "control-label">Número máximo de participantes</label>
-                                <input type="number" class="form-control" id="lotacao" name="lotacao" placeholder="Número máximo de participantes" required>
+                                <input type="number" class="form-control" id="lotacao" name="lotacao" placeholder="Número máximo de participantes" 
+                                    required min="0">
                                 <p class="text-center text-danger" id="infoLotacao"></p>
                                 <small class="text-muted" id="lotacaoSala"></small>
                             </div>
@@ -72,6 +73,7 @@
                                 <?php if($this->session->flashdata('erroMarcarAula3'))echo $this->session->flashdata('erroMarcarAula3')?>
                                 <?php if($this->session->flashdata('erroMarcarAula4'))echo $this->session->flashdata('erroMarcarAula4')?>
                                 <?php if($this->session->flashdata('erroMarcarAula5'))echo $this->session->flashdata('erroMarcarAula5')?>
+                                <?php if($this->session->flashdata('erroMarcarAula6'))echo $this->session->flashdata('erroMarcarAula6')?>
                             </h4>
                             
                             <div class="form-group formShow" >

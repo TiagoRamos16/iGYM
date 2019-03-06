@@ -53,11 +53,11 @@
                             </tr>
                         </thead>
                         <tbody id='lista'>
-                            <?php 
-                            $count = 0;
-                            foreach($planosTreino as $planos): 
-                                $count++;
-                            ?>
+                            <?php $count = 0; ?>
+                            
+                            <?php foreach($planosTreino as $planos):?> 
+                                <?php $count++;?>
+                            
                             <tr>
                                 <td>
                                     <?= $count?>

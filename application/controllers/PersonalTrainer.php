@@ -162,10 +162,10 @@ class PersonalTrainer extends CI_Controller {
 			$lotacao = $this->security->xss_clean($this->input->post('lotacao'));
 			$dataHoje = date('Y-m-d');
 			$duracao = getTimeDiff($inicio,$fim);
-			$inicio = date("Y-m-d ".$inicio.":00");  //tornar time em date time
-			$fim = date("Y-m-d ".$fim.":00");
+			$inicio = date($data." ".$inicio.":00");  //tornar time em date time
+			$fim = date($data." ".$fim.":00");
 
-			$aulas = $this->Aula_m->obterAulaPorSala($sala,$dataHoje); //obter aulas da bd
+			$aulas = $this->Aula_m->obterAulaPorSala($sala,$data); //obter aulas da bd
 
 			//validaçoes do formulario
 			foreach($aulas as $aula){  //verificar se hora da aula é possivel
@@ -198,6 +198,11 @@ class PersonalTrainer extends CI_Controller {
 					redirect('personalTrainer/marcarAula');
 			}
 
+			if($lotacao<1){ // validação de hora de aula
+				$this->session->set_flashdata('erroMarcarAula6', 'Lotação tem de ser um número positivo'); //mensagem de erro
+				redirect('personalTrainer/marcarAula');
+			}
+
 				
 			$aula = array(
 				"nome"=> $nome,
@@ -205,7 +210,7 @@ class PersonalTrainer extends CI_Controller {
 				"lotacao"=> $lotacao,
 				"hora_inicio"=> $inicio,
 				"hora_fim"=> $fim,
-				"data" => $dataHoje,
+				"data" => $data,
 				"tipo" => 1,
 				"funcionario_admin_id" => $this->session->userdata('sessao_utilizador')['id'],
 				"duracao" => $duracao
@@ -734,8 +739,12 @@ class PersonalTrainer extends CI_Controller {
 			);
 
 
-			// $ultimoId = $this->Exercicio_m->inserePlanoTreino($data);
+			$ultimoId = $this->Exercicio_m->inserePlanoTreino($data);
 			// $ultimoId = 10;
+
+
+			$this->session->set_userdata('idUltimoPlano',$ultimoId); //iniciar sessao
+			
 
 	
 			redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$ultimoId,'refresh');
@@ -752,48 +761,59 @@ class PersonalTrainer extends CI_Controller {
 
 	}
 
-	public function adicionarPlanoTreinoPasso2($idPlano=false,$flag=false ){
+	public function adicionarPlanoTreinoPasso2($idPlano=false,$flag=false ){ 
 
 		$data['title'] = 'Adicionar Plano de treino Passo 2';
-
-
-		if($flag==false){
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
-			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
-		}else{
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
-			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
-		}
-
 		$data['id'] = $idPlano;
 
-		if ($this->input->post('btnAdicionar')){
+		if( $idPlano == false ) redirect("personalTrainer/adicionarPlanoTreino");  //verfica se existe get
 
-			$planoTreino_has_exercicio = array(
-				"plano_treino_id" => $this->input->post('idPlanoAdicionar'),
-				"exercicio_id" => $this->input->post('idExercicioAdicionar')
-			);
-			
-			$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio);
-
-			$this->session->set_flashdata('sucessoAdicionarExercicio', 'Sucesso a adicionar exercicio ao plano de treino');
-
-			if($flag==false){
-				redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$idPlano, "refresh");
-			}else{
-				redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$idPlano."/1", "refresh");
-			}
-			
-		}else if($this->input->post('confPT')){
-			$this->session->set_flashdata('sucessoInserirPlano', 'Sucesso a criar o seu plano de treino');
-			redirect('personalTrainer/meusPlanos/', "refresh");
+		if($idPlano != $this->session->userdata('idUltimoPlano')){ //verifica se o plano do get é igual a sessao criada anteriormente
+			echo "nao pode modificar este plano";
 		}else{
-			$this->load->view('templates/header',$data);
-			$this->load->view('templates/nav_top');
-			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/adicionarPlanoTreinoPasso2',$data);
-			$this->load->view('templates/footer');
+
+			if($flag==false){ //seleciona exercicios associados  a utilizador
+				$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+				$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+			}else{//seleciona todos os exercicios
+				$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+				$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+			}
+				
+	
+			if ($this->input->post('btnAdicionar')){ //adicionar exercicio ao plano
+	
+				$planoTreino_has_exercicio = array(
+					"plano_treino_id" => $this->input->post('idPlanoAdicionar'),
+					"exercicio_id" => $this->input->post('idExercicioAdicionar')
+				);
+				
+				$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio); //adiciona exercicio a plando de treino
+	
+				$this->session->set_flashdata('sucessoAdicionarExercicio', 'Sucesso a adicionar exercicio ao plano de treino');
+	
+				if($flag==false){
+					redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$idPlano, "refresh");
+				}else{
+					redirect('personalTrainer/adicionarPlanoTreinoPasso2/'.$idPlano."/1", "refresh");
+				}
+				
+			}else if($this->input->post('confPT')){ //confimar submissao de plano de treino
+				$this->session->set_flashdata('sucessoInserirPlano', 'Sucesso a criar o seu plano de treino');
+				redirect('personalTrainer/meusPlanos/', "refresh");
+			}else{
+				$this->load->view('templates/header',$data);
+				$this->load->view('templates/nav_top');
+				$this->load->view('templates/nav_lateral_funcionario');
+				$this->load->view('PersonalTrainer/adicionarPlanoTreinoPasso2',$data);
+				$this->load->view('templates/footer');
+			}
 		}
+
+
+
+
+	
 
 	}
 
@@ -958,6 +978,28 @@ class PersonalTrainer extends CI_Controller {
 		}else{
 			echo "0";
 		}
+	}
+
+	public function calendario(){
+		$data['title'] = "Calendário";
+
+		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
+
+
+		// variavel que é declarada na DATA do ajax faz sempre post na primeira vez que a pagina é declarada
+		if( $this->input->post('start') ){
+
+			echo json_encode( $this->Aula_m->obterAulasFuncionario($idFuncionario) );
+
+		}else{
+			
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/nav_cliente');
+			$this->load->view('Cliente/calendario',$data);
+			$this->load->view('templates/footer');
+		}
+		
+
 	}
 
 

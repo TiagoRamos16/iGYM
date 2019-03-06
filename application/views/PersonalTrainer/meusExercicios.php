@@ -60,13 +60,7 @@
                     <h1 class="title text-center"> Os meus Exercicios </h1>
                     <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/exercicios')?>"> <i class="fas fa-arrow-left"></i> Back</a>   </p>
                 </div>    
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4" >
-                        <label for="pesqData">Pesquisar por data:</label>
-                        <input type="date" class="form-control" name="pesqData" id="pesqData">
-                    </div>
-                    
-                </div>    
+              
 
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
