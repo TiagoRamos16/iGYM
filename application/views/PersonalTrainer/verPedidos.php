@@ -39,7 +39,8 @@
                 <?php endif?>
 
                 <h1 class="title text-center"> Lista de Pedidos de Cliente </h1>
-
+                <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/clientes')?>">
+                    <i class="fas fa-arrow-left"></i> Back</a> </p>
 
                         <div class="row btns-mensagens">
                             <div class="btn-group  col-md-8 col-md-offset-2">

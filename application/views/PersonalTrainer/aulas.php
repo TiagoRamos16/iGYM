@@ -4,7 +4,7 @@
         <div class="row " id="main-admin">
             <h1 class="title-exercicios text-center">Aulas</h1>
             
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?=base_url('personalTrainer/marcarAula')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item text-center">
                         <div class="exercicios-item-header">
@@ -24,7 +24,7 @@
                 </div>
             </a>
 
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?=base_url('personalTrainer/visualizarAulas')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">
@@ -32,7 +32,7 @@
                         </div>
                         <div class="info">
                             <div class="exercicios-title">
-                                Visualizar aulas
+                                Visualizar Proximas aulas
                             </div>
                             <p class="exercicios-descricao"> Visualizar todas as informções de uma determinada aula (data, hora, gestão de clientes etc...)</p>
                         </div>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </a>
-            <a class="exercicios-link" href="#">
+            <a class="exercicios-link" href="<?=base_url('personalTrainer/historicoAulas')?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="exercicios-item ">
                         <div class="exercicios-item-header">

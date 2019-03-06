@@ -63,12 +63,19 @@
                             <a class="btn btn-info active" href="<?=base_url('personalTrainer/verClientes/2')?>" type="submit">Inactivos</a> 
                         <?php else:?>
                             <a class="btn btn-info" href="<?=base_url('personalTrainer/verClientes/2')?>" type="submit">Inactivos</a> 
-                            <?php endif?>
+                        <?php endif?>
+                        <?php if ($this->uri->segment(3)==3):?>
+                            <a class="btn btn-info active" href="<?=base_url('personalTrainer/verClientes/3')?>" type="submit">Pendentes</a> 
+                        <?php else:?>
+                            <a class="btn btn-info" href="<?=base_url('personalTrainer/verClientes/3')?>" type="submit">Pendentes</a> 
+                        <?php endif?>
                         <a class="btn btn-info" href="<?=base_url('personalTrainer/verClientes')?>">Ver Todos</a>
                     </div>
                 </div>
 
                 <h1 class="title text-center"> Lista de clientes </h1>
+                <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/clientes')?>">
+                    <i class="fas fa-arrow-left"></i> Back</a> </p>
 
                 <div class="row listaClientes">
                     <div class="col-lg-4 col-lg-offset-4">
@@ -79,16 +86,25 @@
                                     <td><img class="img-circle" width="50px" height="50px" src="<?= base_url('uploads/').$utilizador['foto']?>" alt=""></td>
                                     <td><?= $utilizador['nome']?></td>
                                     <td>
-                                        <?php 
+                                        <!-- <?php 
                                             if($utilizador['estado']==1){
                                                 echo "<i class='fas fa-circle text-success'></i> Activo";
                                             }else{
                                                 echo "<i class='fas fa-circle text-danger'></i> Inactivo";
                                             }
+                                        ?> -->
+                                        <?php if($utilizador['fc_estado']=="activo"){
+                                            echo "<i class='fas fa-circle text-success'></i> Activo";
+                                        }else if($utilizador['fc_estado']=="rejeitado"){
+                                            echo "<i class='fas fa-circle text-danger'></i> Rejeitado";
+                                        }else if($utilizador['fc_estado']=="pendente"){
+                                            echo "<i class='fas fa-circle text-warning'></i> Pendente";
+                                        }
+                                        
                                         ?>
                                     </td>
                                     <td class="pull-right">
-                                        <a href="<?=base_url('PersonalTrainer/visualizarAula/'.$utilizador['id'])?>"> <i class="fas fa-eye fa-2x"></i> </a>
+                                        <a href="<?=base_url('utilizador/outroPerfil/'.$utilizador['id'])?>"> <i class="fas fa-eye fa-2x"></i> </a>
                                     </td>
                                 </tr>
                             <?php endforeach;?> 

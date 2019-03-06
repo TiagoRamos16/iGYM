@@ -80,6 +80,11 @@ class Exercicio_m extends CI_Model {
         return $this->db->get_where('plano_treino',array('funcionario_admin_id'=>$idFuncionario))->result_array(); 
     }
 
+    //obter plano de treino por Funcionario
+    public function getExercicioPorFuncionario($idFuncionario=false){
+        return $this->db->get_where('exercicio',array('funcionario_admin_id'=>$idFuncionario))->result_array(); 
+    }
+
     public function obterPlanoTreino($id=false){
         if($id==false){
             $this->db->select('pt.id,pt.nome "pt_nome",pt.funcionario_admin_id,pt.cliente_admin_id, pt.pt_estado,pt.pt_data, f.nome "f_nome" ');
@@ -91,6 +96,8 @@ class Exercicio_m extends CI_Model {
             return $this->db->get_where('plano_treino pt',array('id'=>$id,))->row_array();
         }
     }
+
+    
 
     //obter plano de treino publico e  activos
 
@@ -200,10 +207,14 @@ class Exercicio_m extends CI_Model {
     }
 
 
-    public function apagarPlanoTreino($idTreinoApagar)
-    {
+    public function apagarPlanoTreino($idTreinoApagar){
         $this->db->where('id', $idTreinoApagar);
         return $this->db->delete('plano_treino'); 
+    }
+
+    public function apagarExercicio($idExercicio){
+        $this->db->where('id', $idExercicio);
+        return $this->db->delete('exercicio'); 
     }
 
  
@@ -215,6 +226,14 @@ class Exercicio_m extends CI_Model {
         $this->db->update('plano_treino', $data);
     }
 
+    //eitar exercicio
+
+    public function editarExercicio($data,$id){
+
+        $this->db->update('exercicio', $data, "id = $id");
+    }
+
+   
     
     public function infoPlanoTreino($idPlanoTreino)
     {
@@ -231,6 +250,16 @@ class Exercicio_m extends CI_Model {
         $this->db->where('plano_treino_id', $idPlanoTreino);
         $this->db->where('exercicio_id', $id_exercicio_plano_treino);
         return $this->db->delete('`plano_treino_has_exercicio`');
+    }
+
+    public function inserePlanoTreino($data){
+        $this->db->insert('plano_treino', $data);
+        return $insert_id = $this->db->insert_id();
+    }
+
+    public function insereExercicio($data){
+        $this->db->insert('exercicio', $data);
+        return $insert_id = $this->db->insert_id();
     }
 
 

@@ -45,7 +45,7 @@
                 </div>
             </a>
               
-            <a class="planoTreino-link" href="#">
+            <a class="planoTreino-link" href="<?= base_url("personalTrainer/adicionarPlanoTreino")?>">
                 <div class="col-md-6 col-lg-4">
                     <div class="planoTreino-item ">
                         <div class="planoTreino-item-header">

@@ -51,17 +51,29 @@
                     });
                 </script>
             <?php endif?>
+            <?php if($this->session->flashdata('erroVisualizarAula')!=null):?>
+                <div class="alert alert-danger text-center msn-contacto" id="message">
+                    <i class="fas fa-check-circle  text-danger"></i>
+                    <strong>Erro!</strong> 
+                    <?= $this->session->flashdata('erroVisualizarAula')?>
+                    <button type="button" class="close" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <script>
+                    document.getElementById("close").addEventListener("click", function(){
+                        document.getElementById("message").style.display = "none";
+                    });
+                </script>
+            <?php endif?>
+            
 
                 <div class="row">
-                    <h1 class="title text-center"> Visualizar Aulas </h1>
+                    <h1 class="title text-center"> Proximas Aulas </h1>
+                    <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/aulas')?>"> <i class="fas fa-arrow-left"></i> Back</a>   </p>
                 </div>    
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4" >
-                        <label for="pesqData">Pesquisar por data:</label>
-                        <input type="date" class="form-control" name="pesqData" id="pesqData" min="<?= date('Y-m-d')?>">
-                    </div>
-                    
-                </div>    
+              
 
                
 
@@ -85,8 +97,12 @@
                             <?php foreach($aulas as $aula): ?>
                                 <tr>
                                     <td><?= $aula['data']?></td>
-                                    <td><?= $aula['hora_inicio']?></td>
-                                    <td><?= $aula['hora_fim']?></td>
+                                    <?php 
+                                        $horaInicio = explode(" ", $aula['hora_inicio']); 
+                                        $horaFim = explode(" ", $aula['hora_fim']);
+                                    ?>
+                                    <td><?= $horaInicio[1]?></td>
+                                    <td><?= $horaFim[1]?></td>
                                     <td><?= $aula['nomeAula']?></td>
                                     <td><?= $aula['duracao']?></td>
                                     <td><?= $aula['lotacao']?></td>

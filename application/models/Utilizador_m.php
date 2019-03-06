@@ -113,7 +113,7 @@ class Utilizador_m extends CI_Model
             $this->db->like(array('c.nome'=>$pesquisa)); 
         }
         if($estado!=false){
-            $this->db->where(array('a.estado'=>$estado)); 
+            $this->db->where(array('fc.fc_estado'=>$estado)); 
         }
            
         return $this->db->get()->result_array();
