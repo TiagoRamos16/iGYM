@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="bottom">
-                            <input type="submit" class="btn btn-primary exercicios-btn" value="Pedir" />
+                            <input type="submit" class="btn btn-primary exercicios-btn" name="submitPedidoFuncionario" value="Pedir" />
                         </div>
                         <?php echo form_close(); ?>
                     </div>

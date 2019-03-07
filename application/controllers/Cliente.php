@@ -207,50 +207,55 @@ class Cliente extends CI_Controller
 		// verifica utilizador com sessao iniciada
 		$utilizador = $this->session->userdata('sessao_utilizador'); //iniciar sessao
 
-		
-		// verifica se ja existe algum plano pendente com aquele funcionario para bloquear novo pedido
-		$verificaEstado = $this->Exercicio_m->verificaPlanoTreino($idFuncionario, $utilizador['id']);
 
-		// verifica se existe já existe algum pedido
-		if( count($verificaEstado) > 0 ){
+		if($this->input->post('submitPedidoFuncionario')){
 
-			// verifica se existe mais que um resultado
-			foreach ( $verificaEstado as $row ){
-				
-				// se ja existir algum pendente da erro
-				if ( $row['pt_estado'] == 'pendente' ){
+			// verifica se ja existe algum plano pendente com aquele funcionario para bloquear novo pedido
+			$verificaEstado = $this->Exercicio_m->verificaPlanoTreino($idFuncionario, $utilizador['id']);
 
-					$this->session->set_flashdata('erroPedidoPlano', 'Já efectuou um pedido a este funcionário. Por favor aguarde que o funcionário responda.'); //mensagem de sucesso
-					redirect('cliente/treinos');
+			// verifica se existe já existe algum pedido
+			if( count($verificaEstado) > 0 ){
+
+				// verifica se existe mais que um resultado
+				foreach ( $verificaEstado as $row ){
+					
+					// se ja existir algum pendente da erro
+					if ( $row['pt_estado'] == 'pendente' ){
+
+						$this->session->set_flashdata('erroPedidoPlano', 'Já efectuou um pedido a este funcionário. Por favor aguarde que o funcionário responda.'); //mensagem de sucesso
+						redirect('cliente/treinos');
+					}	
 				}
-				
+			}else{
+
+				// caso contrario faz pedido
+				// array para inserir novo plano				
+				$novoPlanoTreino = array(
+					"nome" => "pedido",
+					"cliente_admin_id" => $utilizador['id'],
+					"funcionario_admin_id" => $idFuncionario,
+					"pt_estado" => "pendente",
+					"pt_data" => date("Y-m-d"),
+					"pt_tipo" => "privado"
+				);
+
+				// insere novo plano na BD e seleciona id
+				$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
+
+				// array para inserir na tabela cliente_has_planoTreino
+				$novoCliente_has_PlanoTreino = array(
+					"id_planoTreino" => $idPlanoTreino,
+					"id_cliente" => $utilizador['id'],
+					"cpt_estado" => "pendente",
+					"cpt_data" => date("Y-m-d")
+				);
+
+				$this->Exercicio_m->criarCliente_has_PlanoTreino($novoCliente_has_PlanoTreino);
+
+				$this->session->set_flashdata('sucessoPedidoPlano', 'Pedido efectuado com sucesso. Por favor aguarde que o funcionário responda.'); //mensagem de sucesso
+				redirect('cliente/treinos');
+
 			}
-			// caso contrario faz pedido
-			// array para inserir novo plano				
-			$novoPlanoTreino = array(
-				"nome" => "pedido",
-				"cliente_admin_id" => $utilizador['id'],
-				"funcionario_admin_id" => $idFuncionario,
-				"pt_estado" => "pendente",
-				"pt_data" => date("Y-m-d"),
-				"pt_tipo" => "privado"
-			);
-
-			// insere novo plano na BD e seleciona id
-			$idPlanoTreino = $this->Exercicio_m->criarPlanoTreino($novoPlanoTreino);
-
-			// array para inserir na tabela cliente_has_planoTreino
-			$novoCliente_has_PlanoTreino = array(
-				"id_planoTreino" => $idPlanoTreino,
-				"id_cliente" => $utilizador['id'],
-				"cpt_estado" => "pendente",
-				"cpt_data" => date("Y-m-d")
-			);
-
-			$this->Exercicio_m->criarCliente_has_PlanoTreino($novoCliente_has_PlanoTreino);
-
-			$this->session->set_flashdata('sucessoPedidoPlano', 'Pedido efectuado com sucesso. Por favor aguarde que o funcionário responda.'); //mensagem de sucesso
-			redirect('cliente/treinos');
 
 		}
 
