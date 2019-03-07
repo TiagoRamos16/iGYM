@@ -125,8 +125,9 @@
                     console.log(url);
 
                     for(var i=0 ;i<data.length;i++){
+                        var count = i+1;
                             html+= '<tr>';
-                                html+= "<td>"+  i +"</td>";
+                                html+= "<td>"+  count +"</td>";
                                 html+= "<td>"+  data[i]['cpt_data']+"</td>";  
                                 html+= "<td>"+  data[i]['nome_cliente']+"</td>"; 
                                 html+= "<td>";
@@ -139,7 +140,7 @@
                                 }
                                 html+= "</td>";
                                 html+= "<td>";
-                                
+                                html+= "<a href="+"<?= base_url('utilizador/outroPerfil/')?>"+data[i].admin_id+'> <i class="fas fa-arrow-circle-right fa-2x"></i></a>';
                                 html+= "</td>";      
                             html+= '</tr>'; 
                         }
@@ -182,8 +183,9 @@
                     console.log(url);
 
                     for(var i=0 ;i<data.length;i++){
+                        var count = i+1;
                             html+= '<tr>';
-                                html+= "<td>"+  i +"</td>";
+                                html+= "<td>"+  count +"</td>";
                                 html+= "<td>"+  data[i]['cpt_data']+"</td>";  
                                 html+= "<td>"+  data[i]['nome_cliente']+"</td>"; 
                                 html+= "<td>";
@@ -196,7 +198,7 @@
                                 }
                                 html+= "</td>";
                                 html+= "<td>";
-                                
+                                html+= "<a href="+"<?= base_url('utilizador/outroPerfil/')?>"+data[i].admin_id+'> <i class="fas fa-arrow-circle-right fa-2x"></i></a>';
                                 html+= "</td>";      
                             html+= '</tr>'; 
                         }

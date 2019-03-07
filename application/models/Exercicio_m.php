@@ -162,12 +162,16 @@ class Exercicio_m extends CI_Model {
     {
         $this->db->insert("plano_treino",$novoPlanoTreino);
         // verifica id dos dados inseridos
-        $this->db->select('id');
-        $this->db->from('plano_treino');
-        $this->db->where('nome', $novoPlanoTreino['nome']);
-        $query = $this->db->get();
-        return $query->row_array()['id'];
+        return $insert_id = $this->db->insert_id();
     }
+
+
+    public function criarCliente_has_PlanoTreino($novoCliente_has_PlanoTreino){
+
+        $this->db->insert("cliente_has_planotreino",$novoCliente_has_PlanoTreino);
+
+    }
+
 
     public function adicionarExercicio_PlanoTreino($planoTreino_has_exercicio)
     {
