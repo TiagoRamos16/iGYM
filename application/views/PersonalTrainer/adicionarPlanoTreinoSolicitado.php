@@ -35,19 +35,19 @@
                 <div class="col-md-8 col-md-offset-2 btns-lista-exercicios">
                     <?php if ($this->uri->segment(4)==false): ?>
                     <div class="col-md-6">
-                        <a class="btn btn-primary btn-block active" href="<?=base_url('personalTrainer/adicionarPlanoTreinoPasso2/').$id?>">Meus
+                        <a class="btn btn-primary btn-block active" href="<?=base_url('personalTrainer/elaborarPlano/').$id?>">Meus
                             Exercicios</a>
                     </div>
                     <div class="col-md-6 ">
-                        <a class="btn btn-primary btn-block" href="<?=base_url('personalTrainer/adicionarPlanoTreinoPasso2/').$id."/1"?>">Todos
+                        <a class="btn btn-primary btn-block" href="<?=base_url('personalTrainer/elaborarPlano/').$id."/1"?>">Todos
                             os exercicios</a> 
                     </div> <?php else: ?>
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block " href="<?=base_url('personalTrainer/adicionarPlanoTreinoPasso2/').$id?>">Meus
+                                <a class="btn btn-primary btn-block " href="<?=base_url('personalTrainer/elaborarPlano/').$id?>">Meus
                                     Exercicios</a>
                             </div>
                             <div class="col-md-6 ">
-                                <a class="btn btn-primary btn-block active" href="<?=base_url('personalTrainer/adicionarPlanoTreinoPasso2/').$id."/1"?>">Todos
+                                <a class="btn btn-primary btn-block active" href="<?=base_url('personalTrainer/elaborarPlano/').$id."/1"?>">Todos
                                     os exercicios</a> 
                             </div> <?php endif ?>
 
@@ -58,18 +58,20 @@
 
                             <div class="plano-treino-divs">
                                 <div class="col-md-6">
-                                    <a class="btn btn-default" href="<?= base_url("personalTrainer/adicionarPlanoTreino")?>">
+                                    <a class="btn btn-default" href="<?php if(isset($_SERVER['HTTP_REFERER'])) echo $_SERVER['HTTP_REFERER']?>">
                                             <i class="fas fa-arrow-left"></i> Back</a>
                                 </div>
-                                <div class="col-md-6">
-                                    <?= form_open("personalTrainer/adicionarPlanoTreinoPasso2/".$id)?>
-                                        <input type="submit" class="btn btn-success pull-right" name="confPT" value="Confirmar Plano de treino">
-                                    <?= form_close()?>
-                                </div>
+                                <?= form_open("personalTrainer/elaborarPlano/".$id)?>
+                                    <div class="col-md-6">  
+                                        <input type="submit" class="btn btn-success pull-right" name="confPT" value="Confirmar Plano de treino"> 
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <input class="form-control" type="text" name="nome" id="" placeholder="Indique o nome do plano de treino" required>
+                                    </div>   
+                                 <?= form_close()?>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Passo 2</h2>
-                                        <h4>Lista de Exercicios</h4>
+                                        <h2>Lista de Exercicios</h2>
                                     </div>
                                 </div>
 
@@ -93,9 +95,9 @@
                                             <?=$exercicio['dificuldade']?></span>
                                         
                                         <?php if ($this->uri->segment(4)==false): ?>
-                                        <?php echo form_open('personalTrainer/adicionarPlanoTreinoPasso2/'.$id,'id=formLE' ) ;?>
+                                        <?php echo form_open('personalTrainer/elaborarPlano/'.$id,'id=formLE' ) ;?>
                                         <?php else:?>
-                                        <?php echo form_open('personalTrainer/adicionarPlanoTreinoPasso2/'.$id."/1",'id=formLE' ) ;?>
+                                        <?php echo form_open('personalTrainer/elaborarPlano/'.$id."/1",'id=formLE' ) ;?>
                                         <?php endif?>
                                         <input type="hidden" name="idPlanoAdicionar" value="<?=$id?>">
                                         <input type="hidden" name="idExercicioAdicionar" value="<?=$exercicio['id']?>">

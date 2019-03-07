@@ -109,7 +109,7 @@ class Exercicio_m extends CI_Model {
 
     public function getPedidosDePlanosTreino($estado=false,$idUtilizador=false,$ordenar=false){
 
-        $this->db->select('cp.cpt_data, c.nome "nome_cliente", cp.cpt_estado, c.admin_id');
+        $this->db->select('pt.id "pt_id",cp.cpt_data, c.nome "nome_cliente", cp.cpt_estado, c.admin_id');
         $this->db->join('cliente c',"cp.id_cliente = c.admin_id");
         $this->db->join('plano_treino pt',"cp.id_planoTreino = pt.id");
 
@@ -237,6 +237,13 @@ class Exercicio_m extends CI_Model {
         $this->db->update('exercicio', $data, "id = $id");
     }
 
+    //eitar cliente_has_planoTreino
+
+    public function editarCliente_has_planoTreino($data,$idPlano,$idCliente){
+
+        $this->db->update('cliente_has_planotreino', $data, array("id_planoTreino" => $idPlano, "id_cliente" =>$idCliente ));
+    }
+
    
     
     public function infoPlanoTreino($idPlanoTreino)
@@ -264,6 +271,10 @@ class Exercicio_m extends CI_Model {
     public function insereExercicio($data){
         $this->db->insert('exercicio', $data);
         return $insert_id = $this->db->insert_id();
+    }
+
+    public function obterPlanoTreinoPorId($id){
+        return $this->db->get_where('plano_treino',array("id"=>$id))->row_array();
     }
 
 

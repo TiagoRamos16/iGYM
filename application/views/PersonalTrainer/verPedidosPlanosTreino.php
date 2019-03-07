@@ -3,6 +3,30 @@
         <!-- Page Heading -->
         <div class="row " id="main-admin">
 
+
+         <!-- Mensagens de sucesso ou de erro -->
+         <?php if($this->session->flashdata('sucessoInserirPedidoPlano')!=null):?>
+            <div class="alert alert-success text-center msn-contacto" id="message">
+                <i class="fas fa-check-circle  text-success"></i>
+                <strong>Sucesso!</strong>
+                <?= $this->session->flashdata('sucessoInserirPedidoPlano')?>
+                <button type="button" class="close" aria-label="Close" id="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <script>
+                document.getElementById("close").addEventListener("click", function () {
+                    document.getElementById("message").style.display = "none";
+                });
+            </script>
+            <?php endif?>
+
+            <div class="row">
+                <h1 class="title text-center"> Adicionar Plano de treino </h1>
+            </div>
+
+
             <h1 class="title text-center"> Pedidos de Planos de Treino</h1>
 
             <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/planosTreino')?>"> 
@@ -45,11 +69,12 @@
                     <table class="table table-striped table-hover ">
                         <thead>
                             <tr class="bg-primary">
-                                <th class="col-md-1">#</th>
-                                <th class="col-md-3">Data</th>
-                                <th class="col-md-3">Pedido Por</th>
-                                <th class="col-md-3">Estado</th>
+                                <th class="col-md-2">#</th>
+                                <th class="col-md-2">Data</th>
+                                <th class="col-md-2">Pedido Por</th>
+                                <th class="col-md-2">Estado</th>
                                 <th class="col-md-2">Ver Cliente</th>
+                                <th class="col-md-2">Aceitar pedido</th>
                             </tr>
                         </thead>
                         <tbody id='lista'>
@@ -79,8 +104,19 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="<?= base_url('utilizador/outroPerfil/').$planos['admin_id']?>"> <i class="fas fa-arrow-circle-right fa-2x"></i></a>
+                                    <a href="<?= base_url('utilizador/outroPerfil/').$planos['admin_id']?>"> <i class="fas fa-arrow-circle-right fa-2x text-info"></i></a>
                                 </td>
+                                <td>
+                                    <a href="<?= base_url('personalTrainer/elaborarPlano/').$planos['pt_id']?>"> <i class="fas fa-check-circle fa-2x"></i></a>
+                                
+                                    <!-- <?= form_open('personalTrainer/verPedidoPlanos/') ?>
+                                        <input type="hidden" name="idPlano" value="<?= $planos['pt_id'] ?>">
+                                        <button type="submit" value="Submit" name="submitAceitar" class="btn-transparent"> 
+                                            <i class="fas fa-check-circle fa-2x"></i>
+                                        </button>
+                                    <?= form_close() ?> -->
+                                </td>
+                                
 
                             </tr>
                             <?php endforeach;?>

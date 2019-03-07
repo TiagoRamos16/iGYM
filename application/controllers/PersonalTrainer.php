@@ -641,7 +641,7 @@ class PersonalTrainer extends CI_Controller {
 		
 		$data['title'] = 'Ver todos os planos';
 
-		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorTipo("publico","1");
+		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorTipo("publico","ativo");
 
 		// var_dump($data['planosTreino']);
 
@@ -660,7 +660,7 @@ class PersonalTrainer extends CI_Controller {
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
 
-		$data['planosTreino'] = $this->Exercicio_m->getPedidosDePlanosTreino(false,$idFuncionario,"data");
+		$data['planosTreino'] = $this->Exercicio_m->getPedidosDePlanosTreino("pendente",$idFuncionario,"data");
 		
 		// var_dump($data['planosTreino']);
 
@@ -670,15 +670,80 @@ class PersonalTrainer extends CI_Controller {
 		}else if($this->input->post('ordenamento2')){
 			$ordenamento2 = $this->input->post('ordenamento2');
 			echo json_encode($this->Exercicio_m->getPedidosDePlanosTreino($ordenamento2,$idFuncionario,false));
-		}
-		
-		else{
+		}else{
 			$this->load->view('templates/header',$data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
 			$this->load->view('PersonalTrainer/verPedidosPlanosTreino',$data);
 			$this->load->view('templates/footer');
 		}
+
+	}
+
+	//elaborar plano de treino apos aceitar o pedido de utilizador
+	public function elaborarPlano($idPlano=false,$flag=false ){
+
+		$data['title'] = 'Criar plano de treino para utilizador';
+		$data['id'] = $idPlano;		
+
+
+		if($flag==false){ //seleciona exercicios associados  a utilizador
+			$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		}else{//seleciona todos os exercicios
+			$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		}
+
+
+		if ($this->input->post('btnAdicionar')){ //adicionar exercicio ao plano
+
+			$planoTreino_has_exercicio = array(
+				"plano_treino_id" => $this->input->post('idPlanoAdicionar'),
+				"exercicio_id" => $this->input->post('idExercicioAdicionar')
+			);
+			
+			$this->Exercicio_m->adicionarExercicio_PlanoTreino($planoTreino_has_exercicio); //adiciona exercicio a plando de treino
+
+			$this->session->set_flashdata('sucessoAdicionarExercicio', 'Sucesso a adicionar exercicio ao plano de treino');
+
+
+			if($flag==false){
+				redirect('personalTrainer/elaborarPlano/'.$idPlano);
+			}else{
+				redirect('personalTrainer/elaborarPlano/'.$idPlano."/1");
+			}
+			
+		}else if($this->input->post('confPT')){ //confimar submissao de plano de treino
+
+			$dados = array(
+				"nome" => $this->input->post('nome'),
+				"pt_estado" => 'ativo',
+			);
+
+			$this->Exercicio_m->editarPlanoTreino($dados,$idPlano);
+
+			$dados2 = array(
+				"cpt_estado" => 'ativo',	
+			);
+
+			$plano = $this->Exercicio_m->obterPlanoTreinoPorId($idPlano);
+
+
+			// var_dump($plano);
+			$this->Exercicio_m->editarCliente_has_planoTreino($dados2,$idPlano,$plano['cliente_admin_id']);
+
+			$this->session->set_flashdata('sucessoInserirPedidoPlano', 'Sucesso a criar o  plano de treino');
+			redirect('personalTrainer/verPedidoPlanos/');
+		}else{
+			$this->load->view('templates/header',$data);
+			$this->load->view('templates/nav_top');
+			$this->load->view('templates/nav_lateral_funcionario');
+			$this->load->view('PersonalTrainer/adicionarPlanoTreinoSolicitado',$data);
+			$this->load->view('templates/footer');
+		}
+		
+
 
 	}
 
