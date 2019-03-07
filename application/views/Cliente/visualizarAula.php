@@ -78,7 +78,7 @@
                                     <button class="btn btn-danger" disabled>Esgotado</button>
 
                                     <!-- mesmo que a aula esteja esgotada pode remover inscricao -->
-                                    <?php if ( $inscricao == 1 && $aula['data_inicio'] > date("Y-m-d H:i:s") ){ ?>
+                                    <?php if ( $inscricao == 1 && $aula['hora_inicio'] > date("Y-m-d H:i:s") ){ ?>
 
                                         <button class="btn btn-danger" data-toggle="modal" data-target="#modalDesmarcarAula" href="">Desmarcar Aula</button>
 
@@ -86,11 +86,11 @@
                                 }else{ ?>
 
             <!-- verifica se ja esta inscrito ou nao para decidir a opçao que mostra e se a data da aula é posterior à data actual, 0 nao inscrito, 1 inscrito -->
-                            <?php if( $inscricao == 0 && $aula['data_inicio'] > date("Y-m-d H:i:s") ){ ?>
+                            <?php if( $inscricao == 0 && $aula['hora_inicio'] > date("Y-m-d H:i:s") ){ ?>
 
                                 <button class="btn btn-success" data-toggle="modal" data-target="#modalMarcarAula" href="">Inscrever na Aula</button>
 
-                            <?php }elseif ( $inscricao == 1 && $aula['data_inicio'] > date("Y-m-d H:i:s") ){ ?>
+                            <?php }elseif ( $inscricao == 1 && $aula['hora_inicio'] > date("Y-m-d H:i:s") ){ ?>
 
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modalDesmarcarAula" href="">Desmarcar Aula</button>
                             
