@@ -623,14 +623,6 @@ class PersonalTrainer extends CI_Controller {
 			$this->load->view('templates/footer');
 		}
 
-
-		
-
-		// var_dump($this->Exercicio_m->obterExerciciosAssociadosPlano($idPlano));
-
-		// var_dump($this->Exercicio_m->dadosExercicio());
-
-		// var_dump($data['exercicios']);
 		
 
 	}

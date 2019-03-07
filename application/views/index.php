@@ -207,8 +207,8 @@
         <div class="row servicosRow">
 
             <div class="jumbotron">
-                <h1>Jumbotron</h1>
-                <p>Faça parte da nossa família, aqui preocupamo-nos com todos os nossos.</p>
+                <h1>Faça parte da nossa família</h1>
+                <p>Aqui preocupamo-nos com todos os nossos clientes. Terá sempre apoio nutricional, físico e motivacional para atingir os objectios que sempre pretendeu.</p>
                 <p><a class="btn btn-primary btn-lg" href="<?= base_url('utilizador/registo_plano')?>">Adesão online</a></p>
             </div>
 
