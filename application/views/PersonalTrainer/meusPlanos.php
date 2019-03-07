@@ -86,10 +86,10 @@
                                     <td><?= $count?></td>
                                     <td><?= $planos['nome']?></td>
                                     <td><?= $planos['pt_data']?></td>
-                                    <?php if($planos['pt_estado']=="1"):?>
+                                    <?php if($planos['pt_estado']=="ativo"):?>
                                         <td> <i class="fas fa-circle text-success"></i> Activo</td>        
-                                    <?php elseif($planos['pt_estado']=="2"):?>
-                                        <td> <i class="fas fa-circle text-danger"></i> Inactivo</td>  
+                                    <?php elseif($planos['pt_estado']=="pendente"):?>
+                                        <td> <i class="fas fa-circle text-danger"></i> Pendente</td>  
                                     <?php endif ?>
                           
                                     <td>

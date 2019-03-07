@@ -23,11 +23,12 @@
             <?php endif?>
 
             <div class="row">
-                <h1 class="title text-center"> Adicionar Plano de treino </h1>
+                <!-- <h1 class="title text-center"> Adicionar Plano de treino </h1> -->
+                <h1 class="title text-center"> Pedidos de Planos de Treino</h1>
             </div>
 
 
-            <h1 class="title text-center"> Pedidos de Planos de Treino</h1>
+            
 
             <p><a class="btn-back-geral btn btn-primary" href="<?= base_url('personalTrainer/planosTreino')?>"> 
             <i class="fas fa-arrow-left"></i> Back</a> </p>
