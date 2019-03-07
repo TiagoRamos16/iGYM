@@ -1,0 +1,434 @@
+
+
+
+
+/* *****************ADMIN************ */
+
+#main-admin{
+    padding-top: 60px; 
+
+}
+
+
+
+  @media only screen and (max-width: 600px) {
+    .section-login {
+      background-color: lightblue;
+    }
+  }
+
+
+ 
+
+
+
+/* funcionario/planosTreino ,funcionario/Exercicios */
+
+.title-planosTreino, .title-exercicios{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    margin: 50px 0px; 
+}
+
+.planoTreino-link, .exercicios-link{
+    display: block!important;
+}
+
+.planoTreino-link:hover, .exercicios-link:hover{
+    /* background-color: #194463!important; */
+    text-decoration: none;
+}
+
+
+.planoTreino-item, .exercicios-item{
+    padding: 50px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    /* margin-top: 40px;
+    margin-bottom: 40px;  */
+    margin: 40px;
+    /* width: 300px; */
+    /* border: 1px solid rgb(65, 62, 73); */
+    border-radius: 20px;
+    background-color: #dfe7ec;
+}
+
+/* .planoTreino-item:hover{
+   cursor: pointer;
+   background-color: #c7d3e0;
+} */
+
+
+.planoTreino-item-header, .exercicios-item-header{
+  text-align: center;
+  color: #2c3e50;
+}
+
+.planoTreino-title, .exercicios-title{
+    margin: 20px 0px;
+    font-size: 1.7em;
+    font-weight: 600;
+    text-align: center;
+    color: #18bc9c;
+}
+
+.planoTreino-title a:hover, .exercicios a:hover {
+    text-decoration: none;
+}
+
+.planoTreino-descricao, .exercicios-descricao{
+    font-size: 1em;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.planoTreino-btn, .exercicios-btn{
+    display: block;
+    width: 100%!important; 
+    margin-top: 35px ;
+}
+
+
+/* utilizador/mensagens */
+
+.btns-mensagens{
+    margin: 45px 0px 20px 0px;
+}
+
+.pesquisa-mensagens{
+    margin: 45px 0px 45px 0px;
+}
+
+.form-pesquisa-mensagens{
+    width: 100%;
+    padding: 0px;
+}
+.form-pesquisa-mensagens div{
+    padding: 0px;
+}
+
+.form-pesquisa-mensagens input{
+    width: 100%!important;
+}
+
+.btn-criar-mensagem{
+    border-radius: 30px;
+    
+}
+
+.btn-criar-mensagem {
+    border-radius: 30px;
+    
+}
+
+#modalCriarMsn{
+    margin-top: 15%; 
+}
+
+#modalCriarMsn .modal-header{
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+}
+
+#modalCriarMsn .modal-header .close{   
+    color: #fff;
+}
+
+#modalCriarMsn .modal-body .form-msn{
+    margin-top: 30px;
+}
+
+
+
+
+
+
+
+/* pagina de perfil */
+
+
+.perfil-dados-pessoais{
+    padding: 25px;
+    border: 1px solid #c0c9cf!important; 
+    width: 60%;
+
+    border-radius: 15px;
+    margin: 50px auto; 
+    overflow: auto;
+}
+
+.perfil-dados-pessoais h3{
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.perfil-dados-pessoais .row{
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(142, 153, 156);  */
+}
+
+.img-perfil{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.edit-perfil{
+    top: -9px;
+    left: -19px;
+    position: relative;
+    font-size: 1.2em;
+}
+
+.edit-perfil:hover{
+    text-decoration: none;
+}
+
+/* modals editar perfil */
+#editarDadosPerfil, #editarDadosContacto, #editarDadosGym{
+    margin-top: 10%; 
+}
+
+#editarDadosPerfil .modal-header,#editarDadosContacto .modal-header,#editarDadosGym .modal-header{
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+}
+
+#editarDadosPerfil .modal-header .close,#editarDadosContacto .modal-header .close,#editarDadosGym .modal-header .close{   
+    color: #fff;
+}
+
+#editarDadosPerfil .modal-body .form-msn,#editarDadosContacto .modal-body .form-msn,#editarDadosGym .modal-body .form-msn{
+    margin-top: 30px;
+}
+
+
+/* calendario */
+
+
+.calendar {
+    font-family: Arial, Verdana, Sans-serif;
+    width: 100%;
+    min-width: 960px;
+    border-collapse: collapse;
+    color: #18bc9c;
+}
+
+.calendar tbody tr:first-child th {
+    color: #505050;
+    margin: 0 0 10px 0;
+}
+
+.day_header {
+    font-weight: normal;
+    text-align: center;
+    color: #757575;
+    font-size: 10px;
+}
+
+.calendar td {
+    width: 14%; /* Force all cells to be about the same width regardless of content */
+    border:1px solid #CCC;
+    height: 100px;
+    vertical-align: top;
+    font-size: 10px;
+    padding: 0;
+}
+
+.calendar th a{
+   /* content: '<i class="fas fa-arrow-right"></i>'!important; */
+}
+
+.calendar td:hover {
+    background: #F3F3F3;
+}
+
+.day_listing {
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    color: #2C2C2C;
+    padding: 5px 5px 0 0;
+}
+
+div.today {
+    background: #E9EFF7;
+    height: 100%;
+} 
+
+
+
+/* calendario */
+
+
+/* Fechar modal */
+
+.closeModal{
+    color: #fff!important;
+}
+
+
+/* back */
+
+.back-arrow{
+    font-size: 2em;
+}
+
+.btnremoveCliente{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+/* ver personalTrainer/clientes */
+
+.verClientes-menu{
+    margin-top: 40px;
+     
+}
+
+.row{
+    /* margin-right: 0px!important; 
+    margin-left: 0px!important; */
+}
+
+.verClientes-menu .btn-criar-mensagem{
+    margin-top: -9px;
+}
+
+.listaClientes{
+    margin-top: 100px;
+}
+
+.btn-verPedidos{
+    width: 100%;
+ 
+}
+
+
+
+
+/* personalTrainer / ver plano treino */
+
+.verPT-nomeCliente{
+    font-size: 1.8em;
+    position: relative;
+    top: 5px;
+    left: 30px;
+}
+
+.listaClientes-li-verPlano:hover{
+    background-color: #f1eeee;
+}
+
+.exercioPlanoTreino{
+    /* margin: 8px!important; */
+    margin: 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(178, 178, 202); 
+}
+
+.plano-treino-divs{
+    padding: 20px;
+    border: 1px solid #c0c9cf!important; 
+    border-radius: 15px;
+    margin: 50px auto; 
+    overflow: auto;
+    width: 80%
+}
+
+
+
+
+.plano-treino-divs h3{
+    font-size: 2em;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.plano-treino-divs .row{
+    padding-top: 10px;
+    /* border-bottom: 1px solid rgb(142, 153, 156);  */
+}
+
+.label-nivel{
+    position: absolute;
+    padding: 8px;
+    top: 20px;
+    left:35px;
+    /* font-size: 1em; */
+}
+
+.icon-del{
+    position: absolute;
+    padding: 8px;
+    top: 15px;
+    right:30px;
+}
+
+.btns-lista-exercicios{
+    margin-top: 30px ;
+    margin-bottom: 30px ;
+}
+
+
+
+
+
+
+
+/* personal trainer adicionar plano treino */
+
+
+.form-add-pt{
+   margin-top: 30px;
+}
+
+.btn-cancel-add-pt{
+    margin-right: 10px;
+}
+
+
+/* personal trainer/adicionar exercicio */
+
+.div-form-addExercicio{
+    margin-top: 45px;
+}
+
+.div-form-addExercicio label{
+    margin: 10px 0px;
+}
+
+
+/* personalTrainer/MarcarAula */
+
+
+.form-marcarAula{
+    margin-top: 35px;
+}
+
+
+/* .btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
+} */
+
+/* section {
+    padding: 60px 0;
+} */
+
