@@ -22,7 +22,9 @@
              <!-- Top Menu Items -->
 
         <ul class="nav navbar-right top-nav ">
-            <li><a href="<?= base_url('utilizador/mensagens') ?>" class=""><i class="far fa-envelope"></i></i> Mensagens <span class="badge">1142</span></a>
+            <li><a href="<?= base_url('utilizador/mensagens') ?>" class=""><i class="far fa-envelope"></i></i> Mensagens 
+                <span class="badge"><?= $countMensagens ?></span></a>
+                
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">

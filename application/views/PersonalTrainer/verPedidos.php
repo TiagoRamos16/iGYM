@@ -202,6 +202,51 @@
     // document.getElementById("idPedido").value = id;
     $(".idPedido").val(id);
 
+
+     $.ajax(
+            {
+                url: '<?=base_url('personalTrainer/verPedidoPlanos')?>',
+                type:"post",
+                dataType: "json",
+                data:{
+                    "ordenamento" : ordenamento,
+                    },
+                success: function(data,status){
+
+                    var bodyTabela = $('#lista');
+                    console.log(data);
+                    var html = "";
+                    var url = $('#url').val();;
+                    console.log(url);
+
+                    for(var i=0 ;i<data.length;i++){
+                        var count = i+1;
+                            html+= '<tr>';
+                                html+= "<td>"+  count +"</td>";
+                                html+= "<td>"+  data[i]['cpt_data']+"</td>";  
+                                html+= "<td>"+  data[i]['nome_cliente']+"</td>"; 
+                                html+= "<td>";
+                                if(data[i]['cpt_estado']=="pendente"){
+                                        html+= "<i class='fas fa-circle text-warning'></i> Pendente";
+                                }else if(data[i]['cpt_estado']=="rejeitado"){
+                                        html+= "<i class='fas fa-circle text-danger'></i> Rejeitado";
+                                }else if(data[i]['cpt_estado']=="aceite"){
+                                        html+= "<i class='fas fa-circle text-success'></i> Aceite";
+                                }
+                                html+= "</td>";
+                                html+= "<td>";
+                                html+= "<a href="+"<?= base_url('utilizador/outroPerfil/')?>"+data[i].admin_id+'> <i class="fas fa-arrow-circle-right fa-2x"></i></a>';
+                                html+= "</td>";      
+                            html+= '</tr>'; 
+                        }
+
+                        
+                            bodyTabela.html(html); 
+        
+            }
+        });
+
+
 });
 
 </script>

@@ -4,9 +4,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Utilizador extends CI_Controller
 {
 
+	private $data;
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Utilizador_m');
+
+
+		
+		if($this->session->userdata('sessao_utilizador')){
+			// $this->data['countMensagens'] = $this->Utilizador_m->countMensagens($this->session->userdata('sessao_utilizador')['id'],2); 
+			$this->data['countMensagens'] = $this->Utilizador_m->countMensagens($this->session->userdata('sessao_utilizador')['id'],2); 
+		}
+		 
 	}
 
 
@@ -63,7 +73,7 @@ class Utilizador extends CI_Controller
 
 
 	public function login(){
-		$data['title'] = 'Login';
+		$this->data['title'] = 'Login';
 
 		$this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -101,7 +111,7 @@ class Utilizador extends CI_Controller
 				}
 			}
 		} else {
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/header', $this->data);
 			// $this->load->view('templates/nav');
 			$this->load->view('Utilizador/login');
 			$this->load->view('templates/footer');
@@ -112,8 +122,8 @@ class Utilizador extends CI_Controller
 
 	public function registo_plano()
 	{
-		$data['title'] = "Escolher Plano"; 
-		$data['plano'] = $this->Utilizador_m->queryPlanos();
+		$this->data['title'] = "Escolher Plano"; 
+		$this->data['plano'] = $this->Utilizador_m->queryPlanos();
 
 		$planoEscolhido = $this->input->post("plano_escolhido");	//  token do plano escolhido passado no input hidden
 
@@ -128,16 +138,16 @@ class Utilizador extends CI_Controller
 			redirect('utilizador/registo');
 
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			// $this->load->view('templates/nav');
-			$this->load->view('Utilizador/registo_plano', $data);
+			$this->load->view('Utilizador/registo_plano', $this->data);
 			$this->load->view('templates/footer');
 		}
 
 	}
 
 	public function registo(){
-		$data['title'] = "Registo";
+		$this->data['title'] = "Registo";
 
 		if($this->session->userdata('planoEscolhido') == null){
 			redirect('utilizador/registo_plano');
@@ -175,13 +185,13 @@ class Utilizador extends CI_Controller
 				$cc = $this->security->xss_clean($this->input->post("cc"));
 				$nif = $this->security->xss_clean($this->input->post("nif"));
 				$genero = $this->security->xss_clean($this->input->post("genero"));
-				$dataNascimento = $this->security->xss_clean($this->input->post("dataNascimento"));
+				$this->dataNascimento = $this->security->xss_clean($this->input->post("dataNascimento"));
 				$telefone = $this->security->xss_clean($this->input->post("telefone"));
 				$username = $this->security->xss_clean($this->input->post("username"));
 				$email = $this->security->xss_clean($this->input->post("email"));
 				$password = $this->security->xss_clean($this->input->post("passwordRegisto"));
 				$reg_agree = $this->security->xss_clean($this->input->post("reg_agree"));
-				$dataRegisto = date('Y-m-d');
+				$this->dataRegisto = date('Y-m-d');
 				$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 				if($this->input->post("reg_agree") == null){
@@ -201,12 +211,12 @@ class Utilizador extends CI_Controller
 					$response = $_POST['g-recaptcha-response'];
 					$url = 'https://www.google.com/recaptcha/api/siteverify';
 					$key = '6LdOt5AUAAAAAPqkPCflKL_e2VGRPbeze5cAS7Pt';
-					$data = array('secret' => $key, 'response' => $response);
+					$this->data = array('secret' => $key, 'response' => $response);
 					$options = array(
 						'http' => array(
 							'header' => "Content-type: application/x-www-form-urlencoded\r\n",
 							'method' => "POST",
-							'content' => http_build_query($data)
+							'content' => http_build_query($this->data)
 						)
 					);
 					$context = stream_context_create($options);
@@ -240,7 +250,7 @@ class Utilizador extends CI_Controller
 				$arrayCliente = array(
 					"nome" => $nome,
 					"genero" => $genero,
-					"data_registo" => $dataRegisto,
+					"data_registo" => $this->dataRegisto,
 					"morada" => $morada,
 					"localidade" => $localidade,
 					"codigo_postal" => $codigoPostal,
@@ -248,7 +258,7 @@ class Utilizador extends CI_Controller
 					"nacionalidade" => $nacionalidade,
 					"cc" => $cc,
 					"nif" => $nif,
-					"data_nascimento" => $dataNascimento,
+					"data_nascimento" => $this->dataNascimento,
 					"ultimo_pagamento" => 0,
 					"admin_id" => null,
 					"plano_adesao_id" => $idPlano
@@ -261,9 +271,9 @@ class Utilizador extends CI_Controller
 
 			}else{
 
-				$this->load->view('templates/header', $data);
+				$this->load->view('templates/header', $this->data);
 				// $this->load->view('templates/nav');
-				$this->load->view('Utilizador/registo', $data);
+				$this->load->view('Utilizador/registo', $this->data);
 				$this->load->view('templates/footer');
 			}
 		}
@@ -272,11 +282,11 @@ class Utilizador extends CI_Controller
 	public function registo_pagamento()
 	{
 
-		$data['title'] = "Pagamento do Plano"; 
+		$this->data['title'] = "Pagamento do Plano"; 
 
 		// var_dump($this->session->userdata('clienteRegisto'));
 		// var_dump($this->session->userdata('adminRegisto'));
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		// $this->load->view('templates/nav');
 		$this->load->view('Utilizador/registo_pagamento');
 		$this->load->view('templates/footer');
@@ -284,17 +294,17 @@ class Utilizador extends CI_Controller
 
 	public function registo_confirmacao($idPagamento = null)
 	{
-		$data['title'] = "Confirmação da Inscrição"; 
+		$this->data['title'] = "Confirmação da Inscrição"; 
 
-		$data['id_pagamento'] = $idPagamento;	// id enviado por url com o id do pagamento efectuado
+		$this->data['id_pagamento'] = $idPagamento;	// id enviado por url com o id do pagamento efectuado
 
 		if ($idPagamento == 3){ // se for pago por transferencia bancária
 			
-			$data['estado_pagamento'] = 0; // aguarda confirmacao de transferencia
+			$this->data['estado_pagamento'] = 0; // aguarda confirmacao de transferencia
 
 		}elseif(($idPagamento == 1) || ($idPagamento == 2)){ // se id = 1 -> pago por cartao  || id = 2 -> pag por paypal
 
-			$data['estado_pagamento'] = 1; // pagamento confirmado
+			$this->data['estado_pagamento'] = 1; // pagamento confirmado
 
 		}
 
@@ -320,7 +330,7 @@ class Utilizador extends CI_Controller
 
 		$this->load->view('templates/header');
 		// $this->load->view('templates/nav');
-		$this->load->view('Utilizador/registo_confirmacao', $data);
+		$this->load->view('Utilizador/registo_confirmacao', $this->data);
 		$this->load->view('templates/footer');
 	}
 
@@ -337,7 +347,7 @@ class Utilizador extends CI_Controller
 	//recuperar password
 	public function resetPassword(){
 
-		$data['title'] = 'Reset Password';
+		$this->data['title'] = 'Reset Password';
 
 		if ($this->input->post('formRegisto')) {
 			$email = $this->security->xss_clean($this->input->post('email'));
@@ -398,7 +408,7 @@ class Utilizador extends CI_Controller
 
 
 		} else {
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/header', $this->data);
 			$this->load->view('templates/navIndex');
 			$this->load->view('Utilizador/resetPassword');
 			$this->load->view('templates/footer');
@@ -410,7 +420,7 @@ class Utilizador extends CI_Controller
 
 	//modificar password recuperada
 	public function validaToken(){
-		$data['title'] = "Modificar Password";
+		$this->data['title'] = "Modificar Password";
 
 		if ($this->input->get('token')) {
 			$token = $this->input->get('token');
@@ -419,11 +429,11 @@ class Utilizador extends CI_Controller
 			if ($this->Utilizador_m->verificaToken($idUtilizador) != null) {
 				$tokenMail = $this->Utilizador_m->verificaToken($idUtilizador);
 				if ($token == $tokenMail['value']) {
-					$data['token'] = $this->Utilizador_m->verificaToken($idUtilizador);
+					$this->data['token'] = $this->Utilizador_m->verificaToken($idUtilizador);
 
-					$this->load->view('templates/header', $data);
+					$this->load->view('templates/header', $this->data);
 					$this->load->view('templates/navIndex');
-					$this->load->view('utilizador/modificaPassword', $data);
+					$this->load->view('utilizador/modificaPassword', $this->data);
 					$this->load->view('templates/footer');
 				} else {
 					echo "Seu Token não é válido";
@@ -444,7 +454,7 @@ class Utilizador extends CI_Controller
 			$this->session->set_flashdata('sucessoModPass', 'Password atualizada com sucesso'); //mensagem de sucesso
 			redirect('utilizador/login');
 		} else {
-			// $this->load->view('templates/header', $data);
+			// $this->load->view('templates/header', $this->data);
 			// // $this->load->view('templates/nav');
 			// $this->load->view('utilizador/modificaPassword');
 			// $this->load->view('templates/footer');
@@ -454,26 +464,41 @@ class Utilizador extends CI_Controller
 	}
 
 	public function mensagens($estado=false){
-		$data['title'] = 'Mensagens';
+		$this->data['title'] = 'Mensagens';
 
 		if($estado > 2 || $estado < 0) $estado=false;
 
 		$utilizador = $this->session->userdata('sessao_utilizador');
 
-		// var_dump($utilizador);
+		$this->data['countMensagens'] = $this->Utilizador_m->countMensagens($utilizador['id'],2);  
+
+	
 
 		if($estado == 1){
-			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
+			$this->data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
 		}else if($estado == 2){
-			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
+			$this->data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
 		}else{
-			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id']);
+			$this->data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id']);
 		}
 
 
 		$this->form_validation->set_rules('para', 'para', 'required|valid_email');
 		$this->form_validation->set_rules('assunto', 'assunto', 'required');
 		$this->form_validation->set_rules('mensagem', 'mensagem', 'required');
+
+		if($this->input->post('idMensagem')){
+
+			$idMensagem = $this->input->post('idMensagem');
+
+			$mensagemEditar = array(
+				"estado" => 1
+			);
+
+			$this->Utilizador_m->editarMensagem($mensagemEditar,$idMensagem);
+
+			echo 1;
+		}
 
 		if ($this->form_validation->run() == true) {
 
@@ -509,14 +534,14 @@ class Utilizador extends CI_Controller
 		
 
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			if($utilizador['tipo'] == 3){
 				$this->load->view('templates/nav_top');
 				$this->load->view('templates/nav_lateral_funcionario');
 			}elseif($utilizador['tipo'] == 5){
 				$this->load->view('templates/nav_cliente');
 			}
-			$this->load->view('utilizador/mensagens',$data);
+			$this->load->view('utilizador/mensagens',$this->data);
 			$this->load->view('templates/footer');
 		}
 
@@ -527,17 +552,17 @@ class Utilizador extends CI_Controller
 
 
 	public function paginaPerfil(){
-		$data['title'] = 'Perfil Pessoal';
+		$this->data['title'] = 'Perfil Pessoal';
 
 		$utilizador = $this->session->userdata('sessao_utilizador');
 
-		$data['utilizador'] = $this->Utilizador_m->obterUtilizador($utilizador['id']);
-		$data['funcionario'] = $this->Utilizador_m->obterFuncionario($utilizador['id']);
+		$this->data['utilizador'] = $this->Utilizador_m->obterUtilizador($utilizador['id']);
+		$this->data['funcionario'] = $this->Utilizador_m->obterFuncionario($utilizador['id']);
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('utilizador/paginaPerfil',$data);
+		$this->load->view('utilizador/paginaPerfil',$this->data);
 		$this->load->view('templates/footer');
 	}
 
@@ -681,15 +706,15 @@ class Utilizador extends CI_Controller
 
 	
 	public function outroPerfil($idUtilizador=null){
-		$data['title'] = 'Perfil de Utilizador';
+		$this->data['title'] = 'Perfil de Utilizador';
 
-		$data['utilizador'] = $this->Utilizador_m->obterUtilizador($idUtilizador);
-		$data['cliente'] = $this->Utilizador_m->obterCliente($idUtilizador);
+		$this->data['utilizador'] = $this->Utilizador_m->obterUtilizador($idUtilizador);
+		$this->data['cliente'] = $this->Utilizador_m->obterCliente($idUtilizador);
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('utilizador/outroPerfil',$data);
+		$this->load->view('utilizador/outroPerfil',$this->data);
 		$this->load->view('templates/footer');
 	}
 

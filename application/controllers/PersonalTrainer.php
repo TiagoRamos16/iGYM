@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class PersonalTrainer extends CI_Controller {
 
 	private $idFuncionario; 
+	private $data;
 
 	public function __construct(){
 		parent::__construct();
@@ -24,6 +25,7 @@ class PersonalTrainer extends CI_Controller {
 				redirect('','refresh');
 			}else{
 				$this->idFuncionario = $this->session->userdata('sessao_utilizador')['id']; 
+				$this->data['countMensagens'] = $this->Utilizador_m->countMensagens($this->session->userdata('sessao_utilizador')['id'],2); 
 			}
 		}
 
@@ -32,9 +34,10 @@ class PersonalTrainer extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Home'; 
-
-		$this->load->view('templates/header',$data);
+		$this->data['title'] = 'Home'; 
+		
+		
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
 		$this->load->view('PersonalTrainer/horario');
@@ -44,20 +47,23 @@ class PersonalTrainer extends CI_Controller {
 
 	public function horario()
 	{
-		$data['title'] = 'Horario'; 
+		$this->data['title'] = 'Horario'; 
+		// $this->data['countMensagens'] = $this->Utilizador_m->countMensagens($this->idFuncionario,2);
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
+
+		// var_dump($this->idFuncionario);
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/horario',$data);
+		$this->load->view('PersonalTrainer/horario',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 	public function clientes()
 	{
-		$data['title'] = 'Clientes'; 
+		$this->data['title'] = 'Clientes'; 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
 		$this->load->view('PersonalTrainer/clientes');
@@ -66,9 +72,9 @@ class PersonalTrainer extends CI_Controller {
 
 	public function planosTreino()
 	{
-		$data['title'] = 'Planos de Treino'; 
+		$this->data['title'] = 'Planos de Treino'; 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
 		$this->load->view('PersonalTrainer/planosTreino');
@@ -77,9 +83,9 @@ class PersonalTrainer extends CI_Controller {
 
 	public function exercicios()
 	{
-		$data['title'] = 'Exercicios'; 
+		$this->data['title'] = 'Exercicios'; 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
 		$this->load->view('PersonalTrainer/exercicios');
@@ -88,9 +94,9 @@ class PersonalTrainer extends CI_Controller {
 
 	public function aulas()
 	{
-		$data['title'] = 'Aulas'; 
+		$this->data['title'] = 'Aulas'; 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
 		$this->load->view('PersonalTrainer/aulas');
@@ -101,9 +107,9 @@ class PersonalTrainer extends CI_Controller {
 
 	public function marcarAula()
 	{
-		$data['title'] = 'Marcar Aula'; 
+		$this->data['title'] = 'Marcar Aula'; 
 
-		$data['salas'] = $this->Sala_m->obterSala();
+		$this->data['salas'] = $this->Sala_m->obterSala();
 
 		//validações do formulario marcar aula
 		$this->form_validation->set_rules('data', 'Data', 'required');
@@ -118,18 +124,18 @@ class PersonalTrainer extends CI_Controller {
 		//se passar nas validações
 		if ($this->form_validation->run() == TRUE){
 			
-			$data = $this->security->xss_clean($this->input->post('data'));
+			$this->data = $this->security->xss_clean($this->input->post('data'));
 			$sala = $this->security->xss_clean($this->input->post('sala'));
 			$nome = $this->security->xss_clean($this->input->post('nome'));
 			$inicio = $this->security->xss_clean($this->input->post('inicio'));
 			$fim = $this->security->xss_clean($this->input->post('fim'));
 			$lotacao = $this->security->xss_clean($this->input->post('lotacao'));
-			$dataHoje = date('Y-m-d');
+			$this->dataHoje = date('Y-m-d');
 			$duracao = getTimeDiff($inicio,$fim);
-			$inicio = date($data." ".$inicio.":00");  //tornar time em date time
-			$fim = date($data." ".$fim.":00");
+			$inicio = date($this->data." ".$inicio.":00");  //tornar time em date time
+			$fim = date($this->data." ".$fim.":00");
 
-			$aulas = $this->Aula_m->obterAulaPorSala($sala,$data); //obter aulas da bd
+			$aulas = $this->Aula_m->obterAulaPorSala($sala,$this->data); //obter aulas da bd
 
 			//validaçoes do formulario
 			foreach($aulas as $aula){  //verificar se hora da aula é possivel
@@ -140,7 +146,7 @@ class PersonalTrainer extends CI_Controller {
 
 			}			
 
-			if($data<$dataHoje){	//validação de data
+			if($this->data<$this->dataHoje){	//validação de data
 				$this->session->set_flashdata('erroMarcarAula1', 'Data incorrecta'); //mensagem de erro
 				redirect('personalTrainer/marcarAula');
 			}
@@ -174,7 +180,7 @@ class PersonalTrainer extends CI_Controller {
 				"lotacao"=> $lotacao,
 				"hora_inicio"=> $inicio,
 				"hora_fim"=> $fim,
-				"data" => $data,
+				"data" => $this->data,
 				"tipo" => 1,
 				"funcionario_admin_id" => $this->session->userdata('sessao_utilizador')['id'],
 				"duracao" => $duracao
@@ -185,10 +191,10 @@ class PersonalTrainer extends CI_Controller {
 			redirect('personalTrainer/marcarAula');
 
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/marcarAula',$data);
+			$this->load->view('PersonalTrainer/marcarAula',$this->data);
 			$this->load->view('templates/footer');
 		}
 
@@ -198,25 +204,25 @@ class PersonalTrainer extends CI_Controller {
 
 	public function visualizarAulas()
 	{
-		$data['title'] = 'As minhas aulas'; 
+		$this->data['title'] = 'As minhas aulas'; 
 		
 		$funcionarioId = $this->session->userdata('sessao_utilizador')['id'];
 		// $aulasPorUtilizador = $this->Aula_m->obterAulas(false,$funcionarioId);
 		
-		$data['aulas'] = $this->Aula_m->obterAulasPorUtilizador($funcionarioId);
+		$this->data['aulas'] = $this->Aula_m->obterAulasPorUtilizador($funcionarioId);
 
 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/visualizarAulas',$data);
+		$this->load->view('PersonalTrainer/visualizarAulas',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 	public function visualizarAula($idAula=null)
 	{
-		$data['title'] = 'Ver aula'; 
+		$this->data['title'] = 'Ver aula'; 
 
 		//verifica get
 
@@ -246,17 +252,17 @@ class PersonalTrainer extends CI_Controller {
 				redirect('personalTrainer/visualizarAula/'.$idAula);
 
 			}else{
-				$data['aula'] = $this->Aula_m->obterAulas($idAula, false);
-				$data['participantesAula'] = $this->Aula_m->obterParticipantesAula($idAula,"aceite");
-				$data['participantesAulaPendente'] = $this->Aula_m->obterParticipantesAula($idAula,"pendente");
+				$this->data['aula'] = $this->Aula_m->obterAulas($idAula, false);
+				$this->data['participantesAula'] = $this->Aula_m->obterParticipantesAula($idAula,"aceite");
+				$this->data['participantesAulaPendente'] = $this->Aula_m->obterParticipantesAula($idAula,"pendente");
 				
-				$data['id'] = $idAula;
+				$this->data['id'] = $idAula;
 				
 			
-				$this->load->view('templates/header',$data);
+				$this->load->view('templates/header',$this->data);
 				$this->load->view('templates/nav_top');
 				$this->load->view('templates/nav_lateral_funcionario');
-				$this->load->view('PersonalTrainer/visualizarAula',$data);
+				$this->load->view('PersonalTrainer/visualizarAula',$this->data);
 				$this->load->view('templates/footer');
 			}
 
@@ -267,22 +273,22 @@ class PersonalTrainer extends CI_Controller {
 
 	public function visualizarAulaHistorico($idAula = null)
 	{
-		$data['title'] = 'Ver aula'; 
+		$this->data['title'] = 'Ver aula'; 
 
 		//verifica get
 
 		if ($idAula == null) redirect('personalTrainer/visualizarAulas');
 
-		$data['aula'] = $this->Aula_m->obterAulas($idAula, false);
-		$data['participantesAula'] = $this->Aula_m->obterParticipantesAula($idAula, "aceite");
+		$this->data['aula'] = $this->Aula_m->obterAulas($idAula, false);
+		$this->data['participantesAula'] = $this->Aula_m->obterParticipantesAula($idAula, "aceite");
 
-		$data['id'] = $idAula;
+		$this->data['id'] = $idAula;
 
 
-		$this->load->view('templates/header', $data);
+		$this->load->view('templates/header', $this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/visualizarAulaHistorico', $data);
+		$this->load->view('PersonalTrainer/visualizarAulaHistorico', $this->data);
 		$this->load->view('templates/footer');
 
 	}
@@ -327,22 +333,22 @@ class PersonalTrainer extends CI_Controller {
 
 	public function historicoAulas(){
 
-		$data['title'] = 'Historico de aulas'; 
+		$this->data['title'] = 'Historico de aulas'; 
 
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
-		$data['aulas'] = $this->Aula_m->obterHistoricoAulas($idFuncionario);
+		$this->data['aulas'] = $this->Aula_m->obterHistoricoAulas($idFuncionario);
 		
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/historicoAulas',$data);
+		$this->load->view('PersonalTrainer/historicoAulas',$this->data);
 		$this->load->view('templates/footer');
 
 	}
 
 	public function verClientes($arg1=false){
 
-		$data['title'] = 'Listagem de clientes';
+		$this->data['title'] = 'Listagem de clientes';
 
 		if($arg1 == 1 ){//verifica url
 			$arg1 ="activo";
@@ -363,21 +369,21 @@ class PersonalTrainer extends CI_Controller {
 			$pesquisa = $this->input->post('pesquisa');
 			$utilizadores = $this->Utilizador_m->obterUtilizadorPorFuncinario($idFuncionario,$pesquisa,$arg1);
 
-			$data['utilizadores'] = $utilizadores ;
+			$this->data['utilizadores'] = $utilizadores ;
 		
 		}else{
 			$utilizadores = $this->Utilizador_m->obterUtilizadorPorFuncinario($idFuncionario,false,$arg1);
 
-			$data['utilizadores'] = $utilizadores ;
+			$this->data['utilizadores'] = $utilizadores ;
 		}
 
 
-		// var_dump($data['utilizadores']);
+		// var_dump($this->data['utilizadores']);
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/verClientes',$data);
+		$this->load->view('PersonalTrainer/verClientes',$this->data);
 		$this->load->view('templates/footer');
 	}
 
@@ -390,13 +396,13 @@ class PersonalTrainer extends CI_Controller {
 			$email = $this->input->post('email');
 			$utilizador = $this->Utilizador_m->verificaEmail($email);
 			$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
-			$data = date('Y-m-d');
+			$this->data = date('Y-m-d');
 
 			$dados = array(
 				"cliente_admin_id" => $utilizador['id'],
 				"funcionario_admin_id" => $idFuncionario,
 				"fc_estado" => "pendente",
-				"fc_data" => $data
+				"fc_data" => $this->data
 			);
 
 
@@ -422,17 +428,17 @@ class PersonalTrainer extends CI_Controller {
 	}
 
 	public function verPedidos($estado=false){
-		$data['title'] = 'Listagem de pedidos';
+		$this->data['title'] = 'Listagem de pedidos';
 
 
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
 		if($estado==1){
-			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"activo");
+			$this->data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"activo");
 		}else if($estado==2){
-			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"rejeitado");
+			$this->data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"rejeitado");
 		}else{
-			$data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"pendente");
+			$this->data['listaPedidos'] =  $this->Utilizador_m->listaPedidoPendentesPorUtilizador($idFuncionario,"pendente");
 		}
 		
 
@@ -441,11 +447,11 @@ class PersonalTrainer extends CI_Controller {
 		if($this->input->post('submitAceitaCliente')){
 			$idPedido = $this->input->post('idPedido');
 
-			$data = array(
+			$this->data = array(
 				"fc_estado" => "activo",
 			);
 
-			$this->Utilizador_m->editarFuncionarioHasCliente($data,$idPedido);
+			$this->Utilizador_m->editarFuncionarioHasCliente($this->data,$idPedido);
 
 			
 			$this->session->set_flashdata('sucessoAceitar', 'Sucesso a aceitar Cliente');
@@ -456,11 +462,11 @@ class PersonalTrainer extends CI_Controller {
 			
 			$idPedido = $this->input->post('idPedido');
 
-			$data = array(
+			$this->data = array(
 				"fc_estado" => "rejeitado",
 			);
 
-			$this->Utilizador_m->editarFuncionarioHasCliente($data,$idPedido);
+			$this->Utilizador_m->editarFuncionarioHasCliente($this->data,$idPedido);
 
 			
 			$this->session->set_flashdata('sucessoRejeitar', 'Sucesso a rejeitar Cliente');
@@ -468,10 +474,10 @@ class PersonalTrainer extends CI_Controller {
 			redirect('personalTrainer/verPedidos',"refresh");
 
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/verPedidos',$data);
+			$this->load->view('PersonalTrainer/verPedidos',$this->data);
 			$this->load->view('templates/footer');
 		}
 		
@@ -480,11 +486,11 @@ class PersonalTrainer extends CI_Controller {
 
 
 	public function meusPlanos(){
-		$data['title'] = 'Meus planos de treino';
+		$this->data['title'] = 'Meus planos de treino';
 
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
-		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorFuncionario($idFuncionario);
+		$this->data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorFuncionario($idFuncionario);
 		
 
 		if($this->input->post('submitRemovePlano')){
@@ -513,13 +519,13 @@ class PersonalTrainer extends CI_Controller {
 			if($nome == "") $nome = $plano['pt_nome'];
 			if($estado == "") $estado = $plano['pt_estado'];
 
-			$data = array(
+			$this->data = array(
 				"nome" => $nome,
 				"pt_estado" => $estado
 			);
 
 
-			$this->Exercicio_m->editarPlanoTreino($data,$idPlano);
+			$this->Exercicio_m->editarPlanoTreino($this->data,$idPlano);
 				
 			$this->session->set_flashdata('sucessoEditarPlano', 'Sucesso a editar plano de treino');
 			
@@ -527,47 +533,47 @@ class PersonalTrainer extends CI_Controller {
 		
 		}
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/meusPlanos',$data);
+		$this->load->view('PersonalTrainer/meusPlanos',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 	public function verPlanoTreino($idPlano = false){
 		
-		$data['title'] = 'Visualizar plano de treino';
+		$this->data['title'] = 'Visualizar plano de treino';
 
-		$data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
-		$data['clientes'] = $this->Exercicio_m->oberClientesAssociadoPlanoTreino($idPlano);
-		$data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
-		$data['id'] = $idPlano;
+		$this->data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
+		$this->data['clientes'] = $this->Exercicio_m->oberClientesAssociadoPlanoTreino($idPlano);
+		$this->data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		$this->data['id'] = $idPlano;
 
 		// var_dump($this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano));
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/verPlanoTreino',$data);
+		$this->load->view('PersonalTrainer/verPlanoTreino',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 	public function verPlanoTreinoOutro($idPlano = false){
 		
-		$data['title'] = 'Visualizar plano de treino';
+		$this->data['title'] = 'Visualizar plano de treino';
 
-		$data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
-		$data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
-		$data['id'] = $idPlano;
+		$this->data['plano'] = $this->Exercicio_m->obterPlanoTreino($idPlano);
+		$this->data['exercicios'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+		$this->data['id'] = $idPlano;
 
-		// var_dump($data);
+		// var_dump($this->data);
 
 		// var_dump($this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano));
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/verPlanoTreinoOutro',$data);
+		$this->load->view('PersonalTrainer/verPlanoTreinoOutro',$this->data);
 		$this->load->view('templates/footer');
 	}
 
@@ -584,14 +590,14 @@ class PersonalTrainer extends CI_Controller {
 
 	public function listaExercicios($idPlano=false,$flag=false){
 
-		$data['title'] = 'Lista de exercicios';
+		$this->data['title'] = 'Lista de exercicios';
 
-		$data['id'] = $idPlano;
+		$this->data['id'] = $idPlano;
 
 		if($flag==false){
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+			$this->data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
 		}else{
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+			$this->data['exercicios'] = $this->Exercicio_m->dadosExercicio();
 		}
 
 		if($this->input->post('idPlano')){
@@ -616,10 +622,10 @@ class PersonalTrainer extends CI_Controller {
 			
 		}
 		else{ 
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/listaExercicios',$data);
+			$this->load->view('PersonalTrainer/listaExercicios',$this->data);
 			$this->load->view('templates/footer');
 		}
 
@@ -631,30 +637,30 @@ class PersonalTrainer extends CI_Controller {
 
 	public function verTodosPlanos(){
 		
-		$data['title'] = 'Ver todos os planos';
+		$this->data['title'] = 'Ver todos os planos';
 
-		$data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorTipo("publico","ativo");
+		$this->data['planosTreino'] = $this->Exercicio_m->getPlanoTreinoPorTipo("publico","ativo");
 
-		// var_dump($data['planosTreino']);
+		// var_dump($this->data['planosTreino']);
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/verTodosPlanosTreino',$data);
+		$this->load->view('PersonalTrainer/verTodosPlanosTreino',$this->data);
 		$this->load->view('templates/footer');
 	}
 
 
 	public function verPedidoPlanos(){
-		$data['title'] = 'Pedidos de Planos';
+		$this->data['title'] = 'Pedidos de Planos';
 
 		// var_dump($this->Exercicio_m->getPedidosDePlanosTreino(0));
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
 
-		$data['planosTreino'] = $this->Exercicio_m->getPedidosDePlanosTreino("pendente",$idFuncionario,"data");
+		$this->data['planosTreino'] = $this->Exercicio_m->getPedidosDePlanosTreino("pendente",$idFuncionario,"data");
 		
-		// var_dump($data['planosTreino']);
+		// var_dump($this->data['planosTreino']);
 
 		if($this->input->post('ordenamento')){
 			$ordenamento = $this->input->post('ordenamento');
@@ -663,10 +669,10 @@ class PersonalTrainer extends CI_Controller {
 			$ordenamento2 = $this->input->post('ordenamento2');
 			echo json_encode($this->Exercicio_m->getPedidosDePlanosTreino($ordenamento2,$idFuncionario,false));
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/verPedidosPlanosTreino',$data);
+			$this->load->view('PersonalTrainer/verPedidosPlanosTreino',$this->data);
 			$this->load->view('templates/footer');
 		}
 
@@ -675,16 +681,16 @@ class PersonalTrainer extends CI_Controller {
 	//elaborar plano de treino apos aceitar o pedido de utilizador
 	public function elaborarPlano($idPlano=false,$flag=false ){
 
-		$data['title'] = 'Criar plano de treino para utilizador';
-		$data['id'] = $idPlano;		
+		$this->data['title'] = 'Criar plano de treino para utilizador';
+		$this->data['id'] = $idPlano;		
 
 
 		if($flag==false){ //seleciona exercicios associados  a utilizador
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
-			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+			$this->data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+			$this->data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
 		}else{//seleciona todos os exercicios
-			$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
-			$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+			$this->data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+			$this->data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
 		}
 
 
@@ -728,10 +734,10 @@ class PersonalTrainer extends CI_Controller {
 			$this->session->set_flashdata('sucessoInserirPedidoPlano', 'Sucesso a criar o  plano de treino');
 			redirect('personalTrainer/verPedidoPlanos/');
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/adicionarPlanoTreinoSolicitado',$data);
+			$this->load->view('PersonalTrainer/adicionarPlanoTreinoSolicitado',$this->data);
 			$this->load->view('templates/footer');
 		}
 		
@@ -742,25 +748,25 @@ class PersonalTrainer extends CI_Controller {
 
 	public function adicionarPlanoTreino(){
 
-		$data['title'] = 'Adicionar Plano de treino';
+		$this->data['title'] = 'Adicionar Plano de treino';
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
 		if($this->input->post('addPlanoPasso1')){
 			
 			// echo $this->input->post('nome');
 			// echo $this->input->post('radioPrivado');
-			$dataHoje = date('Y-m-d');
+			$this->dataHoje = date('Y-m-d');
 
-			$data = array(
+			$this->data = array(
 				"nome" => $this->input->post('nome'),
 				"funcionario_admin_id" => $idFuncionario,
 				"pt_estado" => 1,
-				"pt_data" => $dataHoje,
+				"pt_data" => $this->dataHoje,
 				"pt_tipo" => $this->input->post('radioPrivado')
 			);
 
 
-			$ultimoId = $this->Exercicio_m->inserePlanoTreino($data);
+			$ultimoId = $this->Exercicio_m->inserePlanoTreino($this->data);
 			// $ultimoId = 10;
 
 
@@ -773,10 +779,10 @@ class PersonalTrainer extends CI_Controller {
 
 		}else{
 
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/adicionarPlanoTreino',$data);
+			$this->load->view('PersonalTrainer/adicionarPlanoTreino',$this->data);
 			$this->load->view('templates/footer');
 		}
 
@@ -784,8 +790,8 @@ class PersonalTrainer extends CI_Controller {
 
 	public function adicionarPlanoTreinoPasso2($idPlano=false,$flag=false ){ 
 
-		$data['title'] = 'Adicionar Plano de treino Passo 2';
-		$data['id'] = $idPlano;
+		$this->data['title'] = 'Adicionar Plano de treino Passo 2';
+		$this->data['id'] = $idPlano;
 
 		if( $idPlano == false ) redirect("personalTrainer/adicionarPlanoTreino");  //verfica se existe get
 
@@ -794,11 +800,11 @@ class PersonalTrainer extends CI_Controller {
 		}else{
 
 			if($flag==false){ //seleciona exercicios associados  a utilizador
-				$data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
-				$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+				$this->data['exercicios'] = $this->Exercicio_m->dadosExercicioPorUtilizador($this->session->userdata('sessao_utilizador')['id']);
+				$this->data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
 			}else{//seleciona todos os exercicios
-				$data['exercicios'] = $this->Exercicio_m->dadosExercicio();
-				$data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
+				$this->data['exercicios'] = $this->Exercicio_m->dadosExercicio();
+				$this->data['exerciciosAssoc'] = $this->Exercicio_m->oberExerciciosAssociadoPlanoTreino($idPlano);
 			}
 				
 	
@@ -823,10 +829,10 @@ class PersonalTrainer extends CI_Controller {
 				$this->session->set_flashdata('sucessoInserirPlano', 'Sucesso a criar o seu plano de treino');
 				redirect('personalTrainer/meusPlanos/', "refresh");
 			}else{
-				$this->load->view('templates/header',$data);
+				$this->load->view('templates/header',$this->data);
 				$this->load->view('templates/nav_top');
 				$this->load->view('templates/nav_lateral_funcionario');
-				$this->load->view('PersonalTrainer/adicionarPlanoTreinoPasso2',$data);
+				$this->load->view('PersonalTrainer/adicionarPlanoTreinoPasso2',$this->data);
 				$this->load->view('templates/footer');
 			}
 		}
@@ -855,11 +861,11 @@ class PersonalTrainer extends CI_Controller {
 	public function meusExercicios(){
 		$this->load->helper('text');
 
-		$data['title'] = 'Meus Exercicios';
+		$this->data['title'] = 'Meus Exercicios';
 		
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
-		$data['exercicios'] = $this->Exercicio_m->getExercicioPorFuncionario($idFuncionario);
+		$this->data['exercicios'] = $this->Exercicio_m->getExercicioPorFuncionario($idFuncionario);
 
 
 		if($this->input->post('idExercicio')){
@@ -912,10 +918,10 @@ class PersonalTrainer extends CI_Controller {
 
 
 		}else{
-			$this->load->view('templates/header',$data);
+			$this->load->view('templates/header',$this->data);
 			$this->load->view('templates/nav_top');
 			$this->load->view('templates/nav_lateral_funcionario');
-			$this->load->view('PersonalTrainer/meusExercicios',$data);
+			$this->load->view('PersonalTrainer/meusExercicios',$this->data);
 			$this->load->view('templates/footer');
 		}	
 	}
@@ -923,7 +929,7 @@ class PersonalTrainer extends CI_Controller {
 
 	public function adicionarExercicio(){
 
-		$data['title'] = 'Adicionar Exercicios';
+		$this->data['title'] = 'Adicionar Exercicios';
 
 
 		$this->form_validation->set_rules('nome', 'Nome', 'trim|required');
@@ -972,10 +978,10 @@ class PersonalTrainer extends CI_Controller {
 		}
 
 
-		$this->load->view('templates/header',$data);
+		$this->load->view('templates/header',$this->data);
 		$this->load->view('templates/nav_top');
 		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('PersonalTrainer/adicionarExercicio',$data);
+		$this->load->view('PersonalTrainer/adicionarExercicio',$this->data);
 		$this->load->view('templates/footer');
 
 	}
@@ -983,8 +989,8 @@ class PersonalTrainer extends CI_Controller {
 	public function ajax(){
 		if($this->input->post('sala')){
 			$idSala = $this->input->post('sala');
-			$data =  $this->input->post('dataForm');
-			echo json_encode($this->Aula_m->obterAulaPorSala($idSala,$data));
+			$this->data =  $this->input->post('dataForm');
+			echo json_encode($this->Aula_m->obterAulaPorSala($idSala,$this->data));
 		}else{
 			echo "0";
 		}
@@ -1002,7 +1008,7 @@ class PersonalTrainer extends CI_Controller {
 	}
 
 	public function calendario(){
-		$data['title'] = "Calendário";
+		$this->data['title'] = "Calendário";
 
 		$idFuncionario = $this->session->userdata('sessao_utilizador')['id'];
 
@@ -1014,9 +1020,9 @@ class PersonalTrainer extends CI_Controller {
 
 		}else{
 			
-			$this->load->view('templates/header', $data);
+			$this->load->view('templates/header', $this->data);
 			$this->load->view('templates/nav_cliente');
-			$this->load->view('Cliente/calendario',$data);
+			$this->load->view('Cliente/calendario',$this->data);
 			$this->load->view('templates/footer');
 		}
 		

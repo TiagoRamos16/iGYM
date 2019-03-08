@@ -122,10 +122,35 @@
                                     <?php endif?>
 
                                     <td>
-                                        <button class="btn-transparent"><i class="fas fa-arrow-circle-right fa-2x"></i></button>
+                                        <button href="<?='#modalVerMsn'.$mensagem['id']?>"  data-toggle="modal" data-id="<?=$mensagem['id']?>" 
+                                        class="btn-transparent" id="<?=$mensagem['id']?>"> 
+                                            <i id="<?=$mensagem['id']?>" class="fas fa-arrow-circle-right fa-2x" ></i></button>
                                     </td>
                                 </tr>
                         
+                                <div class="modal" class="modal123" id="<?='modalVerMsn'.$mensagem['id']?>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header bg-primary text-center">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">Ver Mensagem</h4>
+                                        </div>
+                                        <div class="modal-body">
+    
+                                            <h4>Titulo: <?=$mensagem['assunto']?></h4>
+                                            <hr>
+                                            <h5>Mensagem:</h5>
+                                            <small><?=$mensagem['descricao']?></small>
+
+                                               
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                  
+                                        </div>
+                                </div>
+                            </div>
                         <?php endforeach?>
                     </tbody>
                 </table>
@@ -167,3 +192,48 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+<script>
+
+$('.btn-transparent').click(function(){
+    // var id = event.target.id;
+
+    var idMensagem = $(this).attr('id');
+
+     $.ajax(
+            {
+                url: '<?=base_url('utilizador/mensagens')?>',
+                type:"post",
+                // dataType: "json",
+                data:{
+                    "idMensagem" : idMensagem
+                    },
+                success: function(data,status){
+
+
+                    // location.reload();
+                    console.log("asdsa");
+                    if(data==1){
+                        // location.reload();
+                        console.log("asdsa");
+                    }
+
+                }
+                 
+                 
+            });
+
+
+});
+
+$('#myModal').on('hidden.bs.modal', function () {
+    location.reload();
+})
+
+</script>

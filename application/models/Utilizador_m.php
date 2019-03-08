@@ -223,5 +223,25 @@ class Utilizador_m extends CI_Model
         return $this->db->insert("mensagem",$mensagem);
     }
 
+    /**
+     * count mensagens nao lidas
+     */
+
+     public function countMensagens($idUtilizadorPara,$estado){
+        $this->db->where("estado",$estado);
+        $this->db->where("para_utilizador_id",$idUtilizadorPara);
+        return $this->db->count_all_results('mensagem');
+     } 
+        
+
+     /**
+      * Editar Mensagem
+      */
+
+      public function editarMensagem($data, $id){
+        return $this->db->update('mensagem',$data,array("id"=>$id));
+        
+      }
+
    
 }
