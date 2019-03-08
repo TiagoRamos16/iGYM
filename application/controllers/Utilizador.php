@@ -422,7 +422,7 @@ class Utilizador extends CI_Controller
 					$data['token'] = $this->Utilizador_m->verificaToken($idUtilizador);
 
 					$this->load->view('templates/header', $data);
-					// $this->load->view('templates/nav');
+					$this->load->view('templates/navIndex');
 					$this->load->view('utilizador/modificaPassword', $data);
 					$this->load->view('templates/footer');
 				} else {

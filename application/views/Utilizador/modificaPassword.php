@@ -1,8 +1,8 @@
-<section class="sectionLogin">
-    <div class="container">
+<section class="section-resetPass">
+    <div class="container containerResetPass">
         <?php echo form_open('utilizador/validaToken','id="formRegisto"'); ?>
             <div class="form-login">
-            <h2 class="form-signin-heading">Modificar Password</h2><br>
+            <h2 class="form-signin-heading text-center">Modificar Password</h2><br>
             <div class="form-group">
                     <label for="passwordRegisto">Password: <span class="text-danger"> *</span></label>
                     <div class="input-group">

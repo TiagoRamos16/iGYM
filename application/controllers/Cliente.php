@@ -212,11 +212,15 @@ class Cliente extends CI_Controller
 		$idFuncionario = $this->security->xss_clean($this->input->post('selecionaFuncionario'));
 		// verifica utilizador com sessao iniciada
 		$utilizador = $this->session->userdata('sessao_utilizador'); //iniciar sessao
+		
 		if($this->input->post('submitPedidoFuncionario')){
+			
 			// verifica se ja existe algum plano pendente com aquele funcionario para bloquear novo pedido
 			$verificaEstado = $this->Exercicio_m->verificaPlanoTreino($idFuncionario, $utilizador['id']);
+			
 			// verifica se existe já existe algum pedido
 			if( count($verificaEstado) > 0 ){
+				
 				// verifica se existe mais que um resultado
 				foreach ( $verificaEstado as $row ){
 					
@@ -273,7 +277,7 @@ class Cliente extends CI_Controller
 			redirect('cliente/treinos');
 		}
 		$this->load->view('templates/header', $data);
-		// $this->load->view('templates/nav_cliente');
+		$this->load->view('templates/nav_cliente');
 		$this->load->view('Cliente/treinos',$data);
 		$this->load->view('templates/footer');
 	}
@@ -378,6 +382,8 @@ class Cliente extends CI_Controller
 
 			$inscricao = 1;
 		}
+
+		var_dump($inscricao);
 
 		// passa variavel para a view para indicar se o utilizar adiciona ou remove a inscricao na aula
 		$data['inscricao'] = $inscricao;

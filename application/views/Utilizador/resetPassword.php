@@ -16,14 +16,14 @@ if($this->session->flashdata('sucessoResetPassword')!=null):?>
     </script>
 <?php endif?>
 
-<section class="sectionLogin">
-    <div class="container">
+<section class="section-resetPass">
+    <div class="container containerResetPass">
         <?php echo form_open('utilizador/resetPassword'); ?>
             <input type="hidden" value="<?= base_url()?>" id="url">
             <div class="form-login">
-            <h2 class="form-signin-heading">Recuperar Password</h2><br>
+            <h2 class="form-signin-heading text-center">Recuperar Password</h2><br>
             <div class="form-group">
-                <label for="inputEmail" class="">Email address:</label>
+                <label for="inputEmail" class="">Endereço de email:</label>
                 <input type="email" id="email" class="form-control" placeholder="Email address" required name="email"
                 value="<?php if($this->session->flashdata('email')) echo $this->session->flashdata('email')?>" >
                 <small class="text-muted"><p>As instrução de reset de password serão enviadas para o email</p>
