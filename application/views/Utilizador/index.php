@@ -84,362 +84,181 @@
     </div>
 
 
-<section id="sobre">
+    <section id="servicos" class="pb-5">
+        <div class="container servicosContainer">
+            <h1 class="section-title text-center">Serviços</h1>
+            <div class="row servicosRow">
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-3">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Consultas de Nutrição</h4>
+                                        <p><img class=" img-fluid" src="https://www.eadplus.com.br/wp-content//uploads/2016/09/nutricao_na_cardiologia.jpg" alt="card image"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Consultas de Nutrição</h4>
+                                        <p class="card-text">This is basic card with image on top, title, description and button.
+                                            This is basic card with image on top, title, description and button.This is basic card 
+                                            with image on top, title, description and button.</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-3">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Avaliação Física</h4>
+                                        <p><img class=" img-fluid" src="https://blogeducacaofisica.com.br/wp-content/uploads/2017/05/Anamnese-730x456.jpg" alt="card image"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Avaliação Física</h4>
+                                        <p class="card-text">This is basic card with image on top, title, description and button.
+                                            This is basic card with image on top, title, description and button.This is basic card 
+                                            with image on top, title, description and button.</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-3">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Aulas de Grupo</h4>
+                                        <p><img class=" img-fluid" src="http://www.clube-fitness.com/generated_files/6-melhores-aulas-de-grupo-para-tonificar1.jpg" alt="card image"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Aulas de Grupo</h4>
+                                        <p class="card-text">This is basic card with image on top, title, description and button.
+                                            This is basic card with image on top, title, description and button.This is basic card 
+                                            with image on top, title, description and button.</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-3">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Planos de Treino</h4>
+                                        <p><img class=" img-fluid" src="https://horadotreino.com.br/wp-content/uploads/2011/10/musculacao-atletas.jpg" alt="card image"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Planos de Treino</h4>
+                                        <p class="card-text">This is basic card with image on top, title, description and button.
+                                            This is basic card with image on top, title, description and button.This is basic card 
+                                            with image on top, title, description and button.</p>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+            </div>
+        </div>
+    </section>
+
+<section id="conceito">
+
+    <div class="container servicosContainer">
+        <h1 class="section-title text-center">Conceitos</h1>
+        <div class="row servicosRow">
+
+            <div class="jumbotron">
+                <h1>Faça parte da nossa família</h1>
+                <p>Aqui preocupamo-nos com todos os nossos clientes. Terá sempre apoio nutricional, físico e motivacional para atingir os objectios que sempre pretendeu.</p>
+                <p><a class="btn btn-primary btn-lg" href="<?= base_url('utilizador/registo_plano')?>">Adesão online</a></p>
+            </div>
 
 
+            <div class="wrapper">
+                <div class="counter col_fourth">
+                <i class="fas fa-building fa-2x iconeIndex"></i>
+                <h2 class="timer count-title count-number" data-to="12" data-speed="1500"></h2>
+                <p class="count-text ">Estúdios de Fitness</p>
+                </div>
 
-<!-- Team -->
-<section id="team" class="pb-5">
-    <div class="container">
-        <h5 class="section-title h1">Novidades</h5>
-        <div class="row">
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="http://www.galoactive.com/wp-content/uploads/2018/03/lanc%CC%A7amentos-mar-02-480x369.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.
-                                        This is basic card with image on top, title, description and button.This is basic card 
-                                        with image on top, title, description and button.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="counter col_fourth">
+                <i class="far fa-clipboard fa-2x iconeIndex"></i>
+                <h2 class="timer count-title count-number" data-to="19" data-speed="1500"></h2>
+                <p class="count-text ">Personal Trainers</p>
+                </div>
+
+                <div class="counter col_fourth">
+                <i class="fas fa-users fa-2x iconeIndex"></i>
+                <h2 class="timer count-title count-number" data-to="120" data-speed="1500"></h2>
+                <p class="count-text ">Aulas de Grupo</p>
+                </div>
+
+                <div class="counter col_fourth end">
+                <i class="fas fa-dumbbell fa-2x iconeIndex"></i>
+                <h2 class="timer count-title count-number" data-to="51980" data-speed="1500"></h2>
+                <p class="count-text ">Equipamentos</p>
                 </div>
             </div>
-            <!-- ./Team member -->
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_02.png" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Team member -->
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_03.png" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Team member -->
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_04.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Team member -->
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_05.png" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Team member -->
-            <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_06.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
-                                    <ul class="list-inline">
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-skype"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a class="social-icon text-xs-center" target="_blank" href="#">
-                                                <i class="fa fa-google"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Team member -->
 
         </div>
     </div>
-</section>
-<!-- Team -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>Página Principal</h1>
-
-<a class="btn btn-success" href="<?= base_url('utilizador/login')?>">Login</a>
-<a class="btn btn-success" href="<?= base_url('utilizador/registo_plano')?>">Registo</a>
-<a class="btn btn-success" href="<?= base_url('administrador')?>">Admin</a>
-<a class="btn btn-success" href="<?= base_url('cliente')?>">Cliente</a>
-<a class="btn btn-success" href="<?= base_url('nutricionista')?>">Nutricionista</a>
-<a class="btn btn-success" href="<?= base_url('personalTrainer')?>">Personal Trainer</a>
-<a class="btn btn-success" href="<?= base_url('rececionista')?>">Rececionista</a>
-
-
 
 </section>
 
-<section id="conceito">
-    
-        <div class="jumbotron">
-            <h1>Jumbotron</h1>
-            <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <p><a class="btn btn-primary btn-lg">Learn more</a></p>
-        </div>
-
-    
-<h2>conceitos</h2>
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</section>
-
-<section id="servicos">
-<h2>serviços</h2>
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</section>
 
 
 
     <section id="contactos" class="section-contactos">
         <div class="container">
-            <h3 class="text-center text-uppercase">Contactos</h3>
+            <h1 class="section-title text-center">Contactos</h1>
             <hr>
             <div class="row">
-                <div class="col-md-12 text-center" id="mapaContacto">
+                <div class="col-md-12 text-center mapaContacto fade-in fade-ani" id="mapaContacto">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13433.057601117858!2d-17.059944!3d32.679014!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa393204f0d195615!2sACIN+-+iCloud+Solutions!5e0!3m2!1spt-PT!2spt!4v1551459233837"
                     width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
             
-            <div class="row iconsContacto">
+            <div class="row iconsContacto fade-in fade-ani">
                 <div class="col-sm-12 col-md-6 col-lg-4 my-5">
                     <div class="card border-0">
                         <div class="card-body text-center">
@@ -471,7 +290,7 @@
         </div>
 
 
-        <div class="container form-contacto">
+        <div class="container form-contacto fade-in fade-ani">
             <div class="row">
                 <?php echo form_open('utilizador/index') ;?>
                 <div class="row">
@@ -542,11 +361,137 @@
 </section> <!-- id="fullpage" -->
 
 
+
+
+<!-- funcao para ocultar mensagem de submissao do form apos 3 segundos -->
 <script>
-    //funcao para ocultar mensagem de submissao do form apos 3 segundos
     $( document ).ready(function(){
         $('#sucessoForm').fadeIn('slow', function(){
             $('#sucessoForm').delay(3000).fadeOut(); 
         });
     });
+</script>
+
+
+<!-- funcao para fade da secção contacto -->
+<script>
+$(function(){
+	$(window).scroll( function(){
+		
+		var bottom_of_window = $(window).scrollTop() + $(window).height();
+		//fade-in
+		$('.fade-ani').each(function(){
+			var bottom_of_object = $(this).position().top + $(this).outerHeight();
+			 if( bottom_of_window > bottom_of_object ){
+				$(this).addClass('showing');
+			}
+			else{
+				$(this).removeClass('showing');
+			}
+        });
+    })
+})
+</script>
+
+
+<!-- funcao para efeito de contagem da secção conceitos -->
+<script>
+(function ($) {
+	$.fn.countTo = function (options) {
+		options = options || {};
+		
+		return $(this).each(function () {
+			// set options for current element
+			var settings = $.extend({}, $.fn.countTo.defaults, {
+				from:            $(this).data('from'),
+				to:              $(this).data('to'),
+				speed:           $(this).data('speed'),
+				refreshInterval: $(this).data('refresh-interval'),
+				decimals:        $(this).data('decimals')
+			}, options);
+			
+			// how many times to update the value, and how much to increment the value on each update
+			var loops = Math.ceil(settings.speed / settings.refreshInterval),
+				increment = (settings.to - settings.from) / loops;
+			
+			// references & variables that will change with each update
+			var self = this,
+				$self = $(this),
+				loopCount = 0,
+				value = settings.from,
+				data = $self.data('countTo') || {};
+			
+			$self.data('countTo', data);
+			
+			// if an existing interval can be found, clear it first
+			if (data.interval) {
+				clearInterval(data.interval);
+			}
+			data.interval = setInterval(updateTimer, settings.refreshInterval);
+			
+			// initialize the element with the starting value
+			render(value);
+			
+			function updateTimer() {
+				value += increment;
+				loopCount++;
+				
+				render(value);
+				
+				if (typeof(settings.onUpdate) == 'function') {
+					settings.onUpdate.call(self, value);
+				}
+				
+				if (loopCount >= loops) {
+					// remove the interval
+					$self.removeData('countTo');
+					clearInterval(data.interval);
+					value = settings.to;
+					
+					if (typeof(settings.onComplete) == 'function') {
+						settings.onComplete.call(self, value);
+					}
+				}
+			}
+			
+			function render(value) {
+				var formattedValue = settings.formatter.call(self, value, settings);
+				$self.html(formattedValue);
+			}
+		});
+	};
+	
+	$.fn.countTo.defaults = {
+		from: 0,               // the number the element should start at
+		to: 0,                 // the number the element should end at
+		speed: 1000,           // how long it should take to count between the target numbers
+		refreshInterval: 100,  // how often the element should be updated
+		decimals: 0,           // the number of decimal places to show
+		formatter: formatter,  // handler for formatting the value before rendering
+		onUpdate: null,        // callback method for every time the element is updated
+		onComplete: null       // callback method for when the element finishes updating
+	};
+	
+	function formatter(value, settings) {
+		return value.toFixed(settings.decimals);
+	}
+}(jQuery));
+
+jQuery(function ($) {
+  // custom formatting example
+  $('.count-number').data('countToOptions', {
+	formatter: function (value, options) {
+	  return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+	}
+  });
+  
+  // start all the timers
+  $('.timer').each(count);  
+  
+  function count(options) {
+	var $this = $(this);
+	options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+	$this.countTo(options);
+  }
+});
 </script>

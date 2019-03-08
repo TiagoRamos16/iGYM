@@ -27,12 +27,14 @@
                             <i class="fas fa-user"></i> <?=$this->session->userdata('sessao_utilizador')['username']?><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Ver Perfil</a></li>
+                            
                             <?php
                                 if ($this->session->userdata('sessao_utilizador')['tipo']==5){ ?>
+                                    <li><a href="<?= base_url('cliente/paginaPerfil') ?>">Ver Perfil</a></li>
                                     <li><a href="<?= base_url('cliente') ?>">Area de cliente</a></li>
                             <?php
                                 }elseif ($this->session->userdata('sessao_utilizador')['tipo']==3){ ?>
+                                    <li><a href="<?= base_url('utilizador/paginaPerfil') ?>">Ver Perfil</a></li>
                                     <li><a href="<?= base_url('PersonalTrainer') ?>">Area de cliente</a></li>
                             <?php
                                 }

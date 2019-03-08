@@ -7,10 +7,22 @@ class Utilizador extends CI_Controller
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Utilizador_m');
+		$this->load->helper('cookie'); /* load cookie default form helper */
 	}
 
 
 	public function index(){
+
+		$data['title'] = "Home"; 
+
+		if( get_cookie('usercookie') != null ){
+			
+			$userEmail = get_cookie('usercookie'); // verifica email associado à cookie
+			$utilizador = $this->Utilizador_m->verificaEmail($userEmail); // verifica dados de login do email associado à cookie
+			$this->session->set_userdata('sessao_utilizador',$utilizador); //iniciar sessao
+		}
+
+		// var_dump(get_cookie('usercookie'));
 
 		$this->form_validation->set_rules('nomeContacto', 'Nome', 'trim|required');
 		$this->form_validation->set_rules('emailContacto', 'Email', 'trim|required|valid_email');
@@ -57,7 +69,11 @@ class Utilizador extends CI_Controller
 			$this->session->set_flashdata('erroFormContacto', 'Formulário não submetido, por favor tente novamente'); //mensagem de erro
 		}
 
-		redirect('home#contactos');
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/navIndex');
+		$this->load->view('Utilizador/index', $data);
+		$this->load->view('templates/footer');
+		// redirect('home');
 
 	}
 
@@ -80,15 +96,34 @@ class Utilizador extends CI_Controller
             //password verify
 			$verificaPass = password_verify($password, $utilizador['password']);
 
-			//rasmuslerdorf
-			if ($verificaPass != 1) { //se dados incorrectos
+
+			if ( $verificaPass != 1 ) { //se dados incorrectos
 				$this->session->set_flashdata('erroLogin', 'Dados de login incorretos'); //mensagem de erro
 				$this->session->set_flashdata('erroEmail', $email); //email do utilizador para ser colocado como value no formulario
 				redirect('utilizador/login');
 			} else {
 				$this->session->set_userdata('sessao_utilizador',$utilizador); //iniciar sessao
 
-				if($utilizador['tipo']==1){ //redirecionar consoante o tipo de utilizador
+				// verifica se foi selecionado opcao rememberme
+				if ($this->input->post("rememberme")){
+					$this->input->set_cookie('usercookie', $utilizador['email'], 604800); /* cria cookie */
+
+					// $cookie = array(
+					// 	'name'   => 'UId',
+					// 	'value'  => $result['id'],
+					// 	'expire' => time()+(3600*24*7),
+					// 	'domain' => $this->config->item('cookie_domain'),
+					// 	'path'   => $this->config->item('cookie_path'),
+					// 	'prefix' => ''
+					// );
+	 				// set_cookie($cookie);
+
+				}else{
+					delete_cookie('usercookie'); /* apaga cookie */
+				}
+
+				//redirecionar consoante o tipo de utilizador
+				if($utilizador['tipo']==1){ 
 					redirect('administrador');
 				}else if($utilizador['tipo']==2){
 					redirect('rececionista');
@@ -102,7 +137,7 @@ class Utilizador extends CI_Controller
 			}
 		} else {
 			$this->load->view('templates/header', $data);
-			// $this->load->view('templates/nav');
+			$this->load->view('templates/navIndex');
 			$this->load->view('Utilizador/login');
 			$this->load->view('templates/footer');
 		}
@@ -330,6 +365,7 @@ class Utilizador extends CI_Controller
 	public function logout()
 	{
 		$this->session->sess_destroy();
+		delete_cookie('usercookie'); // apaga cookie rememberme
 		redirect('home');
 	}
 

@@ -252,13 +252,13 @@
             <h1 class="section-title text-center">Contactos</h1>
             <hr>
             <div class="row">
-                <div class="col-md-12 text-center" id="mapaContacto">
+                <div class="col-md-12 text-center mapaContacto fade-in fade-ani" id="mapaContacto">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13433.057601117858!2d-17.059944!3d32.679014!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa393204f0d195615!2sACIN+-+iCloud+Solutions!5e0!3m2!1spt-PT!2spt!4v1551459233837"
                     width="800" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
             
-            <div class="row iconsContacto">
+            <div class="row iconsContacto fade-in fade-ani">
                 <div class="col-sm-12 col-md-6 col-lg-4 my-5">
                     <div class="card border-0">
                         <div class="card-body text-center">
@@ -290,7 +290,7 @@
         </div>
 
 
-        <div class="container form-contacto">
+        <div class="container form-contacto fade-in fade-ani">
             <div class="row">
                 <?php echo form_open('utilizador/index') ;?>
                 <div class="row">
@@ -361,8 +361,10 @@
 </section> <!-- id="fullpage" -->
 
 
+
+
+<!-- funcao para ocultar mensagem de submissao do form apos 3 segundos -->
 <script>
-    //funcao para ocultar mensagem de submissao do form apos 3 segundos
     $( document ).ready(function(){
         $('#sucessoForm').fadeIn('slow', function(){
             $('#sucessoForm').delay(3000).fadeOut(); 
@@ -371,10 +373,28 @@
 </script>
 
 
+<!-- funcao para fade da secção contacto -->
+<script>
+$(function(){
+	$(window).scroll( function(){
+		
+		var bottom_of_window = $(window).scrollTop() + $(window).height();
+		//fade-in
+		$('.fade-ani').each(function(){
+			var bottom_of_object = $(this).position().top + $(this).outerHeight();
+			 if( bottom_of_window > bottom_of_object ){
+				$(this).addClass('showing');
+			}
+			else{
+				$(this).removeClass('showing');
+			}
+        });
+    })
+})
+</script>
 
 
-
-
+<!-- funcao para efeito de contagem da secção conceitos -->
 <script>
 (function ($) {
 	$.fn.countTo = function (options) {

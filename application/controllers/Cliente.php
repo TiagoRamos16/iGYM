@@ -32,6 +32,11 @@ class Cliente extends CI_Controller
 	{
 		$data['title'] = 'Home';
 
+		// var_dump($this->session->userdata('sessao_utilizador'));
+		// $this->load->helper('cookie'); /* load cookie default form helper */
+		// var_dump(get_cookie('usercookie'));
+
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/nav_cliente');
 		$this->load->view('Cliente/index');
