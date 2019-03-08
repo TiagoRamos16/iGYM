@@ -187,13 +187,41 @@ class Utilizador_m extends CI_Model
 
     //update funcionario_has_cliente
 
+
     public function editarFuncionarioHasCliente($data,$id){
 
         $this->db->where('id', $id);
         $this->db->update('funcionario_has_cliente', $data);
     }
 
+    /**
+     * Listar mensagem por utilizador
+     */
 
+    public function verMensagens($idUtilizador=false,$estado=false){
+        if($idUtilizador!=false){
+            $this->db->select('m.* , a.email');
+            $this->db->join('admin a','m.de_utilizador_id = a.id');
+
+            if($estado!=false){
+                $this->db->where('m.estado',$estado);
+            }
+           
+            return $this->db->get_where('mensagem m',array('m.para_utilizador_id'=>$idUtilizador))->result_array();
+        }else{
+            return $this->db->get('mensagem')->result_array();
+        }     
+    }
+
+
+    /**
+     * Inserir mensagem
+     */
+
+
+    public function insereMensagem($mensagem){
+        return $this->db->insert("mensagem",$mensagem);
+    }
 
    
 }

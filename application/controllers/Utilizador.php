@@ -453,14 +453,76 @@ class Utilizador extends CI_Controller
 		}
 	}
 
-	public function mensagens(){
+	public function mensagens($estado=false){
 		$data['title'] = 'Mensagens';
 
-		$this->load->view('templates/header',$data);
-		$this->load->view('templates/nav_top');
-		$this->load->view('templates/nav_lateral_funcionario');
-		$this->load->view('utilizador/mensagens');
-		$this->load->view('templates/footer');
+		if($estado > 2 || $estado < 0) $estado=false;
+
+		$utilizador = $this->session->userdata('sessao_utilizador');
+
+		// var_dump($utilizador);
+
+		if($estado == 1){
+			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
+		}else if($estado == 2){
+			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id'],$estado);
+		}else{
+			$data['mensagens'] = $this->Utilizador_m->verMensagens($utilizador['id']);
+		}
+
+
+		$this->form_validation->set_rules('para', 'para', 'required|valid_email');
+		$this->form_validation->set_rules('assunto', 'assunto', 'required');
+		$this->form_validation->set_rules('mensagem', 'mensagem', 'required');
+
+		if ($this->form_validation->run() == true) {
+
+			$para = $this->security->xss_clean($this->input->post('para'));
+			$assunto = $this->security->xss_clean($this->input->post('assunto'));
+			$mensagem = $this->security->xss_clean($this->input->post('mensagem'));
+
+			$idUtilizadorPara = $this->Utilizador_m->verificaEmail($para)['id'];
+
+			if($idUtilizadorPara == null){
+				$this->session->set_flashdata('erroEnviarMensagem', 'Erro a enviar mensagem utilizador destinatário não existe'); //mensagem de sucesso
+
+				redirect("utilizador/mensagens");
+			}else{
+				$mensagemArray = array(
+					"tipo" => 1,
+					"data_envio" => date('Y-m-d h:i:s'),
+					"estado" =>2,
+					"assunto" => $assunto,
+					"descricao" => $mensagem,
+					"de_utilizador_id" => $utilizador['id'],
+					"para_utilizador_id" => $idUtilizadorPara,
+				);
+	
+				$this->Utilizador_m->insereMensagem($mensagemArray);
+	
+				$this->session->set_flashdata('sucessoEnviarMensagem', 'Sucesso a enviar mensagem'); //mensagem de sucesso
+	
+				redirect("utilizador/mensagens");
+			}
+
+			
+		
+
+		}else{
+			$this->load->view('templates/header',$data);
+			if($utilizador['tipo'] == 3){
+				$this->load->view('templates/nav_top');
+				$this->load->view('templates/nav_lateral_funcionario');
+			}elseif($utilizador['tipo'] == 5){
+				$this->load->view('templates/nav_cliente');
+			}
+			$this->load->view('utilizador/mensagens',$data);
+			$this->load->view('templates/footer');
+		}
+
+
+		
+
 	}
 
 
