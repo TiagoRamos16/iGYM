@@ -94,34 +94,13 @@
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-3">
                         <label>Localidade<span class="required">*</span></label>
-                        <select class="form-control" name="localidade"  name="localidade" required
+                        <input type="text" class="form-control" placeholder="" name="localidade" required
                         value="<?php 
                         if($this->session->userdata('clienteRegisto')!= null){
                             echo $this->session->userdata('clienteRegisto')['localidade'];
                             }else{
                                 echo set_value('localidade');
                             } ?>">
-
-                            <option selected="true" disabled="disabled" value="">Localidade</option>
-                            <option value="1" 
-                            <?php 
-                                if($this->session->userdata('clienteRegisto')!= null){
-                                    if($this->session->userdata('clienteRegisto')['localidade']=='1'){
-                                        echo 'selected="selected"'; 
-                                    }
-                                } 
-                            ?> 
-                            >Ponta do sol</option>
-                           
-                            
-                           
-                            <?php 
-                                        // foreach($fabricante as $row)
-                                        // { 
-                                        // echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
-                                        // }
-                                    ?>
-                        </select>
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-3">
                         <label>Código Postal<span class="required">*</span></label>
@@ -148,7 +127,7 @@
                             } ?>">
 
                             <option selected="true" disabled="disabled" value="">Nacionalidade</option>
-                            <option value="1"
+                            <!-- <option value="1"
                             <?php 
                                 if($this->session->userdata('clienteRegisto')!= null){
                                     if($this->session->userdata('clienteRegisto')['nacionalidade']=='1'){
@@ -156,13 +135,14 @@
                                     }
                                 } 
                             ?> 
-                            >Portuguesa</option>
+                            >Portuguesa</option> -->
+                            
                             <?php 
-                                        // foreach($fabricante as $row)
-                                        // { 
-                                        // echo '<option value="'.$row['id'].'">'.$row['nome'].'</option>';
-                                        // }
-                                    ?>
+                                foreach($listaPaises as $pais)
+                                { 
+                                echo '<option value="'.$pais['paisId'].'">'.$pais['paisNome'].'</option>';
+                                }
+                            ?>
                         </select>
                     </div> <!-- form-group end.// -->
                     <div class="form-group col-md-4">

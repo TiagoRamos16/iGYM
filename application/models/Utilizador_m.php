@@ -13,6 +13,12 @@ class Utilizador_m extends CI_Model
         return $query->result_array();
     }
 
+    // envia dados dos paises para o registo
+    public function getPais(){
+        $query = $this->db->get('pais');
+        return $query->result_array();
+    }
+
     // verifica se o token do plano escolhido existe na base de dados para prevenir alteracao por F12
     public function confirmaPlano($planoEscolhido){
         return $this->db->get_where('plano_adesao', array('identificacao' => $planoEscolhido))->row_array();

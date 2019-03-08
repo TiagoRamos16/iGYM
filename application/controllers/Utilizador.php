@@ -106,6 +106,22 @@ class Utilizador extends CI_Controller
 
 				// verifica se foi selecionado opcao rememberme
 				if ($this->input->post("rememberme")){
+					
+			
+			// 	if (crypt( $valordoinput, $emailparacomparar) ==  $emailparacomparar) {
+			// 				echo "Password verified!";
+			// 			 }else{
+			// 				echo "no";
+			// 			 }
+			// ///-------------------------------------------------------------///
+			// 		  if (hash_equals($test, crypt($email, $test))) {	  
+			// 				echo "desencriptação feita com sucesso";
+			// 			} else {			
+			// 				echo " encriptação failed!";	  
+			// 				 }
+			// crypt($this->input->post("")nome);
+
+
 					$this->input->set_cookie('usercookie', $utilizador['email'], 604800); /* cria cookie */
 
 					// $cookie = array(
@@ -185,6 +201,8 @@ class Utilizador extends CI_Controller
 			// var_dump ($this->session->userdata('clienteRegisto'));
 			// echo $this->session->userdata('adminRegisto')['email'];
 
+			//envia lista de paises para o registo
+			$data['listaPaises'] = $this->Utilizador_m->getPais();
 
 			$this->form_validation->set_rules('nome', 'Nome', 'trim|required');
 			$this->form_validation->set_rules('morada', 'Morada', 'trim|required');

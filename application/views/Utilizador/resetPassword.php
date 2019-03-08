@@ -1,6 +1,6 @@
 <?php
 if($this->session->flashdata('sucessoResetPassword')!=null):?>
-    <div class="alert alert-success text-center msn-contacto" id="message">
+    <div class="alert alert-success text-center msn-contacto" id="mensagem">
         <i class="fas fa-check-circle  text-success"></i>
         <strong>Sucesso!</strong> 
         <?= $this->session->flashdata('sucessoResetPassword')?>
@@ -11,7 +11,7 @@ if($this->session->flashdata('sucessoResetPassword')!=null):?>
 
     <script>
         document.getElementById("close").addEventListener("click", function(){
-            document.getElementById("message").style.display = "none";
+            document.getElementById("mensagem").style.display = "none";
         });
     </script>
 <?php endif?>
